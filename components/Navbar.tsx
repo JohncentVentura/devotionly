@@ -1,11 +1,10 @@
 import { BookOpenText, Church, LogIn, LogOut } from "lucide-react";
 import Link from "next/link";
-import React from "react";
-import { getUserDetails } from "@/actions/user.actions";
-import { stackServerApp } from "@/stack/server";
+import { getUserDetails } from "@/actions/user.action";
 import { Button } from "@/components/ui/button";
-import { ModeToggle } from "./ModeToggle";
+import { stackServerApp } from "@/stack/server";
 import { UserButton } from "@stackframe/stack";
+import { ModeToggle } from "./ModeToggle";
 
 export default async function Navbar() {
   const user = await stackServerApp.getUser();

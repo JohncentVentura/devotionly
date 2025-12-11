@@ -14,9 +14,13 @@ Shadcn UI
 * npx shadcn@latest add https://www.shadcnui-blocks.com/r/table-01.json
 * npx shadcn@latest add popover
 * npx shadcn@latest add command
+* npx shadcn@latest add card
+* npx shadcn@latest add skeleton
 Neon
 * https://neon.com/
 * npm install @neondatabase/serverless
+* Run query below in the SQL Editor of neon when creating data inside neon
+* UPDATE "Devotions" SET id = replace(id, E'\t', '');
 Stack Auth
 * npx @stackframe/init-stack . --no-browser
 Prisma

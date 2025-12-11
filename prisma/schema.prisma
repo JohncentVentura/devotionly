@@ -25,10 +25,3 @@ model Devotions{
   userId String
   imageUrl String?
 }
-
-model Post{
-  id Int @id @default(autoincrement())
-  title String
-  content String
-  createdAt DateTime @default(now())
-}
