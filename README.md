@@ -1,11 +1,19 @@
 # Devotionly
+
 A digital devotion app for writing, organizing, and tracking on personal bible devotions.
 
 ## Tools & Commands
+
 Next.js
 * npx create-next-app@latest
+
+React
+* npm add react-hot-toast
+
 Typescript
+
 Tailwind CSS
+
 Shadcn UI
 * npx shadcn@latest init
 * npx shadcn@latest add button
@@ -16,13 +24,20 @@ Shadcn UI
 * npx shadcn@latest add command
 * npx shadcn@latest add card
 * npx shadcn@latest add skeleton
+* npx shadcn@latest add alert-dialog
+* npx shadcn@latest add label
+* npx shadcn@latest add textarea
+* npx shadcn@latest add input
+
 Neon
 * https://neon.com/
 * npm install @neondatabase/serverless
 * Run query below in the SQL Editor of neon when creating data inside neon
 * UPDATE "Devotions" SET id = replace(id, E'\t', '');
+
 Stack Auth
 * npx @stackframe/init-stack . --no-browser
+
 Prisma
 * npm install -D prisma (Same as npm install prisma --save-dev)
 * npx prisma init (Creates prisma folder, .env, & prisma.config.ts)

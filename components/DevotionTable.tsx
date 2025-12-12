@@ -14,33 +14,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-const localDevotions = [
-  {
-    id: "000001",
-    date: "2026-01-01",
-    book: "Genesis",
-    chapter: 1,
-    scripture: "In the beginning, God created the heavens and the earth.",
-    reflection: "Reflect on the power of creation and new beginnings.",
-  },
-  {
-    id: "000002",
-    date: "2026-01-02",
-    book: "Exodus",
-    chapter: 2,
-    scripture: "The Lord is my shepherd; I shall not want.",
-    reflection: "Consider the guidance and provision of God in your life.",
-  },
-  {
-    id: "000003",
-    date: "2026-01-03",
-    book: "Psalms",
-    chapter: 3,
-    scripture: "The Lord is my light and my salvation; whom shall I fear?",
-    reflection: "Find courage in the presence of God during challenging times.",
-  },
-];
+import CreateDialog from "./CreateDialog";
+import DeleteDialog from "./DeleteDialog";
+import EditDialog from "./EditDialog";
 
 type Devotions = Awaited<ReturnType<typeof getDevotions>>;
 
@@ -54,7 +30,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
   const router = useRouter();
   const filteredDevotions = devotions?.userDevotions?.filter(
     (devotion) =>
-      devotion.book.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      devotion.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (selectedBook === "" || devotion.book === selectedBook)
   );
 
@@ -126,7 +102,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           <div className="relative max-w-sm w-full">
             <input
               className="pl-10"
-              placeholder="Filter book..."
+              placeholder="Filter title..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -136,6 +112,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
             value={selectedBook}
             onChange={(val) => setSelectedBook(val)}
           />
+          <CreateDialog />
         </div>
       </div>
 
@@ -143,6 +120,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         <TableHeader>
           <TableRow>
             <TableHead>Devotion ID</TableHead>
+            <TableHead>Title</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Book</TableHead>
             <TableHead>Chapter</TableHead>
@@ -165,15 +143,21 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                 onClick={() => router.push(devotionUrl)}
               >
                 <TableCell>{devotion.id}</TableCell>
+                <TableCell>{devotion.title}</TableCell>
                 <TableCell>{devotion.date?.toLocaleDateString()}</TableCell>
                 <TableCell>{devotion.book}</TableCell>
                 <TableCell className="font-bold">{devotion.chapter}</TableCell>
                 <TableCell>{devotion.scripture}</TableCell>
                 <TableCell>{devotion.reflection}</TableCell>
+
                 <TableCell className="text-right">
-                  <div className="flex justify-end space-x-4">
-                    <h1>Edit</h1>
-                    <h1>Delete</h1>
+                  <div
+                    className="flex justify-end space-x-4"
+                    //e.stopPropagation to stop clicking the parent (because TableRow has onClick)
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <EditDialog devotion={devotion} />
+                    <DeleteDialog devotion={devotion} />
                   </div>
                 </TableCell>
               </TableRow>

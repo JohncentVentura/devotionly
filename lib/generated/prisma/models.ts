@@ -9,5 +9,4 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Devotions'
-export type * from './models/Post'
 export type * from './commonInputTypes'

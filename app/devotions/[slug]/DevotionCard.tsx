@@ -38,19 +38,17 @@ export default function DevotionCard({ devotion }: DevotionCardProps) {
         <div className="basis-2/4 flex flex-col justify-between">
           <CardContent className="mt-8 space-y-3">
             <CardTitle className="text-5xl font-bold">
-              {devotion.book}
+              {devotion.title}
             </CardTitle>
             <CardTitle className="text-3xl font-bold">
               {devotion.date?.toLocaleDateString()}
             </CardTitle>
             <Badge>{devotion.book}</Badge>
             <CardDescription>Chapter: {devotion.chapter}</CardDescription>
-            <CardDescription className="text-white">
-              {devotion.scripture}
-            </CardDescription>
-            <CardDescription className="text-white">
-              {devotion.reflection}
-            </CardDescription>
+            <CardDescription>Scripture</CardDescription>
+            <CardDescription>{devotion.scripture}</CardDescription>
+            <CardDescription>Reflection</CardDescription>
+            <CardDescription>{devotion.reflection}</CardDescription>
           </CardContent>
         </div>
       </div>

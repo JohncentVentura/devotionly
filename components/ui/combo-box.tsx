@@ -32,6 +32,7 @@ const bookCatergories = [
   { value: "Deuteronomy", label: "Deuteronomy" },
   { value: "Psalms", label: "Psalms" },
   { value: "Proverbs", label: "Proverbs" },
+  { value: "John", label: "John" },
 ];
 
 export function Combobox({ value, onChange }: ComboboxProps) {

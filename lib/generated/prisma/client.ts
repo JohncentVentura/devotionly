@@ -44,8 +44,3 @@ export { Prisma }
  * 
  */
 export type Devotions = Prisma.DevotionsModel
-/**
- * Model Post
- * 
- */
-export type Post = Prisma.PostModel

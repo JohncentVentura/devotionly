@@ -51,8 +51,7 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Devotions: 'Devotions',
-  Post: 'Post'
+  Devotions: 'Devotions'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -73,6 +72,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const DevotionsScalarFieldEnum = {
   id: 'id',
+  title: 'title',
   date: 'date',
   book: 'book',
   chapter: 'chapter',
@@ -85,16 +85,6 @@ export const DevotionsScalarFieldEnum = {
 } as const
 
 export type DevotionsScalarFieldEnum = (typeof DevotionsScalarFieldEnum)[keyof typeof DevotionsScalarFieldEnum]
-
-
-export const PostScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  content: 'content',
-  createdAt: 'createdAt'
-} as const
-
-export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
 
 
 export const SortOrder = {

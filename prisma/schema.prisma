@@ -15,6 +15,7 @@ datasource db {
 
 model Devotions{
   id String @id @default(cuid())
+  title String
   date DateTime
   book  String
   chapter Int
