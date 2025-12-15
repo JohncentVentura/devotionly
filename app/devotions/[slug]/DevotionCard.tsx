@@ -26,7 +26,7 @@ export default function DevotionCard({ devotion }: DevotionCardProps) {
           <CardHeader>
             {devotion.imageUrl && (
               <div className="rounded-lg overflow-hidden">
-                <Image
+                <img
                   src={devotion.imageUrl}
                   alt="Post content"
                   className="w-full h-auto object-cover"

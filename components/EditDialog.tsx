@@ -18,6 +18,7 @@ import { Combobox } from "./ui/combo-box";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
+import ImageUpload from "./ImageUpload";
 
 type Devotion = NonNullable<Awaited<ReturnType<typeof getDevotionById>>>;
 
@@ -125,6 +126,17 @@ export default function EditDialog({ devotion }: EditDialogProps) {
               onChange={(e) => handleChange("reflection", e.target.value)}
             />
           </div>
+
+          <div className="py-5">
+            <ImageUpload
+              endpoint="postImage"
+              value={formData.imageUrl ?? ""}
+              onChange={(url) => {
+                handleChange("imageUrl", url);
+              }}
+            />
+          </div>
+
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction type="submit">Submit</AlertDialogAction>
