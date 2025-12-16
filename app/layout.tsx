@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import Navbar from "@/components/Navbar";
+//import NavbarLocal from "@/components/NavbarLocal";
 import { ThemeProvider } from "@/components/theme-provider";
 import { StackProvider, StackTheme } from "@stackframe/stack";
 import { stackClientApp } from "../stack/client";
 import "./globals.css";
+import Navbar from "@/components/navbar";
+import NavbarLocal from "@/components/NavbarLocal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,7 +44,7 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               <Toaster />
-              <Navbar />
+              <NavbarLocal />
               {children}
             </ThemeProvider>
           </StackTheme>

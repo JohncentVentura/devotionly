@@ -21,7 +21,7 @@ Shadcn UI
 - npx shadcn@latest init
 - npx shadcn@latest add button
 - npm install next-themes
-- npx shadcn@latest add https://shadcnui-blocks.com/r/hero-05.json
+- npx shadcn@latest add https://shadcnui-blocks.com/r/hero-01.json
 - npx shadcn@latest add https://www.shadcnui-blocks.com/r/table-01.json
 - npx shadcn@latest add popover
 - npx shadcn@latest add command
@@ -31,6 +31,8 @@ Shadcn UI
 - npx shadcn@latest add label
 - npx shadcn@latest add textarea
 - npx shadcn@latest add input
+- npx shadcn@latest add https://shadcnui-blocks.com/r/features-01.json
+- npx shadcn@latest add https://shadcnui-blocks.com/r/navbar-02.json
 
 Neon
 
@@ -54,3 +56,7 @@ Prisma
 - (Create a typescript file & paste PrismaClient from prisma.docs)
 - npm i @prisma/adapter-pg
 - npm install @prisma/client
+
+Uploadthing
+
+- https://docs.uploadthing.com/getting-started/appdir
