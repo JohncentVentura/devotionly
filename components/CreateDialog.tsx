@@ -1,4 +1,5 @@
-import { BookPlus } from "lucide-react";
+"use client";
+import { Pencil } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { createDevotion } from "@/actions/devotion.action";
@@ -53,15 +54,9 @@ export default function CreateDialog() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          variant="outline"
-          className="ml-auto flex items-center gap-2"
-          asChild
-        >
-          <span>
-            <BookPlus className="w-4 h-4" />
-            Add devotion
-          </span>
+        <Button size="lg" className="rounded-full text-base ">
+          <Pencil className="size-4" />
+          Write devotion
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

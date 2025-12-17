@@ -7,8 +7,8 @@ import {
 } from "@/components/ui/sheet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Menu } from "lucide-react";
-import { Logo } from "@/components/logo";
 import { NavMenu } from "@/components/nav-menu";
+import Logo from "./Logo";
 
 export const NavigationSheet = () => {
   return (
@@ -18,7 +18,7 @@ export const NavigationSheet = () => {
       </VisuallyHidden>
 
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" className="rounded-full">
           <Menu />
         </Button>
       </SheetTrigger>

@@ -98,7 +98,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
   return (
     <>
       <div className="w-full">
-        <div className="flex items-center gap-2 py-4">
+        <div className="flex items-center justify-between py-4">
           <div className="relative max-w-sm w-full">
             <input
               className="pl-10"

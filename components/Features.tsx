@@ -1,50 +1,51 @@
 import {
-  Blocks,
-  Bot,
-  ChartPie,
-  Film,
-  MessageCircle,
-  Settings2,
+  BookOpen,
+  PenLine,
+  CalendarCheck,
+  Sparkles,
+  HeartHandshake,
+  Clock
 } from "lucide-react";
 
-const features = [
+export const features = [
   {
-    icon: Settings2,
-    title: "Customizable Layouts",
+    icon: PenLine,
+    title: "Devotion Writing",
     description:
-      "Design your space with drag-and-drop simplicity—create grids, lists, or galleries in seconds.",
+      "Write personal reflections, prayers, and insights with a peaceful, distraction-free editor.",
   },
   {
-    icon: Blocks,
-    title: "Interactive Widgets",
+    icon: BookOpen,
+    title: "Scripture Organization",
     description:
-      "Embed polls, quizzes, or forms to keep your audience engaged.",
+      "Attach Bible verses to your devotions and organize them by book, chapter, or topic.",
   },
   {
-    icon: Bot,
-    title: "AI-Powered Tools",
+    icon: CalendarCheck,
+    title: "Daily Devotion Tracking",
     description:
-      "Generate summaries, auto-format content, or translate into multiple languages seamlessly.",
+      "Build a consistent quiet time habit with streaks, reminders, and devotion history.",
   },
   {
-    icon: Film,
-    title: "Media Integrations",
+    icon: Sparkles,
+    title: "Guided Reflection Prompts",
     description:
-      "Connect with Spotify, Instagram, or your own media library for dynamic visuals and sound.",
+      "Receive gentle prompts that help deepen understanding and personal application of Scripture.",
   },
   {
-    icon: ChartPie,
-    title: "Advanced Analytics",
+    icon: HeartHandshake,
+    title: "Prayer Journal",
     description:
-      "Track engagement, clicks, and user activity with intuitive charts and reports.",
+      "Record prayers, track answered prayers, and reflect on God’s faithfulness over time.",
   },
   {
-    icon: MessageCircle,
-    title: "Seamless Collaboration",
+    icon: Clock,
+    title: "Devotion Timeline",
     description:
-      "Comment, tag, and assign tasks directly within your documents.",
+      "View your spiritual journey through a chronological timeline of past devotions.",
   },
 ];
+
 
 const Features = () => {
   return (

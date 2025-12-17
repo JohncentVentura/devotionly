@@ -4,12 +4,13 @@ import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 
-export function ModeToggle() {
+export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
     <Button
       variant="outline"
+      className="rounded-full"
       size="icon"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >

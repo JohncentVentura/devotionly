@@ -12,7 +12,7 @@ export default async function Devotions() {
   //const localDevotions = await prisma.devotions.findMany();
 
   return (
-    <>
+    <div className="pt-20">
       {user ? (
         <div className="mt-7 max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-10 gap-6">
           <div className="lg:col-span-full">
@@ -35,6 +35,6 @@ export default async function Devotions() {
           <SignUp />
         </div>
       )}
-    </>
+    </div>
   );
 }

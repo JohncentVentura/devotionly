@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-//import NavbarLocal from "@/components/NavbarLocal";
 import { ThemeProvider } from "@/components/theme-provider";
+import NavbarServer from "@/components/NavbarServer";
+import { stackClientApp } from "@/stack/client";
 import { StackProvider, StackTheme } from "@stackframe/stack";
-import { stackClientApp } from "../stack/client";
 import "./globals.css";
-import Navbar from "@/components/navbar";
-import NavbarLocal from "@/components/NavbarLocal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +23,7 @@ export const metadata: Metadata = {
     "A digital devotion app for writing, organizing, and tracking on personal bible devotions.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -44,7 +42,7 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               <Toaster />
-              <NavbarLocal />
+              <NavbarServer />
               {children}
             </ThemeProvider>
           </StackTheme>

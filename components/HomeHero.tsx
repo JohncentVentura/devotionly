@@ -1,37 +1,32 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  ArrowUpRight,
-  BookOpen,
-  CirclePlay,
-  Pencil,
-  Sparkles,
-} from "lucide-react";
+import { ArrowUpRight, BookOpen, Pencil, Sparkles } from "lucide-react";
 import Link from "next/link";
-import CreateDialog from "./CreateDialog";
 import Image from "next/image";
 import { stackServerApp } from "@/stack/server";
 import { imagePaths } from "@/lib/paths";
+import CreateDialog from "./CreateDialog";
 
-export default async function Hero() {
+export default async function HomeHero() {
   const user = await stackServerApp.getUser();
   const app = stackServerApp.urls;
 
   return (
     <section className="relative">
-      <img
-        src={imagePaths.hero}
+      <Image
+        src={imagePaths.homeHero}
         alt="Hero"
-        className="absolute z-[-1] w-full h-full object-cover"
+        className="absolute -z-10 w-full h-full object-cover"
+        fill
       />
-      <div className="min-h-screen flex justify-center px-6 pt-[10vh]">
+      <div className="min-h-screen flex justify-center px-6 pt-[17.5vh]">
         <div className="text-center max-w-3xl">
           <Badge
             variant="secondary"
             className="rounded-full py-1 border-border"
             asChild
           >
-            <Link href="#">
+            <Link href="/">
               <Sparkles className="ml-1 size-4" /> Be a part of community of
               +100 users
             </Link>
@@ -46,9 +41,7 @@ export default async function Hero() {
           </p>
           <div className="mt-12 flex items-center justify-center gap-4">
             {user ? (
-              <Button size="lg" className="rounded-full text-base">
-                <Pencil className="size-5" /> Write Devotion
-              </Button>
+              <CreateDialog />
             ) : (
               <Link href={app.signUp}>
                 <Button size="lg" className="rounded-full text-base">
