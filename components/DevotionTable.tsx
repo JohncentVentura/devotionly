@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { getDevotions } from "@/actions/devotion.action";
-import { Combobox } from "./ui/combo-box";
+import { ComboboxBook } from "./ComboboxBook";
 import { Skeleton } from "./ui/skeleton";
 import {
   Table,
@@ -108,7 +108,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
             />
             <Search className="absolute h-4 w-4 left-3 top-1/2 transform -translate-y-1/2" />
           </div>
-          <Combobox
+          <ComboboxBook
             value={selectedBook}
             onChange={(val) => setSelectedBook(val)}
           />
@@ -131,7 +131,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         </TableHeader>
         <TableBody>
           {filteredDevotions?.map((devotion) => {
-            const slugifiedName = devotion.book
+            const slugifiedName = devotion.title
               .toLowerCase()
               .replace(/\s+/g, "-");
             const slug = `${devotion.id}--${slugifiedName}`;

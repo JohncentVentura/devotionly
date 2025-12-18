@@ -1,23 +1,22 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, CirclePlay, Sun } from "lucide-react";
+import { ArrowUpRight, BookType, Sun } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { imagePaths } from "@/lib/paths";
-import CreateDialog from "./CreateDialog";
+import CreateDialog from "../CreateDialog";
 import { stackServerApp } from "@/stack/server";
 
-
-export default async function DailyVerseHero() {
+export default async function HomeDailyWord() {
   const user = await stackServerApp.getUser();
-    const app = stackServerApp.urls;
+  const app = stackServerApp.urls;
 
   return (
     <section className="relative">
-      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-background to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-40 bg-linear-to-b from-background to-transparent pointer-events-none" />
 
       <Image
-        src={imagePaths.dailyVerseHero}
+        src={imagePaths.homeDailyWord}
         alt="Hero"
         className="absolute -z-10  object-cover"
         fill
@@ -44,23 +43,24 @@ export default async function DailyVerseHero() {
               Son, that whoever believes in Him shall not perish, but have
               eternal life&quot;
             </p>
-            
+
             <div className="mt-12 flex items-center gap-4">
               {user ? (
-              <CreateDialog />
-            ) : (
-              <Link href={app.signUp}>
-                <Button size="lg" className="rounded-full text-base">
-                  Get Started <ArrowUpRight className="size-5" />
-                </Button>
-              </Link>
-            )}
+                <CreateDialog />
+              ) : (
+                <Link href={app.signUp}>
+                  <Button size="lg" className="rounded-full text-base">
+                    Get Started <ArrowUpRight className="size-5" />
+                  </Button>
+                </Link>
+              )}
               <Button
                 variant="outline"
                 size="lg"
                 className="rounded-full text-base shadow-none"
               >
-                <CirclePlay className="h-5! w-5!" />ESV Translate
+                <BookType className="h-5! w-5!" />
+                ESV Translate
               </Button>
             </div>
           </div>
@@ -68,7 +68,7 @@ export default async function DailyVerseHero() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-40 bg-linear-to-t from-background to-transparent pointer-events-none" />
     </section>
   );
 }

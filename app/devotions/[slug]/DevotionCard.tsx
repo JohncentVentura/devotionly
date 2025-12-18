@@ -20,7 +20,7 @@ export default function DevotionCard({ devotion }: DevotionCardProps) {
   if (!devotion) return <div>Devotion data is not available</div>;
 
   return (
-    <Card className="max-w">
+    <Card className="mt-20 max-w">
       <div className="flex flex-row">
         <div className="basis-2/4">
           <CardHeader>

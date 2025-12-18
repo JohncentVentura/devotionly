@@ -14,7 +14,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Combobox } from "./ui/combo-box";
+import { ComboboxBook } from "./ComboboxBook";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
@@ -92,7 +92,7 @@ export default function EditDialog({ devotion }: EditDialogProps) {
             </div>
             <div>
               <Label htmlFor="book">Book</Label>
-              <Combobox
+              <ComboboxBook
                 value={formData.book}
                 onChange={(val) => handleChange("book", val)}
               />

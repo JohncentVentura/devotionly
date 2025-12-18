@@ -1,15 +1,15 @@
-import HomeHero from "@/components/HomeHero";
-import Features from "@/components/Features";
-import DailyVerseHero from "@/components/DailyVerseHero";
-import Footer from "@/components/Footer";
+import HomeDailyWord from "@/components/home/HomeDailyWord";
+import HomeFAQ from "@/components/home/HomeFAQ";
+import HomeFeatures from "@/components/home/HomeFeatures";
+import HomeHero from "@/components/home/HomeHero";
 
 export default function Home() {
   return (
     <>
       <HomeHero />
-      <Features />
-      <DailyVerseHero />
-      <Footer />
+      <HomeFeatures />
+      <HomeDailyWord />
+      <HomeFAQ />
     </>
   );
 }

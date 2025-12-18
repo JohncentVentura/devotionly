@@ -15,7 +15,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Combobox } from "./ui/combo-box";
+import { ComboboxBook } from "./ComboboxBook";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
@@ -59,6 +59,7 @@ export default function CreateDialog() {
           Write devotion
         </Button>
       </AlertDialogTrigger>
+      
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Add a devotion?</AlertDialogTitle>
@@ -81,7 +82,7 @@ export default function CreateDialog() {
             </div>
             <div>
               <Label htmlFor="book">Book</Label>
-              <Combobox
+              <ComboboxBook
                 value={formData.book}
                 onChange={(val) => handleChange("book", val)}
               />

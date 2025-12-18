@@ -18,12 +18,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-interface ComboboxProps {
-  value: string;
-  onChange: (value: string) => void;
-}
-
-const bookCatergories = [
+const books = [
   { value: "", label: "None" },
   { value: "Genesis", label: "Genesis" },
   { value: "Exodus", label: "Exodus" },
@@ -35,7 +30,12 @@ const bookCatergories = [
   { value: "John", label: "John" },
 ];
 
-export function Combobox({ value, onChange }: ComboboxProps) {
+interface ComboboxProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export function ComboboxBook({ value, onChange }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -47,30 +47,30 @@ export function Combobox({ value, onChange }: ComboboxProps) {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {value ? value : "Select category..."}
+          {value ? value : "Select Book..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search category..." className="h-9" />
+          <CommandInput placeholder="Search Book..." className="h-9" />
           <CommandList>
-            <CommandEmpty>No category found.</CommandEmpty>
+            <CommandEmpty>No Book Found.</CommandEmpty>
             <CommandGroup>
-              {bookCatergories.map((cat) => (
+              {books.map((book) => (
                 <CommandItem
-                  key={cat.value}
-                  value={cat.value}
+                  key={book.value}
+                  value={book.value}
                   onSelect={(currentValue) => {
                     onChange(currentValue);
                     setOpen(false);
                   }}
                 >
-                  {cat.label}
+                  {book.label}
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === cat.value ? "opacity-100" : "opacity-0"
+                      value === book.value ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>

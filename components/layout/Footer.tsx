@@ -1,31 +1,26 @@
 import { Separator } from "@/components/ui/separator";
-import {
-  DribbbleIcon,
-  GithubIcon,
-  TwitchIcon,
-  TwitterIcon,
-} from "lucide-react";
+import { GithubIcon } from "lucide-react";
 import Link from "next/link";
-import Logo from "./Logo";
+import Logo from "../Logo";
 
 const footerLinks = [
   {
     title: "Devotions",
-    href: "#",
+    href: "/devotions",
   },
   {
     title: "About",
-    href: "#",
+    href: "/about",
   },
   {
     title: "Contact",
-    href: "#",
+    href: "/contact",
   },
 ];
 
 export default function Footer() {
   return (
-    <div className="flex flex-col">
+    <footer className="flex flex-col">
       <footer>
         <div className="max-w-(--breakpoint-xl) mx-auto">
           <div className="py-12 flex flex-col justify-start items-center">
@@ -66,6 +61,6 @@ export default function Footer() {
           </div>
         </div>
       </footer>
-    </div>
+    </footer>
   );
 }

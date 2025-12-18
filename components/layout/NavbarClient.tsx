@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { NavMenu } from "@/components/nav-menu";
-import { NavigationSheet } from "@/components/navigation-sheet";
+import { NavMenu } from "@/components/layout/nav-menu";
+import { NavigationSheet } from "@/components/layout/navigation-sheet";
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@stackframe/stack";
-import Logo from "./Logo";
-import { ThemeToggle } from "./ThemeToggle";
+import Logo from "../Logo";
+import { ThemeToggle } from "../ThemeToggle";
 
 interface NavbarClientProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,10 +34,8 @@ export default function NavbarClient({ user, app }: NavbarClientProps) {
 
   return (
     <nav
-      className={`z-10 fixed top-6 inset-x-4 h-16 bg-background border max-w-(--breakpoint-xl) mx-auto rounded-full 
-         ${
-           showNavbar ? "translate-y-0" : "-translate-y-24"
-         } transition-transform duration-300`}
+      className={`z-10 fixed top-3 md:top-6 inset-x-4 h-12 md:h-16 bg-background border max-w-(--breakpoint-xl) mx-auto rounded-full transition-transform duration-300
+         ${showNavbar ? "translate-y-0" : "-translate-y-24"} `}
     >
       <div className="h-full flex items-center justify-between mx-auto px-6">
         <Logo />

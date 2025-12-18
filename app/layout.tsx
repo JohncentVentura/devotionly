@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/components/layout/Footer";
+import NavbarServer from "@/components/layout/NavbarServer";
 import { ThemeProvider } from "@/components/theme-provider";
-import NavbarServer from "@/components/NavbarServer";
 import { stackClientApp } from "@/stack/client";
 import { StackProvider, StackTheme } from "@stackframe/stack";
 import "./globals.css";
@@ -44,6 +45,7 @@ export default async function RootLayout({
               <Toaster />
               <NavbarServer />
               {children}
+              <Footer />
             </ThemeProvider>
           </StackTheme>
         </StackProvider>
