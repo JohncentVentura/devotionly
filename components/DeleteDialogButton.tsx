@@ -22,7 +22,7 @@ interface DeleteDialogProps {
   };
 }
 
-export default function DeleteDialog({ devotion }: DeleteDialogProps) {
+export default function DeleteDialogButton({ devotion }: DeleteDialogProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {

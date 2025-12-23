@@ -18,8 +18,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-const books = [
-  { value: "", label: "None" },
+const oldTestament = [
   { value: "Genesis", label: "Genesis" },
   { value: "Exodus", label: "Exodus" },
   { value: "Leviticus", label: "Leviticus" },
@@ -27,6 +26,12 @@ const books = [
   { value: "Deuteronomy", label: "Deuteronomy" },
   { value: "Psalms", label: "Psalms" },
   { value: "Proverbs", label: "Proverbs" },
+];
+
+const newTestament = [
+  { value: "Matthew", label: "Matthew" },
+  { value: "Mark", label: "Mark" },
+  { value: "Luke", label: "Luke" },
   { value: "John", label: "John" },
 ];
 
@@ -45,37 +50,79 @@ export function ComboboxBook({ value, onChange }: ComboboxProps) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-50 justify-between"
         >
           {value ? value : "Select Book..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-full p-0">
         <Command>
           <CommandInput placeholder="Search Book..." className="h-9" />
           <CommandList>
             <CommandEmpty>No Book Found.</CommandEmpty>
+           
             <CommandGroup>
-              {books.map((book) => (
-                <CommandItem
-                  key={book.value}
-                  value={book.value}
-                  onSelect={(currentValue) => {
-                    onChange(currentValue);
-                    setOpen(false);
-                  }}
-                >
-                  {book.label}
-                  <Check
-                    className={cn(
-                      "ml-auto",
-                      value === book.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                </CommandItem>
-              ))}
+              <CommandItem
+                value=""
+                onSelect={() => {
+                  onChange("");
+                  setOpen(false);
+                }}
+              >
+                None
+                <Check
+                  className={cn(
+                    "ml-auto",
+                    value === "" ? "opacity-100" : "opacity-0"
+                  )}
+                />
+              </CommandItem>
             </CommandGroup>
+
+            <div className="grid grid-cols-2 gap-2 p-2">
+              <CommandGroup heading="Old Testament">
+                {oldTestament.map((book) => (
+                  <CommandItem
+                    key={book.value}
+                    value={book.value}
+                    onSelect={(currentValue) => {
+                      onChange(currentValue);
+                      setOpen(false);
+                    }}
+                  >
+                    {book.label}
+                    <Check
+                      className={cn(
+                        "ml-auto",
+                        value === book.value ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+
+              <CommandGroup heading="New Testament">
+                {newTestament.map((book) => (
+                  <CommandItem
+                    key={book.value}
+                    value={book.value}
+                    onSelect={(currentValue) => {
+                      onChange(currentValue);
+                      setOpen(false);
+                    }}
+                  >
+                    {book.label}
+                    <Check
+                      className={cn(
+                        "ml-auto",
+                        value === book.value ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </div>
           </CommandList>
         </Command>
       </PopoverContent>

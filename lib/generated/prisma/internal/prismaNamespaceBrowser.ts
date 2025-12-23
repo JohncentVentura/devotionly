@@ -71,17 +71,20 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 
 export const DevotionsScalarFieldEnum = {
+  userId: 'userId',
   id: 'id',
-  title: 'title',
   date: 'date',
   book: 'book',
   chapter: 'chapter',
+  fromVerse: 'fromVerse',
+  toVerse: 'toVerse',
   scripture: 'scripture',
-  reflection: 'reflection',
+  observation: 'observation',
+  application: 'application',
+  prayer: 'prayer',
+  imageUrl: 'imageUrl',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId',
-  imageUrl: 'imageUrl'
+  updatedAt: 'updatedAt'
 } as const
 
 export type DevotionsScalarFieldEnum = (typeof DevotionsScalarFieldEnum)[keyof typeof DevotionsScalarFieldEnum]

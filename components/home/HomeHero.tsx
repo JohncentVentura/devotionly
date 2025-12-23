@@ -1,11 +1,11 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, BookOpen, Pencil, Sparkles } from "lucide-react";
+import { ArrowUpRight, BookOpen,  Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { stackServerApp } from "@/stack/server";
 import { imagePaths } from "@/lib/paths";
-import CreateDialog from "../CreateDialog";
+import CreateDialogButton from "../CreateDialogButton";
 
 export default async function HomeHero() {
   const user = await stackServerApp.getUser();
@@ -60,7 +60,7 @@ export default async function HomeHero() {
                 </Button>
               </Link>
             ) : (
-              <CreateDialog />
+              <CreateDialogButton />
             )}
             <Link href={app.signUp}>
               <Button

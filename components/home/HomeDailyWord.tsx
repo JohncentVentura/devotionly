@@ -4,7 +4,7 @@ import { ArrowUpRight, BookType, Sun } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { imagePaths } from "@/lib/paths";
-import CreateDialog from "../CreateDialog";
+import CreateDialogButton from "../CreateDialogButton";
 import { stackServerApp } from "@/stack/server";
 
 export default async function HomeDailyWord() {
@@ -46,7 +46,7 @@ export default async function HomeDailyWord() {
 
             <div className="mt-12 flex items-center gap-4">
               {user ? (
-                <CreateDialog />
+                <CreateDialogButton />
               ) : (
                 <Link href={app.signUp}>
                   <Button size="lg" className="rounded-full text-base">

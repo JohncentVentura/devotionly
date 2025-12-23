@@ -26,10 +26,10 @@ export default function DevotionCard({ devotion }: DevotionCardProps) {
           <CardHeader>
             {devotion.imageUrl && (
               <div className="rounded-lg overflow-hidden">
-                <img
+                <Image
                   src={devotion.imageUrl}
                   alt="Post content"
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover"
                 />
               </div>
             )}
@@ -37,18 +37,22 @@ export default function DevotionCard({ devotion }: DevotionCardProps) {
         </div>
         <div className="basis-2/4 flex flex-col justify-between">
           <CardContent className="mt-8 space-y-3">
-            <CardTitle className="text-5xl font-bold">
-              {devotion.title}
-            </CardTitle>
             <CardTitle className="text-3xl font-bold">
               {devotion.date?.toLocaleDateString()}
             </CardTitle>
             <Badge>{devotion.book}</Badge>
-            <CardDescription>Chapter: {devotion.chapter}</CardDescription>
+            <Badge>Chapter {devotion.chapter}</Badge>
+            <Badge>
+              Verse {devotion.fromVerse} - {devotion.toVerse}
+            </Badge>
             <CardDescription>Scripture</CardDescription>
             <CardDescription>{devotion.scripture}</CardDescription>
-            <CardDescription>Reflection</CardDescription>
-            <CardDescription>{devotion.reflection}</CardDescription>
+            <CardDescription>Observation</CardDescription>
+            <CardDescription>{devotion.observation}</CardDescription>
+            <CardDescription>Application</CardDescription>
+            <CardDescription>{devotion.application}</CardDescription>
+            <CardDescription>Prayer</CardDescription>
+            <CardDescription>{devotion.prayer}</CardDescription>
           </CardContent>
         </div>
       </div>

@@ -47,6 +47,7 @@ export async function createDevotion(data: Prisma.DevotionsCreateInput) {
       data: {
         ...data,
         userId: currentUserId,
+        //id will be auto-generated
       },
     });
 
@@ -58,7 +59,7 @@ export async function createDevotion(data: Prisma.DevotionsCreateInput) {
   }
 }
 
-export async function editDevotion(
+export async function updateDevotion(
   id: string, //identify which devotion we are editing
   data: Prisma.DevotionsUpdateInput
 ) {

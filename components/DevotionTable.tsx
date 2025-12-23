@@ -5,7 +5,17 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { getDevotions } from "@/actions/devotion.action";
 import { ComboboxBook } from "./ComboboxBook";
+
 import { Skeleton } from "./ui/skeleton";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import {
   Table,
   TableBody,
@@ -14,9 +24,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import CreateDialog from "./CreateDialog";
-import DeleteDialog from "./DeleteDialog";
-import EditDialog from "./EditDialog";
+import CreateDialogButton from "./CreateDialogButton";
+import DeleteDialogButton from "./DeleteDialogButton";
+import EditDialogButton from "./EditDialogButton";
+import { ComboboxChapter } from "./ComboboxChapter";
 
 type Devotions = Awaited<ReturnType<typeof getDevotions>>;
 
@@ -25,14 +36,31 @@ interface DevotionsTableProps {
 }
 
 export default function DevotionTable({ devotions }: DevotionsTableProps) {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedBook, setSelectedBook] = useState("");
+  const [selectedChapter, setSelectedChapter] = useState<number>(0);
+
   const router = useRouter();
+  const filteredDevotions = devotions?.userDevotions?.filter((devotion) => {
+    const devotionDate = devotion.date
+      ? new Date(devotion.date).toISOString().split("T")[0]
+      : "";
+
+    return (
+      (selectedDate === "" || devotionDate === selectedDate) &&
+      (selectedBook === "" || devotion.book === selectedBook) &&
+      (selectedChapter === 0 || devotion.chapter === selectedChapter)
+    );
+  });
+
+  /* if <input/> is using string
+  const [searchTerm, setSearchTerm] = useState("");
   const filteredDevotions = devotions?.userDevotions?.filter(
     (devotion) =>
-      devotion.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      devotion.date.toString().toLowerCase().includes(searchTerm.toLowerCase()) &&
       (selectedBook === "" || devotion.book === selectedBook)
   );
+  */
 
   //Loading skeleton
   if (!devotions) {
@@ -96,75 +124,104 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
   }
 
   return (
-    <>
-      <div className="w-full">
-        <div className="flex items-center justify-between py-4">
-          <div className="relative max-w-sm w-full">
-            <input
-              className="pl-10"
-              placeholder="Filter title..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <Search className="absolute h-4 w-4 left-3 top-1/2 transform -translate-y-1/2" />
-          </div>
-          <ComboboxBook
-            value={selectedBook}
-            onChange={(val) => setSelectedBook(val)}
-          />
-          <CreateDialog />
-        </div>
+    <div className="w-full">
+      <div className="grid grid-cols-2 md:grid-cols-4 justify-between items-center gap-2 ">
+        <CreateDialogButton>
+          <div className="text-sm md:text-base">Create Devotion</div>
+        </CreateDialogButton>
+        <input
+          type="date"
+          placeholder="Filter Date..."
+          className="border rounded-2xl px-2 py-1 w-fit text-sm md:text-base"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+        />
+
+        <ComboboxBook
+          value={selectedBook}
+          onChange={(val) => setSelectedBook(val)}
+        />
+        <ComboboxChapter
+          value={selectedChapter}
+          onChange={(val) => setSelectedChapter(val)}
+        />
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Devotion ID</TableHead>
-            <TableHead>Title</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead>Book</TableHead>
-            <TableHead>Chapter</TableHead>
-            <TableHead>Scripture</TableHead>
-            <TableHead>Reflection</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filteredDevotions?.map((devotion) => {
-            const slugifiedName = devotion.title
-              .toLowerCase()
-              .replace(/\s+/g, "-");
-            const slug = `${devotion.id}--${slugifiedName}`;
-            const devotionUrl = `/devotions/${slug}`;
+      <div className="mt-4 w-full bg-background/50 rounded-md overflow-hidden">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Date</TableHead>
+              <TableHead>Book</TableHead>
+              <TableHead>Chapter</TableHead>
+              <TableHead className="hidden md:table-cell">Scripture</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredDevotions?.map((devotion) => {
+              const slugifiedName = devotion.book
+                .toLowerCase()
+                .replace(/\s+/g, "-");
+              const slug = `${devotion.id}--${slugifiedName}`;
+              const devotionUrl = `/devotions/${slug}`;
 
-            return (
-              <TableRow
-                key={devotion.id}
-                onClick={() => router.push(devotionUrl)}
-              >
-                <TableCell>{devotion.id}</TableCell>
-                <TableCell>{devotion.title}</TableCell>
-                <TableCell>{devotion.date?.toLocaleDateString()}</TableCell>
-                <TableCell>{devotion.book}</TableCell>
-                <TableCell className="font-bold">{devotion.chapter}</TableCell>
-                <TableCell>{devotion.scripture}</TableCell>
-                <TableCell>{devotion.reflection}</TableCell>
+              return (
+                <TableRow
+                  key={devotion.id}
+                  onClick={() => router.push(devotionUrl)}
+                >
+                  <TableCell>{devotion.date?.toLocaleDateString()}</TableCell>
 
-                <TableCell className="text-right">
-                  <div
-                    className="flex justify-end space-x-4"
-                    //e.stopPropagation to stop clicking the parent (because TableRow has onClick)
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <EditDialog devotion={devotion} />
-                    <DeleteDialog devotion={devotion} />
-                  </div>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </>
+                  <TableCell>{devotion.book}</TableCell>
+                  <TableCell className="font-bold">
+                    {devotion.chapter}
+                  </TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {devotion.scripture}
+                  </TableCell>
+
+                  <TableCell>
+                    <div
+                      className="flex justify-end"
+                      //e.stopPropagation to stop clicking the parent (because TableRow has onClick)
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <EditDialogButton devotion={devotion} />
+                      <DeleteDialogButton devotion={devotion} />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
+
+      <Pagination className="mt-4">
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious href="#" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">1</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" isActive>
+              2
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">3</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext href="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </div>
   );
 }

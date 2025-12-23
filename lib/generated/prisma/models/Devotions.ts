@@ -28,104 +28,130 @@ export type AggregateDevotions = {
 
 export type DevotionsAvgAggregateOutputType = {
   chapter: number | null
+  fromVerse: number | null
+  toVerse: number | null
 }
 
 export type DevotionsSumAggregateOutputType = {
   chapter: number | null
+  fromVerse: number | null
+  toVerse: number | null
 }
 
 export type DevotionsMinAggregateOutputType = {
+  userId: string | null
   id: string | null
-  title: string | null
   date: Date | null
   book: string | null
   chapter: number | null
+  fromVerse: number | null
+  toVerse: number | null
   scripture: string | null
-  reflection: string | null
+  observation: string | null
+  application: string | null
+  prayer: string | null
+  imageUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  userId: string | null
-  imageUrl: string | null
 }
 
 export type DevotionsMaxAggregateOutputType = {
+  userId: string | null
   id: string | null
-  title: string | null
   date: Date | null
   book: string | null
   chapter: number | null
+  fromVerse: number | null
+  toVerse: number | null
   scripture: string | null
-  reflection: string | null
+  observation: string | null
+  application: string | null
+  prayer: string | null
+  imageUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  userId: string | null
-  imageUrl: string | null
 }
 
 export type DevotionsCountAggregateOutputType = {
+  userId: number
   id: number
-  title: number
   date: number
   book: number
   chapter: number
+  fromVerse: number
+  toVerse: number
   scripture: number
-  reflection: number
+  observation: number
+  application: number
+  prayer: number
+  imageUrl: number
   createdAt: number
   updatedAt: number
-  userId: number
-  imageUrl: number
   _all: number
 }
 
 
 export type DevotionsAvgAggregateInputType = {
   chapter?: true
+  fromVerse?: true
+  toVerse?: true
 }
 
 export type DevotionsSumAggregateInputType = {
   chapter?: true
+  fromVerse?: true
+  toVerse?: true
 }
 
 export type DevotionsMinAggregateInputType = {
+  userId?: true
   id?: true
-  title?: true
   date?: true
   book?: true
   chapter?: true
+  fromVerse?: true
+  toVerse?: true
   scripture?: true
-  reflection?: true
+  observation?: true
+  application?: true
+  prayer?: true
+  imageUrl?: true
   createdAt?: true
   updatedAt?: true
-  userId?: true
-  imageUrl?: true
 }
 
 export type DevotionsMaxAggregateInputType = {
+  userId?: true
   id?: true
-  title?: true
   date?: true
   book?: true
   chapter?: true
+  fromVerse?: true
+  toVerse?: true
   scripture?: true
-  reflection?: true
+  observation?: true
+  application?: true
+  prayer?: true
+  imageUrl?: true
   createdAt?: true
   updatedAt?: true
-  userId?: true
-  imageUrl?: true
 }
 
 export type DevotionsCountAggregateInputType = {
+  userId?: true
   id?: true
-  title?: true
   date?: true
   book?: true
   chapter?: true
+  fromVerse?: true
+  toVerse?: true
   scripture?: true
-  reflection?: true
+  observation?: true
+  application?: true
+  prayer?: true
+  imageUrl?: true
   createdAt?: true
   updatedAt?: true
-  userId?: true
-  imageUrl?: true
   _all?: true
 }
 
@@ -216,17 +242,20 @@ export type DevotionsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 export type DevotionsGroupByOutputType = {
+  userId: string
   id: string
-  title: string
   date: Date
   book: string
   chapter: number
+  fromVerse: number
+  toVerse: number
   scripture: string
-  reflection: string
+  observation: string
+  application: string
+  prayer: string
+  imageUrl: string | null
   createdAt: Date
   updatedAt: Date
-  userId: string
-  imageUrl: string | null
   _count: DevotionsCountAggregateOutputType | null
   _avg: DevotionsAvgAggregateOutputType | null
   _sum: DevotionsSumAggregateOutputType | null
@@ -253,31 +282,37 @@ export type DevotionsWhereInput = {
   AND?: Prisma.DevotionsWhereInput | Prisma.DevotionsWhereInput[]
   OR?: Prisma.DevotionsWhereInput[]
   NOT?: Prisma.DevotionsWhereInput | Prisma.DevotionsWhereInput[]
+  userId?: Prisma.StringFilter<"Devotions"> | string
   id?: Prisma.StringFilter<"Devotions"> | string
-  title?: Prisma.StringFilter<"Devotions"> | string
   date?: Prisma.DateTimeFilter<"Devotions"> | Date | string
   book?: Prisma.StringFilter<"Devotions"> | string
   chapter?: Prisma.IntFilter<"Devotions"> | number
+  fromVerse?: Prisma.IntFilter<"Devotions"> | number
+  toVerse?: Prisma.IntFilter<"Devotions"> | number
   scripture?: Prisma.StringFilter<"Devotions"> | string
-  reflection?: Prisma.StringFilter<"Devotions"> | string
+  observation?: Prisma.StringFilter<"Devotions"> | string
+  application?: Prisma.StringFilter<"Devotions"> | string
+  prayer?: Prisma.StringFilter<"Devotions"> | string
+  imageUrl?: Prisma.StringNullableFilter<"Devotions"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Devotions"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Devotions"> | Date | string
-  userId?: Prisma.StringFilter<"Devotions"> | string
-  imageUrl?: Prisma.StringNullableFilter<"Devotions"> | string | null
 }
 
 export type DevotionsOrderByWithRelationInput = {
+  userId?: Prisma.SortOrder
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   date?: Prisma.SortOrder
   book?: Prisma.SortOrder
   chapter?: Prisma.SortOrder
+  fromVerse?: Prisma.SortOrder
+  toVerse?: Prisma.SortOrder
   scripture?: Prisma.SortOrder
-  reflection?: Prisma.SortOrder
+  observation?: Prisma.SortOrder
+  application?: Prisma.SortOrder
+  prayer?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type DevotionsWhereUniqueInput = Prisma.AtLeast<{
@@ -285,30 +320,36 @@ export type DevotionsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.DevotionsWhereInput | Prisma.DevotionsWhereInput[]
   OR?: Prisma.DevotionsWhereInput[]
   NOT?: Prisma.DevotionsWhereInput | Prisma.DevotionsWhereInput[]
-  title?: Prisma.StringFilter<"Devotions"> | string
+  userId?: Prisma.StringFilter<"Devotions"> | string
   date?: Prisma.DateTimeFilter<"Devotions"> | Date | string
   book?: Prisma.StringFilter<"Devotions"> | string
   chapter?: Prisma.IntFilter<"Devotions"> | number
+  fromVerse?: Prisma.IntFilter<"Devotions"> | number
+  toVerse?: Prisma.IntFilter<"Devotions"> | number
   scripture?: Prisma.StringFilter<"Devotions"> | string
-  reflection?: Prisma.StringFilter<"Devotions"> | string
+  observation?: Prisma.StringFilter<"Devotions"> | string
+  application?: Prisma.StringFilter<"Devotions"> | string
+  prayer?: Prisma.StringFilter<"Devotions"> | string
+  imageUrl?: Prisma.StringNullableFilter<"Devotions"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Devotions"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Devotions"> | Date | string
-  userId?: Prisma.StringFilter<"Devotions"> | string
-  imageUrl?: Prisma.StringNullableFilter<"Devotions"> | string | null
 }, "id">
 
 export type DevotionsOrderByWithAggregationInput = {
+  userId?: Prisma.SortOrder
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   date?: Prisma.SortOrder
   book?: Prisma.SortOrder
   chapter?: Prisma.SortOrder
+  fromVerse?: Prisma.SortOrder
+  toVerse?: Prisma.SortOrder
   scripture?: Prisma.SortOrder
-  reflection?: Prisma.SortOrder
+  observation?: Prisma.SortOrder
+  application?: Prisma.SortOrder
+  prayer?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DevotionsCountOrderByAggregateInput
   _avg?: Prisma.DevotionsAvgOrderByAggregateInput
   _max?: Prisma.DevotionsMaxOrderByAggregateInput
@@ -320,165 +361,202 @@ export type DevotionsScalarWhereWithAggregatesInput = {
   AND?: Prisma.DevotionsScalarWhereWithAggregatesInput | Prisma.DevotionsScalarWhereWithAggregatesInput[]
   OR?: Prisma.DevotionsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.DevotionsScalarWhereWithAggregatesInput | Prisma.DevotionsScalarWhereWithAggregatesInput[]
+  userId?: Prisma.StringWithAggregatesFilter<"Devotions"> | string
   id?: Prisma.StringWithAggregatesFilter<"Devotions"> | string
-  title?: Prisma.StringWithAggregatesFilter<"Devotions"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"Devotions"> | Date | string
   book?: Prisma.StringWithAggregatesFilter<"Devotions"> | string
   chapter?: Prisma.IntWithAggregatesFilter<"Devotions"> | number
+  fromVerse?: Prisma.IntWithAggregatesFilter<"Devotions"> | number
+  toVerse?: Prisma.IntWithAggregatesFilter<"Devotions"> | number
   scripture?: Prisma.StringWithAggregatesFilter<"Devotions"> | string
-  reflection?: Prisma.StringWithAggregatesFilter<"Devotions"> | string
+  observation?: Prisma.StringWithAggregatesFilter<"Devotions"> | string
+  application?: Prisma.StringWithAggregatesFilter<"Devotions"> | string
+  prayer?: Prisma.StringWithAggregatesFilter<"Devotions"> | string
+  imageUrl?: Prisma.StringNullableWithAggregatesFilter<"Devotions"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Devotions"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Devotions"> | Date | string
-  userId?: Prisma.StringWithAggregatesFilter<"Devotions"> | string
-  imageUrl?: Prisma.StringNullableWithAggregatesFilter<"Devotions"> | string | null
 }
 
 export type DevotionsCreateInput = {
+  userId: string
   id?: string
-  title: string
   date: Date | string
   book: string
   chapter: number
+  fromVerse: number
+  toVerse: number
   scripture: string
-  reflection: string
+  observation: string
+  application: string
+  prayer: string
+  imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId: string
-  imageUrl?: string | null
 }
 
 export type DevotionsUncheckedCreateInput = {
+  userId: string
   id?: string
-  title: string
   date: Date | string
   book: string
   chapter: number
+  fromVerse: number
+  toVerse: number
   scripture: string
-  reflection: string
+  observation: string
+  application: string
+  prayer: string
+  imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId: string
-  imageUrl?: string | null
 }
 
 export type DevotionsUpdateInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   book?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.IntFieldUpdateOperationsInput | number
+  fromVerse?: Prisma.IntFieldUpdateOperationsInput | number
+  toVerse?: Prisma.IntFieldUpdateOperationsInput | number
   scripture?: Prisma.StringFieldUpdateOperationsInput | string
-  reflection?: Prisma.StringFieldUpdateOperationsInput | string
+  observation?: Prisma.StringFieldUpdateOperationsInput | string
+  application?: Prisma.StringFieldUpdateOperationsInput | string
+  prayer?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DevotionsUncheckedUpdateInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   book?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.IntFieldUpdateOperationsInput | number
+  fromVerse?: Prisma.IntFieldUpdateOperationsInput | number
+  toVerse?: Prisma.IntFieldUpdateOperationsInput | number
   scripture?: Prisma.StringFieldUpdateOperationsInput | string
-  reflection?: Prisma.StringFieldUpdateOperationsInput | string
+  observation?: Prisma.StringFieldUpdateOperationsInput | string
+  application?: Prisma.StringFieldUpdateOperationsInput | string
+  prayer?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DevotionsCreateManyInput = {
+  userId: string
   id?: string
-  title: string
   date: Date | string
   book: string
   chapter: number
+  fromVerse: number
+  toVerse: number
   scripture: string
-  reflection: string
+  observation: string
+  application: string
+  prayer: string
+  imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId: string
-  imageUrl?: string | null
 }
 
 export type DevotionsUpdateManyMutationInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   book?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.IntFieldUpdateOperationsInput | number
+  fromVerse?: Prisma.IntFieldUpdateOperationsInput | number
+  toVerse?: Prisma.IntFieldUpdateOperationsInput | number
   scripture?: Prisma.StringFieldUpdateOperationsInput | string
-  reflection?: Prisma.StringFieldUpdateOperationsInput | string
+  observation?: Prisma.StringFieldUpdateOperationsInput | string
+  application?: Prisma.StringFieldUpdateOperationsInput | string
+  prayer?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DevotionsUncheckedUpdateManyInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   book?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.IntFieldUpdateOperationsInput | number
+  fromVerse?: Prisma.IntFieldUpdateOperationsInput | number
+  toVerse?: Prisma.IntFieldUpdateOperationsInput | number
   scripture?: Prisma.StringFieldUpdateOperationsInput | string
-  reflection?: Prisma.StringFieldUpdateOperationsInput | string
+  observation?: Prisma.StringFieldUpdateOperationsInput | string
+  application?: Prisma.StringFieldUpdateOperationsInput | string
+  prayer?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DevotionsCountOrderByAggregateInput = {
+  userId?: Prisma.SortOrder
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   date?: Prisma.SortOrder
   book?: Prisma.SortOrder
   chapter?: Prisma.SortOrder
+  fromVerse?: Prisma.SortOrder
+  toVerse?: Prisma.SortOrder
   scripture?: Prisma.SortOrder
-  reflection?: Prisma.SortOrder
+  observation?: Prisma.SortOrder
+  application?: Prisma.SortOrder
+  prayer?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
 }
 
 export type DevotionsAvgOrderByAggregateInput = {
   chapter?: Prisma.SortOrder
+  fromVerse?: Prisma.SortOrder
+  toVerse?: Prisma.SortOrder
 }
 
 export type DevotionsMaxOrderByAggregateInput = {
+  userId?: Prisma.SortOrder
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   date?: Prisma.SortOrder
   book?: Prisma.SortOrder
   chapter?: Prisma.SortOrder
+  fromVerse?: Prisma.SortOrder
+  toVerse?: Prisma.SortOrder
   scripture?: Prisma.SortOrder
-  reflection?: Prisma.SortOrder
+  observation?: Prisma.SortOrder
+  application?: Prisma.SortOrder
+  prayer?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
 }
 
 export type DevotionsMinOrderByAggregateInput = {
+  userId?: Prisma.SortOrder
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   date?: Prisma.SortOrder
   book?: Prisma.SortOrder
   chapter?: Prisma.SortOrder
+  fromVerse?: Prisma.SortOrder
+  toVerse?: Prisma.SortOrder
   scripture?: Prisma.SortOrder
-  reflection?: Prisma.SortOrder
+  observation?: Prisma.SortOrder
+  application?: Prisma.SortOrder
+  prayer?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
 }
 
 export type DevotionsSumOrderByAggregateInput = {
   chapter?: Prisma.SortOrder
+  fromVerse?: Prisma.SortOrder
+  toVerse?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -504,78 +582,93 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 
 export type DevotionsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  userId?: boolean
   id?: boolean
-  title?: boolean
   date?: boolean
   book?: boolean
   chapter?: boolean
+  fromVerse?: boolean
+  toVerse?: boolean
   scripture?: boolean
-  reflection?: boolean
+  observation?: boolean
+  application?: boolean
+  prayer?: boolean
+  imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
-  imageUrl?: boolean
 }, ExtArgs["result"]["devotions"]>
 
 export type DevotionsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  userId?: boolean
   id?: boolean
-  title?: boolean
   date?: boolean
   book?: boolean
   chapter?: boolean
+  fromVerse?: boolean
+  toVerse?: boolean
   scripture?: boolean
-  reflection?: boolean
+  observation?: boolean
+  application?: boolean
+  prayer?: boolean
+  imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
-  imageUrl?: boolean
 }, ExtArgs["result"]["devotions"]>
 
 export type DevotionsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  userId?: boolean
   id?: boolean
-  title?: boolean
   date?: boolean
   book?: boolean
   chapter?: boolean
+  fromVerse?: boolean
+  toVerse?: boolean
   scripture?: boolean
-  reflection?: boolean
+  observation?: boolean
+  application?: boolean
+  prayer?: boolean
+  imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
-  imageUrl?: boolean
 }, ExtArgs["result"]["devotions"]>
 
 export type DevotionsSelectScalar = {
+  userId?: boolean
   id?: boolean
-  title?: boolean
   date?: boolean
   book?: boolean
   chapter?: boolean
+  fromVerse?: boolean
+  toVerse?: boolean
   scripture?: boolean
-  reflection?: boolean
+  observation?: boolean
+  application?: boolean
+  prayer?: boolean
+  imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
-  imageUrl?: boolean
 }
 
-export type DevotionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "date" | "book" | "chapter" | "scripture" | "reflection" | "createdAt" | "updatedAt" | "userId" | "imageUrl", ExtArgs["result"]["devotions"]>
+export type DevotionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "id" | "date" | "book" | "chapter" | "fromVerse" | "toVerse" | "scripture" | "observation" | "application" | "prayer" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["devotions"]>
 
 export type $DevotionsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Devotions"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    userId: string
     id: string
-    title: string
     date: Date
     book: string
     chapter: number
+    fromVerse: number
+    toVerse: number
     scripture: string
-    reflection: string
+    observation: string
+    application: string
+    prayer: string
+    imageUrl: string | null
     createdAt: Date
     updatedAt: Date
-    userId: string
-    imageUrl: string | null
   }, ExtArgs["result"]["devotions"]>
   composites: {}
 }
@@ -659,8 +752,8 @@ export interface DevotionsDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * // Get first 10 Devotions
    * const devotions = await prisma.devotions.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const devotionsWithIdOnly = await prisma.devotions.findMany({ select: { id: true } })
+   * // Only select the `userId`
+   * const devotionsWithUserIdOnly = await prisma.devotions.findMany({ select: { userId: true } })
    * 
    */
   findMany<T extends DevotionsFindManyArgs>(args?: Prisma.SelectSubset<T, DevotionsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DevotionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -704,9 +797,9 @@ export interface DevotionsDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    *   ]
    * })
    * 
-   * // Create many Devotions and only return the `id`
-   * const devotionsWithIdOnly = await prisma.devotions.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Devotions and only return the `userId`
+   * const devotionsWithUserIdOnly = await prisma.devotions.createManyAndReturn({
+   *   select: { userId: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -795,9 +888,9 @@ export interface DevotionsDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    *   ]
    * })
    * 
-   * // Update zero or more Devotions and only return the `id`
-   * const devotionsWithIdOnly = await prisma.devotions.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Devotions and only return the `userId`
+   * const devotionsWithUserIdOnly = await prisma.devotions.updateManyAndReturn({
+   *   select: { userId: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -999,17 +1092,20 @@ export interface Prisma__DevotionsClient<T, Null = never, ExtArgs extends runtim
  * Fields of the Devotions model
  */
 export interface DevotionsFieldRefs {
+  readonly userId: Prisma.FieldRef<"Devotions", 'String'>
   readonly id: Prisma.FieldRef<"Devotions", 'String'>
-  readonly title: Prisma.FieldRef<"Devotions", 'String'>
   readonly date: Prisma.FieldRef<"Devotions", 'DateTime'>
   readonly book: Prisma.FieldRef<"Devotions", 'String'>
   readonly chapter: Prisma.FieldRef<"Devotions", 'Int'>
+  readonly fromVerse: Prisma.FieldRef<"Devotions", 'Int'>
+  readonly toVerse: Prisma.FieldRef<"Devotions", 'Int'>
   readonly scripture: Prisma.FieldRef<"Devotions", 'String'>
-  readonly reflection: Prisma.FieldRef<"Devotions", 'String'>
+  readonly observation: Prisma.FieldRef<"Devotions", 'String'>
+  readonly application: Prisma.FieldRef<"Devotions", 'String'>
+  readonly prayer: Prisma.FieldRef<"Devotions", 'String'>
+  readonly imageUrl: Prisma.FieldRef<"Devotions", 'String'>
   readonly createdAt: Prisma.FieldRef<"Devotions", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Devotions", 'DateTime'>
-  readonly userId: Prisma.FieldRef<"Devotions", 'String'>
-  readonly imageUrl: Prisma.FieldRef<"Devotions", 'String'>
 }
     
 
