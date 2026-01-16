@@ -37,7 +37,7 @@ const NavbarClient = ({ user, urls }: NavbarClientProps) => {
       className={`z-10 fixed top-6 inset-x-4 h-16 bg-background border max-w-(--breakpoint-xl) mx-auto rounded-full
     ${
       showNavbar ? "translate-y-0" : "-translate-y-24"
-    } border-primary border-2 transition-transform duration-300`}
+    } border-primary border-[3px] transition-transform duration-300`}
     >
       <div className="h-full flex items-center justify-between mx-auto px-4">
         <Logo />
@@ -46,6 +46,8 @@ const NavbarClient = ({ user, urls }: NavbarClientProps) => {
         <NavMenu className="hidden md:block" />
 
         <div className="flex items-center gap-3">
+          <ThemeToggleButton />
+
           {user ? (
             <UserButton />
           ) : (
@@ -53,7 +55,6 @@ const NavbarClient = ({ user, urls }: NavbarClientProps) => {
               <Link href={urls?.signIn || "/"}>Sign in</Link>
             </Button>
           )}
-          <ThemeToggleButton />
           
           {/* Mobile Menu */}
           <div className="md:hidden">

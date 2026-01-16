@@ -19,7 +19,7 @@ const faq = [
       "Devotions help strengthen faith and deepen your relationship with God through consistent time with Him. “Draw near to God, and he will draw near to you.” (James 4:8)",
   },
   {
-    question: "When and where is the best time or place?",
+    question: "When and where is the best time or place to devote?",
     answer:
       "The best time and place is where you can be still and focused, whether morning, evening, or anywhere quiet. “This Book of the Law shall not depart from your mouth, but you shall meditate on it day and night, so that you may be careful to do according to all that is written in it.” (Joshua 1:8)",
   },

@@ -1,4 +1,7 @@
-import { ArrowUpRight, BookOpenText, NotebookPen } from "lucide-react";
+"use client";
+
+import * as React from "react";
+import { ArrowUpRight, BookMarked, NotebookPen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getDailyVerse } from "@/app/api/bible/bibleAPI";
@@ -6,11 +9,43 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { imagePaths } from "@/lib/paths";
 import { stackServerApp } from "@/stack/server";
+import { TranslationCombobox } from "../TranslationCombobox";
+import { BibleApiResponse } from "@/app/api/bible/bibleAPI";
 
-export default async function HomeDailyWord() {
-  const user = await stackServerApp.getUser();
-  const urls = stackServerApp.urls;
-  const word = await getDailyVerse();
+interface HomeDailyWordProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user: any;
+  urls: { signUp: string };
+}
+
+export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
+  const [word, setWord] = React.useState<BibleApiResponse | null>(null);
+  const [translation, setTranslation] = React.useState<{
+    value: string;
+    label: string;
+  } | null>({
+    value: "WEB",
+    label: "World English Bible",
+  });
+
+  React.useEffect(() => {
+    if (!translation) return;
+
+    const fetchWord = async () => {
+      const word = await getDailyVerse(translation.value); // use selected value
+      setWord(word);
+    };
+
+    fetchWord();
+  }, [translation]);
+
+  if (!word) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-foreground/60 text-lg">Loading daily verse…</p>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -21,17 +56,15 @@ export default async function HomeDailyWord() {
         className="absolute -z-10  object-cover"
         fill
       />
-      <div className="max-w-(--breakpoint-xl) w-full mx-auto grid lg:grid-cols-2 gap-12 px-6 py-12">
+      <div className="max-w-(--breakpoint-xl) w-full mx-auto px-6 py-16">
         <div>
-          <Badge
-            variant="outline"
-            className="rounded-full py-1 border-border"
-            asChild
-          >
-            <Link href="/bible">
-              TODO: Turn me into a combobox with options of translation{" "}
-            </Link>
-          </Badge>
+          <TranslationCombobox
+            selected={translation}
+            onChange={(status) => {
+              setTranslation(status);
+            }}
+          />
+
           <h1 className="mt-6 max-w-[17ch] text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2]! tracking-[-0.035em]">
             {word.reference}
           </h1>
@@ -61,12 +94,12 @@ export default async function HomeDailyWord() {
               className="rounded-full text-base shadow-none"
             >
               <Link href={"bible"} className="flex items-center gap-2">
-                <BookOpenText className="h-5! w-5!" /> Continue Reading
+                <BookMarked className="h-5! w-5!" /> Read Chapter
               </Link>
             </Button>
           </div>
         </div>
-        <div className="w-full aspect-video bg-accent rounded-xl" />
+        
       </div>
       <div className="absolute bottom-0 left-0 w-full h-40 bg-linear-to-t from-background to-transparent pointer-events-none" />
     </div>

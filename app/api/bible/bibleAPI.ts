@@ -67,7 +67,7 @@ const bibleBooks = [
   { book: "Revelation", chapters: 22 },
 ];
 
-interface BibleApiResponse {
+export interface BibleApiResponse {
   reference: string;
   verses: {
     book_id: string;
@@ -82,9 +82,12 @@ interface BibleApiResponse {
   translation_note: string;
 }
 
-export async function getVerse(reference: string): Promise<BibleApiResponse> {
+export async function getVerse(
+  reference: string,
+  translation: string = "WEB"
+): Promise<BibleApiResponse> {
   const res = await fetch(
-    `https://bible-api.com/${encodeURIComponent(reference)}`,
+    `https://bible-api.com/${encodeURIComponent(reference)}?translation=${translation}`,
     { next: { revalidate: 86400 } }
   );
 
@@ -95,9 +98,9 @@ export async function getVerse(reference: string): Promise<BibleApiResponse> {
   return res.json();
 }
 
-export async function getDailyVerse() {
+export async function getDailyVerse(translation = "WEB") {
   const reference = await getDailyVerseReference();
-  return getVerse(reference);
+  return getVerse(reference, translation);
 }
 
 export function getChapterCount(book: string): number {
@@ -120,8 +123,7 @@ export async function getVerseCount(book: string, chapter: number): Promise<numb
 
 async function getDailyVerseReference(): Promise<string> {
   const today = new Date();
-  const seed =
-    today.getFullYear() * 1000 + today.getMonth() * 31 + today.getDate();
+  const seed = today.getFullYear() * 1000 + today.getMonth() * 31 + today.getDate();
 
   function seededRandom(seed: number) {
     const x = Math.sin(seed) * 10000;
@@ -135,11 +137,17 @@ async function getDailyVerseReference(): Promise<string> {
   // Pick chapter
   const chapter = Math.floor(seededRandom(seed + 1) * book.chapters) + 1;
 
-  // Get actual verse count
+  // Get total verses in that chapter
   const verseCount = await getVerseCount(book.book, chapter);
 
-  // Pick ONE valid verse
-  const verse = Math.floor(seededRandom(seed + 2) * verseCount) + 1;
+  // Pick a start verse
+  const startVerse = Math.floor(seededRandom(seed + 2) * verseCount) + 1;
 
-  return `${book.book} ${chapter}:${verse}`;
+  // Pick length of passage between 1–6, but stay within chapter
+  const passageLength = Math.min(Math.floor(seededRandom(seed + 3) * 4) + 1, verseCount - startVerse + 1);
+
+  // End verse
+  const endVerse = startVerse + passageLength - 1;
+
+  return `${book.book} ${chapter}:${startVerse}-${endVerse}`;
 }

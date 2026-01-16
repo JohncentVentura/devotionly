@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { getDevotions } from "@/actions/devotion.action";
-import { Combobox } from "@/components/ui/combo-box";
+import { Combobox } from "@/components/OldComboBox";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
