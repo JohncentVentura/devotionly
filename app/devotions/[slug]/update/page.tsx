@@ -33,7 +33,7 @@ export default async function page(props: {
   if (!devotion) return <div>Devotion not found</div>;
 
   return (
-    <div className="mt-7 max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-10 gap-6">
+    <div className="mt-32 max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-10 gap-6">
       <div className="lg:col-span-full">
         <UpdatePage devotion={devotion} />
       </div>

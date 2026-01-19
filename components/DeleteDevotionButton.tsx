@@ -16,13 +16,13 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 
-interface DeleteDialogProps {
+interface DeleteDevotionProps {
   devotion: {
     id: string;
   };
 }
 
-export default function DeleteDialog({ devotion }: DeleteDialogProps) {
+export default function DeleteDevotionButton({ devotion }: DeleteDevotionProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
