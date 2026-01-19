@@ -42,7 +42,7 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
   if (!word) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-foreground/60 text-lg">Loading daily verse…</p>
+        <p className="text-foreground/60 text-lg">Loading Daily Word...</p>
       </div>
     );
   }
@@ -60,8 +60,8 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
         <div>
           <TranslationCombobox
             selected={translation}
-            onChange={(status) => {
-              setTranslation(status);
+            setSelected={(selected) => {
+              setTranslation(selected);
             }}
           />
 
@@ -94,7 +94,7 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
               className="rounded-full text-base shadow-none"
             >
               <Link href={"bible"} className="flex items-center gap-2">
-                <BookMarked className="h-5! w-5!" /> Read Chapter
+                <BookMarked className="h-5! w-5!" /> Read Book
               </Link>
             </Button>
           </div>

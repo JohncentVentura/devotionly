@@ -49,12 +49,12 @@ const translations: Translations[] = [
 
 type TranslationComboboxProps = {
   selected: Translations | null;
-  onChange: (status: Translations | null) => void;
+  setSelected: (status: Translations | null) => void;
 };
 
 export function TranslationCombobox({
   selected,
-  onChange,
+  setSelected,
 }: TranslationComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -63,13 +63,20 @@ export function TranslationCombobox({
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button variant="ghost" className="w-56 justify-start">
+          <Button
+            variant="ghost"
+            className="w-56 justify-between border border-transparent hover:border-border hover:bg-transparent"
+          >
             {selected ? <>{selected.label}</> : <>Select Translation</>}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-56 p-0" align="start">
-          <SelectedList setOpen={setOpen} setSelected={onChange} />
+          <SelectedList
+            setOpen={setOpen}
+            selected={selected}
+            setSelected={setSelected}
+          />
         </PopoverContent>
       </Popover>
     );
@@ -78,14 +85,21 @@ export function TranslationCombobox({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="ghost" className="w-56 justify-start">
+        <Button
+          variant="ghost"
+          className="w-56 justify-between border border-transparent hover:border-border hover:bg-transparent"
+        >
           {selected ? <>{selected.label}</> : <>Select Translation</>}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <div className="mt-4 border-t">
-          <SelectedList setOpen={setOpen} setSelected={onChange} />
+          <SelectedList
+            setOpen={setOpen}
+            selected={selected}
+            setSelected={setSelected}
+          />
         </div>
       </DrawerContent>
     </Drawer>
@@ -94,31 +108,47 @@ export function TranslationCombobox({
 
 function SelectedList({
   setOpen,
+  selected,
   setSelected,
 }: {
   setOpen: (open: boolean) => void;
+  selected: Translations | null;
   setSelected: (status: Translations | null) => void;
 }) {
+  //cmdk always focuses the first CommandItem on mount, so we need to reset the value
+  const [value, setValue] = React.useState<string>("");
+  React.useEffect(() => setValue(""), []);
+
   return (
-    <Command>
+    <Command value={value} onValueChange={setValue}>
       <CommandInput placeholder="Filter translation..." />
       <CommandList>
         <CommandEmpty>No translation found.</CommandEmpty>
         <CommandGroup>
-          {translations.map((status) => (
-            <CommandItem
-              key={status.value}
-              value={status.value}
-              onSelect={(value) => {
-                setSelected(
-                  translations.find((priority) => priority.value === value) || null
-                );
-                setOpen(false);
-              }}
-            >
-              {status.label}
-            </CommandItem>
-          ))}
+          {translations.map((translation) => {
+            const isSelected = selected?.value === translation.value;
+
+            return (
+              <CommandItem
+                key={translation.value}
+                value={translation.value}
+                onSelect={(value) => {
+                  setSelected(
+                    translations.find((priority) => priority.value === value) ||
+                      null,
+                  );
+                  setOpen(false);
+                }}
+                className={`
+                  cursor-pointer
+                  data-[selected=true]:bg-primary
+                  ${isSelected ? "bg-secondary font-medium" : ""}
+                `}
+              >
+                {translation.label}
+              </CommandItem>
+            );
+          })}
         </CommandGroup>
       </CommandList>
     </Command>

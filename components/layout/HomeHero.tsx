@@ -30,7 +30,7 @@ export default async function HomeHero() {
             </Link>
           ) : (
             <Link href={urls.signUp}>
-              &quot;Be part of a growing devotion community!&quot;
+              &quot;Start your daily devotion with God&quot;
             </Link>
           )}
         </Badge>
