@@ -4,7 +4,6 @@ import prisma from "@/lib/prisma";
 import { stackServerApp } from "@/stack/server";
 import { SignUp } from "@stackframe/stack";
 
-
 export default async function Devotions() {
   const user = await stackServerApp.getUser();
   const devotions = await getDevotions();

@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ChevronsUpDown } from "lucide-react";
+import { ChevronsUpDown } from "lucide-react";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,15 +24,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { cn } from "@/lib/utils";
+import useMediaQuery from "@/hooks/use-media-query";
+import useHydrated from "@/hooks/useHydrated";
 
-type book = {
-  value: string;
-  label: string;
-};
-
-const oldTestament: book[] = [
+const oldTestament = [
   { value: "Genesis", label: "Genesis" },
   { value: "Exodus", label: "Exodus" },
   { value: "Leviticus", label: "Leviticus" },
@@ -74,7 +69,7 @@ const oldTestament: book[] = [
   { value: "Malachi", label: "Malachi" },
 ];
 
-const newTestament: book[] = [
+const newTestament = [
   { value: "Matthew", label: "Matthew" },
   { value: "Mark", label: "Mark" },
   { value: "Luke", label: "Luke" },
@@ -105,27 +100,33 @@ const newTestament: book[] = [
 ];
 
 type BookComboboxProps = {
-  selected: book | null;
-  setSelected: (status: book | null) => void;
+  selected: string | null;
+  setSelected: (value: string | null) => void;
 };
 
-export function BookCombobox({ selected, setSelected }: BookComboboxProps) {
+export default function BookCombobox({
+  selected,
+  setSelected,
+}: BookComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  const hydrated = useHydrated();
+  if (!hydrated) return null;
 
   if (isDesktop) {
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button>
-            {selected ? <>{selected.label}</> : <>Select Book</>}
+            {selected ? <>{selected}</> : <>Select Book</>}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0" align="start">
           <SelectedList
             setOpen={setOpen}
-            selected={selected}
+            selected={selected || ""}
             setSelected={setSelected}
           />
         </PopoverContent>
@@ -137,7 +138,7 @@ export function BookCombobox({ selected, setSelected }: BookComboboxProps) {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button>
-          {selected ? <>{selected.label}</> : <>Select Book</>}
+          {selected ? <>{selected}</> : <>Select Book</>}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </DrawerTrigger>
@@ -145,7 +146,7 @@ export function BookCombobox({ selected, setSelected }: BookComboboxProps) {
         <div className="mt-4 border-t">
           <SelectedList
             setOpen={setOpen}
-            selected={selected}
+            selected={selected || ""}
             setSelected={setSelected}
           />
         </div>
@@ -160,8 +161,8 @@ function SelectedList({
   setSelected,
 }: {
   setOpen: (open: boolean) => void;
-  selected: book | null;
-  setSelected: (status: book | null) => void;
+  selected: string;
+  setSelected: (value: string) => void;
 }) {
   //cmdk always focuses the first CommandItem on mount, so we need to reset the value
   const [value, setValue] = React.useState<string>("");
@@ -177,7 +178,7 @@ function SelectedList({
           <CommandItem
             value=""
             onSelect={() => {
-              setSelected(null);
+              setSelected("");
               setOpen(false);
             }}
             className={`
@@ -191,58 +192,53 @@ function SelectedList({
           </CommandItem>
         </CommandGroup>
         <div className="grid grid-cols-2 gap-4">
-        <CommandGroup heading="Old Testament">
-          {oldTestament.map((testament) => {
-            const isSelected = selected?.value === testament.value;
+          <CommandGroup heading="Old Testament">
+            {oldTestament.map((testament) => {
+              const isSelected = selected === testament.value;
 
-            return (
-              <CommandItem
-                key={testament.value}
-                value={testament.value}
-                onSelect={(value) => {
-                  setSelected(
-                    oldTestament.find((priority) => priority.value === value) ||
-                      null,
-                  );
-                  setOpen(false);
-                }}
-                className={`
+              return (
+                <CommandItem
+                  key={testament.value}
+                  value={testament.value}
+                  onSelect={(value) => {
+                    setSelected(value);
+                    setOpen(false);
+                  }}
+                  className={`
                   cursor-pointer
                   data-[selected=true]:bg-primary
                   ${isSelected ? "bg-secondary font-medium" : ""}
                 `}
-              >
-                {testament.label}
-              </CommandItem>
-            );
-          })}
-        </CommandGroup>
-        <CommandGroup heading="New Testament">
-          {newTestament.map((testament) => {
-            const isSelected = selected?.value === testament.value;
+                >
+                  {testament.label}
+                </CommandItem>
+              );
+            })}
+          </CommandGroup>
+          <CommandGroup heading="New Testament">
+            {newTestament.map((testament) => {
+              const isSelected = selected === testament.value;
 
-            return (
-              <CommandItem
-                key={testament.value}
-                value={testament.value}
-                onSelect={(value) => {
-                  setSelected(
-                    newTestament.find((priority) => priority.value === value) ||
-                      null,
-                  );
-                  setOpen(false);
-                }}
-                className={`
+              return (
+                <CommandItem
+                  key={testament.value}
+                  value={testament.value}
+                  onSelect={(value) => {
+                    setSelected(value);
+                    setOpen(false);
+                  }}
+                  className={`
                   cursor-pointer
                   data-[selected=true]:bg-primary
                   ${isSelected ? "bg-secondary font-medium" : ""}
                 `}
-              >
-                {testament.label}
-              </CommandItem>
-            );
-          })}
-        </CommandGroup></div>
+                >
+                  {testament.label}
+                </CommandItem>
+              );
+            })}
+          </CommandGroup>
+        </div>
       </CommandList>
     </Command>
   );

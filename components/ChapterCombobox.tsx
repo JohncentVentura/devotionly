@@ -1,7 +1,8 @@
 "use client";
 
-import { Check, ChevronsUpDown } from "lucide-react";
+import { ChevronsUpDown } from "lucide-react";
 import * as React from "react";
+import { getChapterCount } from "@/app/api/bible/bibleAPI";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -24,20 +25,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { cn } from "@/lib/utils";
-import { getChapterCount } from "@/app/api/bible/bibleAPI";
+import useMediaQuery from "@/hooks/use-media-query";
+import useHydrated from "@/hooks/useHydrated";
 
 type ChapterComboboxProps = {
-  book: {
-    value: string;
-    label: string;
-  } | null;
+  book: string | null;
   selected: number | null;
   setSelected: (status: number | null) => void;
 };
 
-export function ChapterCombobox({
+export default function ChapterCombobox({
   book,
   selected,
   setSelected,
@@ -48,7 +45,7 @@ export function ChapterCombobox({
   const chapters = React.useMemo(() => {
     if (!book) return [];
 
-    const count = getChapterCount(book.value);
+    const count = getChapterCount(book);
     return Array.from({ length: count }, (_, i) => ({
       value: i + 1,
       label: String(i + 1),
@@ -57,8 +54,11 @@ export function ChapterCombobox({
 
   // Reset chapter if book changes
   React.useEffect(() => {
-  setSelected(null);
-}, [book?.value]);
+    setSelected(null);
+  }, [book]);
+
+  const hydrated = useHydrated();
+  if (!hydrated) return null;
 
   if (isDesktop) {
     return (
@@ -141,7 +141,7 @@ function SelectedList({
             All
           </CommandItem>
         </CommandGroup>
-        <CommandGroup >
+        <CommandGroup>
           {chapters.map((chapter) => (
             <CommandItem
               key={chapter.value}

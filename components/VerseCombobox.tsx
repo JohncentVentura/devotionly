@@ -2,6 +2,7 @@
 
 import { ChevronsUpDown } from "lucide-react";
 import * as React from "react";
+import { getVerseCount } from "@/app/api/bible/bibleAPI";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -27,38 +28,47 @@ import {
 import useMediaQuery from "@/hooks/use-media-query";
 import useHydrated from "@/hooks/useHydrated";
 
-type Translations = {
-  value: string;
-  label: string;
+type VerseComboboxProps = {
+  book: string | null;
+  chapter: number | null;
+  selected: number | null;
+  setSelected: (value: number | null) => void;
 };
 
-const translations: Translations[] = [
-  {
-    value: "WEB",
-    label: "World English Bible",
-  },
-  {
-    value: "KJV",
-    label: "King James Version",
-  },
-  {
-    value: "ASV",
-    label: "American Standard Version",
-  },
-  { value: "BBE", label: "Bible in Basic English" },
-];
-
-type TranslationComboboxProps = {
-  selected: Translations | null;
-  setSelected: (status: Translations | null) => void;
-};
-
-export function TranslationCombobox({
+export default function VerseCombobox({
+  book,
+  chapter,
   selected,
   setSelected,
-}: TranslationComboboxProps) {
+}: VerseComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+  const [verseCount, setVerseCount] = React.useState<number>(0);
+  const [loading, setLoading] = React.useState(false);
+  
+  // Fetch verse count whenever book or chapter changes
+  React.useEffect(() => {
+    if (!book || !chapter) {
+      setVerseCount(0);
+      setSelected(0);
+      return;
+    }
+
+    setLoading(true);
+    getVerseCount(book, chapter)
+      .then((count) => {
+        setVerseCount(count);
+        if (selected !== null && selected > count) setSelected(null); // reset invalid selection
+      })
+      .finally(() => setLoading(false));
+  }, [book, chapter]);
+  
+  const verses = React.useMemo(() => {
+    return Array.from({ length: verseCount }, (_, i) => ({
+      value: i + 1,
+      label: String(i + 1),
+    }));
+  }, [verseCount]);
 
   const hydrated = useHydrated();
   if (!hydrated) return null;
@@ -67,19 +77,17 @@ export function TranslationCombobox({
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button
-            variant="ghost"
-            className="w-56 justify-between border border-transparent hover:border-border hover:bg-transparent"
-          >
-            {selected ? <>{selected.label}</> : <>Select Translation</>}
+          <Button>
+            {selected ? <>{selected}</> : <>Select Verse</>}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-56 p-0" align="start">
+        <PopoverContent className="w-full p-0" align="start">
           <SelectedList
             setOpen={setOpen}
             selected={selected}
             setSelected={setSelected}
+            verses={verses}
           />
         </PopoverContent>
       </Popover>
@@ -89,11 +97,8 @@ export function TranslationCombobox({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button
-          variant="ghost"
-          className="w-56 justify-between border border-transparent hover:border-border hover:bg-transparent"
-        >
-          {selected ? <>{selected.label}</> : <>Select Translation</>}
+        <Button>
+          {selected ? <>{selected}</> : <>Select Verse</>}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </DrawerTrigger>
@@ -103,6 +108,7 @@ export function TranslationCombobox({
             setOpen={setOpen}
             selected={selected}
             setSelected={setSelected}
+            verses={verses}
           />
         </div>
       </DrawerContent>
@@ -114,45 +120,35 @@ function SelectedList({
   setOpen,
   selected,
   setSelected,
+  verses,
 }: {
   setOpen: (open: boolean) => void;
-  selected: Translations | null;
-  setSelected: (status: Translations | null) => void;
+  selected: number | null;
+  setSelected: (value: number | null) => void;
+  verses: { value: number; label: string }[];
 }) {
   //cmdk always focuses the first CommandItem on mount, so we need to reset the value
   const [value, setValue] = React.useState<string>("");
   React.useEffect(() => setValue(""), []);
-
+  
   return (
     <Command value={value} onValueChange={setValue}>
-      <CommandInput placeholder="Filter translation..." />
+      <CommandInput placeholder="Search Book..." />
       <CommandList>
-        <CommandEmpty>No translation found.</CommandEmpty>
+        <CommandEmpty>No verses found.</CommandEmpty>
         <CommandGroup>
-          {translations.map((translation) => {
-            const isSelected = selected?.value === translation.value;
-
-            return (
-              <CommandItem
-                key={translation.value}
-                value={translation.value}
-                onSelect={(value) => {
-                  setSelected(
-                    translations.find((priority) => priority.value === value) ||
-                    null,
-                  );
-                  setOpen(false);
-                }}
-                className={`
-                  cursor-pointer
-                  data-[selected=true]:bg-primary
-                  ${isSelected ? "bg-secondary font-medium" : ""}
-                `}
-              >
-                {translation.label}
-              </CommandItem>
-            );
-          })}
+          {verses.map((verse) => (
+            <CommandItem
+              key={verse.value}
+              value={verse.value.toString()}
+              onSelect={(currentValue) => {
+                setSelected(Number(currentValue));
+                setOpen(false);
+              }}
+            >
+              {verse.label}
+            </CommandItem>
+          ))}
         </CommandGroup>
       </CommandList>
     </Command>
