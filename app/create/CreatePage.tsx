@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { toast } from "react-hot-toast"; 
+import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { createDevotion } from "@/actions/devotion.action";
 import { getVerse } from "@/app/api/bible/bibleAPI";
@@ -34,7 +34,7 @@ export default function CreatePage() {
 
   const [scriptureLoading, setScriptureLoading] = React.useState(false);
 
-  const handleChange = (field: string, value: string | number | Date) => {
+  const handleChange = (field: string, value: string | number | Date | null) => {
     setFormData({ ...formData, [field]: value });
   };
 
@@ -99,47 +99,35 @@ export default function CreatePage() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div >
-          <Label className="mb-2" htmlFor="book">
-            Book
-          </Label>
-          <BookCombobox
-            selected={formData.book}
-            setSelected={(val) => handleChange("book", val || "")}
-          />
-        </div>
-        <div>
-          <Label className="mb-2" htmlFor="chapter">
-            Chapter
-          </Label>
-          <ChapterCombobox
-            book={formData.book}
-            selected={formData.chapter}
-            setSelected={(val) => handleChange("chapter", val || 0)}
-          />
-        </div>
-        <div>
-          <Label className="mb-2" htmlFor="fromVerse">
-            From Verse
-          </Label>
-          <VerseCombobox
-            book={formData.book}
-            chapter={formData.chapter}
-            selected={formData.fromVerse}
-            setSelected={(val) => handleChange("fromVerse", val || 0)}
-          />
-        </div>
-        <div>
-          <Label className="mb-2" htmlFor="toVerse">
-            To Verse
-          </Label>
-          <VerseCombobox
-            book={formData.book}
-            chapter={formData.chapter}
-            selected={formData.toVerse}
-            setSelected={(val) => handleChange("toVerse", val || 0)}
-          />
-        </div>
+        <BookCombobox
+          selected={formData.book}
+          setSelected={(val) => handleChange("book", val || "")}
+        >
+          Select Book
+        </BookCombobox>
+        <ChapterCombobox
+          book={formData.book}
+          selected={formData.chapter}
+          setSelected={(val) => handleChange("chapter", val)}
+        >
+          Select Chapter
+        </ChapterCombobox>
+        <VerseCombobox
+          book={formData.book}
+          chapter={formData.chapter}
+          selected={formData.fromVerse}
+          setSelected={(val) => handleChange("fromVerse", val)}
+        >
+          From Verse
+        </VerseCombobox>
+        <VerseCombobox
+          book={formData.book}
+          chapter={formData.chapter}
+          selected={formData.toVerse}
+          setSelected={(val) => handleChange("toVerse", val)}
+        >
+          To Verse
+        </VerseCombobox>
       </div>
       <div className="mt-4 grid grid-cols-1 gap-4">
         <div>

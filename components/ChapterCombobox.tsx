@@ -32,12 +32,16 @@ type ChapterComboboxProps = {
   book: string | null;
   selected: number | null;
   setSelected: (status: number | null) => void;
+  className?: string;
+  children?: React.ReactNode;
 };
 
 export default function ChapterCombobox({
   book,
   selected,
   setSelected,
+  className,
+  children,
 }: ChapterComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -64,8 +68,8 @@ export default function ChapterCombobox({
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button>
-            {selected ? <>{selected}</> : <>Select Chapter</>}
+          <Button className={className}>
+            {selected ? selected : children}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -84,8 +88,8 @@ export default function ChapterCombobox({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button>
-          {selected ? <>{selected}</> : <>Select Chapter</>}
+        <Button className={className}>
+          {selected ? selected : children}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </DrawerTrigger>
@@ -142,18 +146,27 @@ function SelectedList({
           </CommandItem>
         </CommandGroup>
         <CommandGroup>
-          {chapters.map((chapter) => (
-            <CommandItem
-              key={chapter.value}
-              value={chapter.value.toString()}
-              onSelect={(currentValue) => {
-                setSelected(Number(currentValue));
-                setOpen(false);
-              }}
-            >
-              {chapter.label}
-            </CommandItem>
-          ))}
+          {chapters.map((chapter) => {
+            const isSelected = selected === chapter.value;
+            
+            return (
+              <CommandItem
+                key={chapter.value}
+                value={chapter.value.toString()}
+                onSelect={(currentValue) => {
+                  setSelected(Number(currentValue));
+                  setOpen(false);
+                }}
+                className={`
+                  cursor-pointer
+                  data-[selected=true]:bg-primary
+                  ${isSelected ? "bg-secondary font-medium" : ""}
+                `}
+              >
+                {chapter.label}
+              </CommandItem>
+            )
+          })}
         </CommandGroup>
       </CommandList>
     </Command>

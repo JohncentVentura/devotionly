@@ -102,11 +102,15 @@ const newTestament = [
 type BookComboboxProps = {
   selected: string | null;
   setSelected: (value: string | null) => void;
+  className?: string;
+  children?: React.ReactNode;
 };
 
 export default function BookCombobox({
   selected,
   setSelected,
+  className,
+  children,
 }: BookComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -118,8 +122,8 @@ export default function BookCombobox({
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button>
-            {selected ? <>{selected}</> : <>Select Book</>}
+          <Button className={className}>
+            {selected ? selected : children}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -137,8 +141,8 @@ export default function BookCombobox({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button>
-          {selected ? <>{selected}</> : <>Select Book</>}
+        <Button className={className}>
+          {selected ? selected : children}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </DrawerTrigger>
@@ -167,7 +171,7 @@ function SelectedList({
   //cmdk always focuses the first CommandItem on mount, so we need to reset the value
   const [value, setValue] = React.useState<string>("");
   React.useEffect(() => setValue(""), []);
-  const isNoneSelected = selected === null;
+  const isNoneSelected = selected === "";
 
   return (
     <Command value={value} onValueChange={setValue}>

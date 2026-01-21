@@ -33,6 +33,8 @@ type VerseComboboxProps = {
   chapter: number | null;
   selected: number | null;
   setSelected: (value: number | null) => void;
+  className?: string;
+  children?: React.ReactNode;
 };
 
 export default function VerseCombobox({
@@ -40,12 +42,14 @@ export default function VerseCombobox({
   chapter,
   selected,
   setSelected,
+  className,
+  children,
 }: VerseComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [verseCount, setVerseCount] = React.useState<number>(0);
   const [loading, setLoading] = React.useState(false);
-  
+
   // Fetch verse count whenever book or chapter changes
   React.useEffect(() => {
     if (!book || !chapter) {
@@ -62,7 +66,7 @@ export default function VerseCombobox({
       })
       .finally(() => setLoading(false));
   }, [book, chapter]);
-  
+
   const verses = React.useMemo(() => {
     return Array.from({ length: verseCount }, (_, i) => ({
       value: i + 1,
@@ -77,8 +81,8 @@ export default function VerseCombobox({
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button>
-            {selected ? <>{selected}</> : <>Select Verse</>}
+          <Button className={className}>
+            {selected ? selected : children}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -97,8 +101,8 @@ export default function VerseCombobox({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button>
-          {selected ? <>{selected}</> : <>Select Verse</>}
+        <Button className={className}>
+          {selected ? selected : children}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </DrawerTrigger>
@@ -130,7 +134,7 @@ function SelectedList({
   //cmdk always focuses the first CommandItem on mount, so we need to reset the value
   const [value, setValue] = React.useState<string>("");
   React.useEffect(() => setValue(""), []);
-  
+
   return (
     <Command value={value} onValueChange={setValue}>
       <CommandInput placeholder="Search Book..." />

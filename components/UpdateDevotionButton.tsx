@@ -10,11 +10,13 @@ type Devotion = Awaited<ReturnType<typeof getDevotionById>>;
 
 interface UpdateDevotionProps {
   devotion: Devotion;
+  className?: string;
   children?: React.ReactNode;
 }
 
 export default function UpdateDevotionButton({
   devotion,
+  className,
   children,
 }: UpdateDevotionProps) {
   const router = useRouter();
@@ -22,7 +24,7 @@ export default function UpdateDevotionButton({
   return (
     <Button
       size="lg"
-      className="rounded-full text-base"
+      className={`rounded-full text-base ${className}`}
       onClick={() => router.push(`/devotions/${devotion?.id}/update`)}
     >
       {children ? children : <SquarePen className="w-4 h-4" />}

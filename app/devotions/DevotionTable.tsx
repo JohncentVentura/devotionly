@@ -22,9 +22,15 @@ import {
 } from "@/components/ui/table";
 import BookCombobox from "@/components/BookCombobox";
 import ChapterCombobox from "@/components/ChapterCombobox";
-import CreateDevotionButton from "@/components/CreateDevotionButton"; 
+import CreateDevotionButton from "@/components/CreateDevotionButton";
 import DeleteDevotionButton from "@/components/DeleteDevotionButton";
 import UpdateDevotionButton from "@/components/UpdateDevotionButton";
+import { Input } from "@/components/ui/input"
+import { DateRangePicker } from "@/components/DateRangePicker";
+import type { DateRange } from "react-day-picker";
+
+// <-- Add this import for date-fns helpers
+import { startOfDay, endOfDay, isWithinInterval, isSameDay } from "date-fns";
 
 type Devotions = Awaited<ReturnType<typeof getDevotions>>;
 
@@ -33,43 +39,71 @@ interface DevotionsTableProps {
 }
 
 export default function DevotionTable({ devotions }: DevotionsTableProps) {
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+  const [selectedDateRange, setSelectedDateRange] = useState<DateRange | undefined>(undefined);
   const [selectedBook, setSelectedBook] = useState<string>("");
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
+  const searchLower = search.toLowerCase();
 
-  const router = useRouter();
   const filteredDevotions = devotions?.userDevotions?.filter((devotion) => {
-    const devotionDate = devotion.date
-      ? new Date(devotion.date).toISOString().split("T")[0]
-      : "";
+    const devotionDate = new Date(devotion.date);
+    let matchesDate = true;
+
+    if (selectedDateRange?.from && selectedDateRange?.to) {
+      const start = startOfDay(selectedDateRange.from);
+      const end = endOfDay(selectedDateRange.to);
+      matchesDate = isWithinInterval(devotionDate, { start, end });
+    } else if (selectedDateRange?.from) {
+      matchesDate = isSameDay(devotionDate, selectedDateRange.from);
+    }
 
     return (
-      (selectedDate === "" || devotionDate === selectedDate) &&
+      matchesDate &&
       (selectedBook === "" || devotion.book === selectedBook) &&
-      (selectedChapter === null || devotion.chapter === selectedChapter)
+      (selectedChapter === null || devotion.chapter === selectedChapter) &&
+      (
+        devotion.scripture.toLowerCase().includes(searchLower) ||
+        devotion.book.toLowerCase().includes(searchLower) ||
+        devotion.chapter.toString().includes(searchLower)
+      )
     );
   });
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-2 md:grid-cols-4 justify-between items-center gap-2 ">
-        <CreateDevotionButton />
-        <input
-          type="date"
-          className="border rounded-2xl px-2 py-1 w-fit text-sm md:text-base"
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
+      <div className="grid grid-cols-3 md:grid-cols-6 justify-between items-center gap-2 ">
+        <Input
+          type="search"
+          placeholder="Search book, chapter, scripture..."
+          className="order-2 md:order-1 col-span-3 rounded-2xl px-2 py-1 text-sm md:text-base border-border dark:border-muted-foreground"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <div className="order-1 col-span-2 " />
+        <CreateDevotionButton className="order-1 col-span-1 md:col-span-1" />
+        <DateRangePicker
+          className="order-2 md:order-3"
+          selectedRange={selectedDateRange}
+          onChange={setSelectedDateRange}
         />
         <BookCombobox
+          className="order-2 md:order-3"
           selected={selectedBook}
           setSelected={(val) => setSelectedBook(val || "")}
-        />
+        >
+          Filter Book
+        </BookCombobox>
         <ChapterCombobox
+          className="order-2 md:order-3"
           book={selectedBook}
           selected={selectedChapter}
           setSelected={(val) => setSelectedChapter(val)}
-        />
+        >
+          Filter Chapter
+        </ChapterCombobox>
       </div>
+
       <div className="mt-6 w-full border rounded-md overflow-hidden">
         <Table>
           <TableHeader>
