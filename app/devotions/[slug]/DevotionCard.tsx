@@ -1,17 +1,18 @@
 "use client";
 
-import Image from "next/image";
-import { getDevotionById } from "@/actions/devotion.action";
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  //CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { ChevronRight } from "lucide-react";
+import { getDevotionById } from "@/actions/devotion.action";
+import UpdateDevotionButton from "@/components/UpdateDevotionButton";
 import { useRouter } from "next/navigation";
 
 type Devotion = Awaited<ReturnType<typeof getDevotionById>>;
@@ -20,49 +21,77 @@ interface DevotionCardProps {
   devotion: Devotion;
 }
 
-export default function DevotionCard({ devotion }: DevotionCardProps) {
+const DevotionCard = ({ devotion }: DevotionCardProps) => {
   const router = useRouter();
-  if (!devotion) return <div>Devotion data is not available</div>;
 
   return (
-    <Card className="max-w">
-      <div className="flex flex-row">
-        <div className="basis-2/4">
-          <CardHeader>
-            {devotion.imageUrl && (
-              <div className="rounded-lg overflow-hidden">
-                <img
-                  src={devotion.imageUrl}
-                  alt="Post content"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            )}
-          </CardHeader>
-        </div>
-        <div className="basis-2/4 flex flex-col justify-between">
-          <CardContent className="mt-8 space-y-3">
-            <CardTitle className="text-5xl font-bold">
-              {devotion.date?.toLocaleDateString()}
-            </CardTitle>
-            <CardTitle className="text-3xl font-bold">
-              {devotion.date?.toLocaleDateString()}
-            </CardTitle>
-            <Badge>{devotion.book}</Badge>
-            <CardDescription>Chapter: {devotion.chapter}</CardDescription>
-            <CardDescription>Scripture</CardDescription>
-            <CardDescription>{devotion.scripture}</CardDescription>
-          </CardContent>
-        </div>
-        <Button
-                      size="lg"
-                      className="rounded-full text-base"
-                      onClick={() => router.push(`/devotions/${devotion.id}/update`)}
-                    >
-                      {/*TODO: Create a client component that returns a button that pushes in /update */}
-                      Update Devotion
-                    </Button>
-      </div>
-    </Card>
+    <div className="max-w-(--breakpoint-xl) mx-auto px-6 xl:px-0">
+      <h2 className="text-3xl font-semibold tracking-tight">
+        {devotion?.date?.toLocaleDateString()}
+      </h2>
+      <Card className="mt-4 shadow-none overflow-hidden rounded-md py-0">
+        <CardContent className="mt-4 pb-6">
+          <div className="flex items-center gap-3">
+            <Badge className="bg-primary/5 text-primary hover:bg-primary/5 shadow-none">
+              Book:
+            </Badge>
+            <span className="font-medium text-xs text-muted-foreground">
+              {devotion?.book}
+            </span>
+            <Badge className="bg-primary/5 text-primary hover:bg-primary/5 shadow-none">
+              Chapter:
+            </Badge>
+            <span className="font-medium text-xs text-muted-foreground">
+              {devotion?.chapter}
+            </span>
+            <Badge className="bg-primary/5 text-primary hover:bg-primary/5 shadow-none">
+              Verses:
+            </Badge>
+            <span className="font-medium text-xs text-muted-foreground">
+              {devotion?.fromVerse}-{devotion?.toVerse}
+            </span>
+          </div>
+
+          <h3 className="mt-4 text-[1.4rem] font-semibold tracking-tight">
+            Scripture
+          </h3>
+          <p className="mt-2 text-muted-foreground">
+            {devotion?.scripture}
+          </p>
+
+          <h3 className="mt-4 text-[1.4rem] font-semibold tracking-tight">
+            Observation
+          </h3>
+          <p className="mt-2 text-muted-foreground">
+            {devotion?.observation}
+          </p>
+
+          <h3 className="mt-4 text-[1.4rem] font-semibold tracking-tight">
+            Application
+          </h3>
+          <p className="mt-2 text-muted-foreground">
+            {devotion?.application}
+          </p>
+
+          <h3 className="mt-4 text-[1.4rem] font-semibold tracking-tight">
+            Prayer
+          </h3>
+          <p className="mt-2 text-muted-foreground">
+            {devotion?.prayer}
+          </p>
+
+          <div className="mt-8 flex justify-between items-center">
+            <UpdateDevotionButton devotion={devotion}  >
+              Edit
+            </UpdateDevotionButton>
+            <Button type="button" size="lg" variant="destructive" onClick={() => router.back()}>
+              Back
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
-}
+};
+
+export default DevotionCard;
