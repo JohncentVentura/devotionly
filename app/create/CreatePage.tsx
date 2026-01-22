@@ -34,6 +34,8 @@ export default function CreatePage() {
 
   const [scriptureLoading, setScriptureLoading] = React.useState(false);
 
+  const [showFull, setShowFull] = React.useState(false);
+
   const handleChange = (field: string, value: string | number | Date | null) => {
     setFormData({ ...formData, [field]: value });
   };
@@ -97,100 +99,143 @@ export default function CreatePage() {
   }, [formData.book, formData.chapter, formData.fromVerse, formData.toVerse]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-6">
-        <BookCombobox
-          selected={formData.book}
-          setSelected={(val) => handleChange("book", val || "")}
-        >
-          Select Book
-        </BookCombobox>
-        <ChapterCombobox
-          book={formData.book}
-          selected={formData.chapter}
-          setSelected={(val) => handleChange("chapter", val)}
-        >
-          Select Chapter
-        </ChapterCombobox>
-        <VerseCombobox
-          book={formData.book}
-          chapter={formData.chapter}
-          selected={formData.fromVerse}
-          setSelected={(val) => handleChange("fromVerse", val)}
-        >
-          From Verse
-        </VerseCombobox>
-        <VerseCombobox
-          book={formData.book}
-          chapter={formData.chapter}
-          selected={formData.toVerse}
-          setSelected={(val) => handleChange("toVerse", val)}
-        >
-          To Verse
-        </VerseCombobox>
-      </div>
-      <div className="mt-4 grid grid-cols-1 gap-4">
-        <div>
-          <Label className="mt-2" htmlFor="scripture">
-            Scripture
-          </Label>
-          <Textarea
-            id="scripture"
-            placeholder="Waiting for the verse to show scripture here."
-            disabled
-            rows={5}
-            value={scriptureLoading ? "Loading scripture…" : formData.scripture}
-            onChange={(e) => handleChange("scripture", e.target.value)}
-          />
+    <section>
+      <h1 className="text-center text-xl md:text-3xl font-semibold">
+        Create Devotion
+      </h1>
+      <p className="mt-2 md:text-lg text-foreground/80">
+        Create your personal Bible devotions using the SOAP method.{" "}
+        {!showFull ? (
+          <button
+            className="text-primary font-medium underline ml-1 cursor-pointer"
+            onClick={() => setShowFull(true)}
+          >
+            Read more...
+          </button>
+        ) : (
+          <button
+            className="text-primary font-medium underline ml-1 cursor-pointer"
+            onClick={() => setShowFull(false)}
+          >
+            Read less
+          </button>
+        )}
+      </p>
+      {showFull && (
+        <div className="mt-2 space-y-2">
+          <p className="md:text-lg text-foreground/80">
+            <strong>S - Scripture:</strong> Read a passage (often a chapter) slowly, then choose one or two verses that stand out to you and write them down verbatim in your journal.
+          </p>
+
+          <p className="md:text-lg text-foreground/80">
+            <strong>O - Observation:</strong> Ask questions about the text (who, what, where, when, why) and note key words, repetition, or commands. Paraphrase the verse in your own words to understand its meaning.
+          </p>
+
+          <p className="md:text-lg text-foreground/80">
+            <strong>A - Application:</strong> Reflect on how the verse applies to your life today. What changes do you need to make? What action can you take?
+          </p>
+
+          <p className="md:text-lg text-foreground/80">
+            <strong>P - Prayer:</strong> Talk to God about what you have learned. Pray the scripture back to Him, confess any sins revealed, and ask for guidance to live it out.
+          </p>
         </div>
-        <div>
-          <Label className="mt-2" htmlFor="observation">
-            Observation
-          </Label>
-          <Textarea
-            id="observation"
-            placeholder="Type your observation here."
-            rows={5}
-            value={formData.observation}
-            onChange={(e) => handleChange("observation", e.target.value)}
-          />
+      )}
+      <form onSubmit={handleSubmit}>
+
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <BookCombobox
+            selected={formData.book}
+            setSelected={(val) => handleChange("book", val || "")}
+          >
+            Select Book
+          </BookCombobox>
+          <ChapterCombobox
+            book={formData.book}
+            selected={formData.chapter}
+            setSelected={(val) => handleChange("chapter", val)}
+          >
+            Select Chapter
+          </ChapterCombobox>
+          <VerseCombobox
+            book={formData.book}
+            chapter={formData.chapter}
+            selected={formData.fromVerse}
+            setSelected={(val) => handleChange("fromVerse", val)}
+          >
+            From Verse
+          </VerseCombobox>
+          <VerseCombobox
+            book={formData.book}
+            chapter={formData.chapter}
+            selected={formData.toVerse}
+            setSelected={(val) => handleChange("toVerse", val)}
+          >
+            To Verse
+          </VerseCombobox>
         </div>
-        <div>
-          <Label className="mt-2" htmlFor="application">
-            Application
-          </Label>
-          <Textarea
-            id="application"
-            placeholder="Type your application here."
-            rows={5}
-            value={formData.application}
-            onChange={(e) => handleChange("application", e.target.value)}
-          />
+        <div className="mt-4 grid grid-cols-1 gap-4">
+          <div>
+            <Label className="mt-2" htmlFor="scripture">
+              Scripture
+            </Label>
+            <Textarea
+              id="scripture"
+              placeholder="Waiting for the verse to show scripture here."
+              disabled
+              rows={5}
+              value={scriptureLoading ? "Loading scripture…" : formData.scripture}
+              onChange={(e) => handleChange("scripture", e.target.value)}
+            />
+          </div>
+          <div>
+            <Label className="mt-2" htmlFor="observation">
+              Observation
+            </Label>
+            <Textarea
+              id="observation"
+              placeholder="Type your observation here."
+              rows={5}
+              value={formData.observation}
+              onChange={(e) => handleChange("observation", e.target.value)}
+            />
+          </div>
+          <div>
+            <Label className="mt-2" htmlFor="application">
+              Application
+            </Label>
+            <Textarea
+              id="application"
+              placeholder="Type your application here."
+              rows={5}
+              value={formData.application}
+              onChange={(e) => handleChange("application", e.target.value)}
+            />
+          </div>
+          <div>
+            <Label className="mt-2" htmlFor="prayer">
+              Prayer
+            </Label>
+            <Textarea
+              id="prayer"
+              placeholder="Type your prayer here."
+              rows={5}
+              value={formData.prayer}
+              onChange={(e) => handleChange("prayer", e.target.value)}
+            />
+          </div>
         </div>
-        <div>
-          <Label className="mt-2" htmlFor="prayer">
-            Prayer
-          </Label>
-          <Textarea
-            id="prayer"
-            placeholder="Type your prayer here."
-            rows={5}
-            value={formData.prayer}
-            onChange={(e) => handleChange("prayer", e.target.value)}
-          />
-        </div>
-      </div>
-      <div className="mt-8 gap-4 flex justify-between">
-        <div className="flex gap-4">
-          <Button type="submit">Create</Button>
-          <Button type="button" variant="outline" onClick={handleClear}>
-            Clear
+        <div className="mt-8 gap-4 flex justify-between">
+          <div className="flex gap-4">
+            <Button type="submit">Create</Button>
+            <Button type="button" variant="outline" onClick={handleClear}>
+              Clear
+            </Button>
+          </div>
+          <Button type="button" variant="destructive" onClick={() => router.back()}>
+            Cancel
           </Button>
         </div>
-        <Button type="button" variant="destructive" onClick={() => router.back()}>
-          Cancel
-        </Button>
-      </div>
-    </form>
+      </form> 
+    </section>
   );
 }

@@ -39,7 +39,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, ChevronUp, ChevronDown } from "lucide-react";
 
 type Devotions = Awaited<ReturnType<typeof getDevotions>>;
 
@@ -117,30 +117,33 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-3 md:grid-cols-6 justify-between items-center gap-2 ">
+      <div className="px-2 grid grid-cols-3 md:grid-cols-6  gap-2 ">
+        <h1 className="col-span-3 md:col-span-2 text-center md:text-left text-xl md:text-3xl font-semibold ">
+          Devotions Table
+        </h1>
+        <div className="col-span-2 md:col-span-3" />
+        <CreateDevotionButton className="col-span-1 " />
         <Input
           type="search"
           placeholder="Search book, chapter, scripture..."
-          className="order-2 md:order-1 col-span-3 rounded-2xl px-2 py-1 text-sm md:text-base border-border dark:border-muted-foreground"
+          className="col-span-3 md:col-span-3 rounded-2xl px-2 py-1 text-sm md:text-base border-border dark:border-muted-foreground"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <div className="order-1 col-span-2 " />
-        <CreateDevotionButton className="order-1 col-span-1 md:col-span-1" />
         <DateRangePicker
-          className="order-2 md:order-3"
+
           selectedRange={selectedDateRange}
           onChange={setSelectedDateRange}
         />
         <BookCombobox
-          className="order-2 md:order-3"
+
           selected={selectedBook}
           setSelected={(val) => setSelectedBook(val || "")}
         >
           Filter Book
         </BookCombobox>
         <ChapterCombobox
-          className="order-2 md:order-3"
+
           book={selectedBook}
           selected={selectedChapter}
           setSelected={(val) => setSelectedChapter(val)}
@@ -154,22 +157,37 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           <TableHeader>
             <TableRow>
               <TableHead
-                className="cursor-pointer select-none"
-                onClick={() => handleSort("date")}
-              >
-                Date {sortKey === "date" ? (sortOrder === "asc" ? "↑" : "↓") : "↓"}
-              </TableHead>
+  className="cursor-pointer select-none"
+  onClick={() => handleSort("date")}
+>
+  <div className="flex items-center gap-1 justify-center md:justify-start">
+    <span>Date</span>
+    {sortKey === "date" ? (
+      sortOrder === "asc" ? <ChevronUp className="w-4 h-4"/> : <ChevronDown className="w-4 h-4"/>
+    ) : (
+      <ChevronDown className="w-4 h-4"/>
+    )}
+  </div>
+</TableHead>
 
-
-              <TableHead
-                className="cursor-pointer select-none"
-                onClick={() => handleSort("citation")}
-              >
-                Citation {sortKey === "citation" ? (sortOrder === "asc" ? "↑" : "↓") : "↓"}
-              </TableHead>
-
+<TableHead
+  className="cursor-pointer select-none"
+  onClick={() => handleSort("citation")}
+>
+  <div className="flex items-center gap-1 justify-center md:justify-start">
+    <span>Citation</span>
+    {sortKey === "citation" ? (
+      sortOrder === "asc" ? <ChevronUp className="w-4 h-4"/> : <ChevronDown className="w-4 h-4"/>
+    ) : (
+      <ChevronDown className="w-4 h-4"/>
+    )}
+  </div>
+</TableHead>
 
               <TableHead>Scripture</TableHead>
+              <TableHead className="hidden md:table-cell">Observation</TableHead>
+              <TableHead className="hidden lg:table-cell">Application</TableHead>
+              <TableHead className="hidden xl:table-cell">Prayer</TableHead>
               <TableHead>{/*Menu*/}</TableHead>
             </TableRow>
           </TableHeader>
@@ -182,44 +200,81 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
               const devotionUrl = `/devotions/${slug}`;
 
               return (
-                <TableRow
-                  key={devotion.id}
-                  className="cursor-pointer hover:bg-primary"
-                  onClick={() => router.push(devotionUrl)}
-                >
+                <TableRow key={devotion.id}>
                   <TableCell>{devotion.date
                     ? devotion.date.toLocaleDateString("en-US", {
                       month: "numeric",
                       day: "numeric",
                       year: "2-digit",
                     })
-                    : ""}</TableCell>
+                    : ""}
+                  </TableCell>
                   <TableCell>
                     {devotion.book} {devotion.chapter}:
                     {devotion.fromVerse}
                     {devotion.fromVerse !== devotion.toVerse && `-${devotion.toVerse}`}
                   </TableCell>
-                  <TableCell>
+                  <TableCell >
                     {devotion.scripture.length > 25
                       ? devotion.scripture.slice(0, 25) + "…"
                       : devotion.scripture}
                   </TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {devotion.observation.length > 25
+                      ? devotion.observation.slice(0, 25) + "…"
+                      : devotion.observation}
+                  </TableCell>
+                  <TableCell className="hidden lg:table-cell">
+                    {devotion.application.length > 25
+                      ? devotion.application.slice(0, 25) + "…"
+                      : devotion.application}
+                  </TableCell>
+                  <TableCell className="hidden xl:table-cell">
+                    {devotion.prayer.length > 25
+                      ? devotion.prayer.slice(0, 25) + "…"
+                      : devotion.prayer}
+                  </TableCell>
                   <TableCell>
-                    <div
-                      className="flex "
-                    //e.stopPropagation to stop clicking the parent (because TableRow has onClick)
-                    //onClick={(e) => e.stopPropagation()}
-                    >
+                    {/* Desktop (md+): show buttons */}
+                    <div className="hidden md:flex justify-end gap-4">
+                      <Button
+                        variant="secondary"
+                        onClick={() => router.push(devotionUrl)}
+                      >
+                        View
+                      </Button>
+                      <UpdateDevotionButton devotion={devotion} >
+                        Edit
+                      </UpdateDevotionButton>
+                      <DeleteDevotionButton devotion={devotion} >
+                        Delete
+                      </DeleteDevotionButton>
+                    </div> {/* Mobile: show dropdown */}
+                    <div className="flex md:hidden">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" className="h-8 w-8 p-0">
+                          <Button
+                            variant="outline"
+                            className="h-8 w-8 p-0 cursor-pointer"
+                          >
                             <span className="sr-only">Open menu</span>
                             <MoreHorizontal />
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <UpdateDevotionButton devotion={devotion} className="w-full" >Edit</UpdateDevotionButton>
-                          <DeleteDevotionButton devotion={devotion} >Delete</DeleteDevotionButton>
+                        <DropdownMenuContent className="flex flex-col gap-2 p-2">
+                          <Button
+                            variant="secondary"
+                            className="w-full"
+                            onClick={() => router.push(devotionUrl)}
+                          >
+                            View
+                          </Button>
+                          <UpdateDevotionButton devotion={devotion} className="w-full">
+                            Edit
+                          </UpdateDevotionButton>
+                          <DeleteDevotionButton devotion={devotion}>
+                            Delete
+                          </DeleteDevotionButton>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </div>

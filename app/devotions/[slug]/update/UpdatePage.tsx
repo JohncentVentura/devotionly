@@ -104,7 +104,19 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <h1 className="text-center  text-xl md:text-3xl font-semibold ">
+        Update Devotion
+      </h1>
+      <p className="mt-2 md:text-lg text-foreground/80">
+        <p className="mt-2 md:text-lg text-foreground/80">
+          Update and refine your personal Bible devotions using the SOAP method. 
+          Reflect on your previous entries—Scripture, Observation, Application, 
+          and Prayer—to gain new insights, deepen your understanding, and strengthen 
+          your daily walk with God. Adjust or expand your notes as you grow in faith and understanding.
+        </p>
+
+      </p>
+      <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
         <div>
           <Label className="mb-2" htmlFor="book">
             Book

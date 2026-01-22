@@ -11,7 +11,7 @@ export default async function Devotions() {
   //const localDevotions = await prisma.devotions.findMany();
 
   return (
-    <section className="relative pt-32 pb-18 px-2 lg:px-24 bg-muted">
+    <section className="relative pt-28 pb-18  lg:px-24 bg-muted">
       {user ? (
         <DevotionTable devotions={devotions} />
       ) : (

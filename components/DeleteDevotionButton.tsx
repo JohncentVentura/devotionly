@@ -2,7 +2,7 @@
 
 import { Trash2 } from "lucide-react";
 import { toast } from "react-hot-toast";
-import { deleteDevotion } from "@/actions/devotion.action";
+import { deleteDevotion, getDevotionById } from "@/actions/devotion.action";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,14 +16,16 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 
+type Devotion = NonNullable<Awaited<ReturnType<typeof getDevotionById>>>;
+
 interface DeleteDevotionProps {
-  devotion: {
-    id: string;
-  };
+  devotion: Devotion;
+  variant?: "default" | "link" | "destructive" | "outline" | "secondary" | "ghost";
+  className?: string;
   children?: React.ReactNode;
 }
 
-export default function DeleteDevotionButton({ devotion, children }: DeleteDevotionProps) {
+export default function DeleteDevotionButton({ devotion, variant, className, children }: DeleteDevotionProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -39,8 +41,8 @@ export default function DeleteDevotionButton({ devotion, children }: DeleteDevot
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
-          variant="destructive"
-          className="ml-auto flex items-center gap-2"
+          variant={variant ? variant : "destructive"}
+          className={`flex items-center gap-2 cursor-pointer ${className}`}
           asChild
         >
           <span>
