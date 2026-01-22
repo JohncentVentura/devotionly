@@ -25,7 +25,7 @@ export async function getDevotions(searchTerm?: string) {
     });
 
     //revalidatePath("/");
-    return { success: true, userDevotions };
+    return userDevotions
   } catch (error) {
     console.error("getDevotions error:", error);
   }

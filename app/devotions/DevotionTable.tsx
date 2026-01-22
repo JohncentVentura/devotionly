@@ -28,9 +28,18 @@ import UpdateDevotionButton from "@/components/UpdateDevotionButton";
 import { Input } from "@/components/ui/input"
 import { DateRangePicker } from "@/components/DateRangePicker";
 import type { DateRange } from "react-day-picker";
-
-// <-- Add this import for date-fns helpers
 import { startOfDay, endOfDay, isWithinInterval, isSameDay } from "date-fns";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { MoreHorizontal } from "lucide-react";
 
 type Devotions = Awaited<ReturnType<typeof getDevotions>>;
 
@@ -39,6 +48,11 @@ interface DevotionsTableProps {
 }
 
 export default function DevotionTable({ devotions }: DevotionsTableProps) {
+  type SortKey = "date" | "citation" | null;
+  type SortOrder = "asc" | "desc";
+  const [sortKey, setSortKey] = useState<SortKey>("date");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [selectedDateRange, setSelectedDateRange] = useState<DateRange | undefined>(undefined);
@@ -46,7 +60,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const searchLower = search.toLowerCase();
 
-  const filteredDevotions = devotions?.userDevotions?.filter((devotion) => {
+  const filteredDevotions = devotions?.filter((devotion) => {
     const devotionDate = new Date(devotion.date);
     let matchesDate = true;
 
@@ -69,6 +83,37 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
       )
     );
   });
+
+  const sortedDevotions = [...(filteredDevotions ?? [])].sort((a, b) => {
+    if (!sortKey) return 0;
+
+    let compareValue = 0;
+
+    if (sortKey === "date") {
+      compareValue =
+        new Date(a.date).getTime() - new Date(b.date).getTime();
+    }
+
+    if (sortKey === "citation") {
+      const citationA = `${a.book} ${a.chapter}:${a.fromVerse}`;
+      const citationB = `${b.book} ${b.chapter}:${b.fromVerse}`;
+      compareValue = citationA.localeCompare(citationB);
+    }
+
+    return sortOrder === "asc" ? compareValue : -compareValue;
+  });
+
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      // toggle same column
+      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      // switch column → reset old, new starts asc
+      setSortKey(key);
+      setSortOrder("asc");
+    }
+  };
+
 
   return (
     <div className="w-full">
@@ -108,16 +153,28 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Date</TableHead>
-              <TableHead>Book</TableHead>
-              <TableHead>Chapter</TableHead>
-              <TableHead>Verse(s)</TableHead>
-              <TableHead className="hidden md:table-cell">Scripture</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
+              <TableHead
+                className="cursor-pointer select-none"
+                onClick={() => handleSort("date")}
+              >
+                Date {sortKey === "date" ? (sortOrder === "asc" ? "↑" : "↓") : "↓"}
+              </TableHead>
+
+
+              <TableHead
+                className="cursor-pointer select-none"
+                onClick={() => handleSort("citation")}
+              >
+                Citation {sortKey === "citation" ? (sortOrder === "asc" ? "↑" : "↓") : "↓"}
+              </TableHead>
+
+
+              <TableHead>Scripture</TableHead>
+              <TableHead>{/*Menu*/}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredDevotions?.map((devotion) => {
+            {sortedDevotions?.map((devotion) => {
               const slugifiedName = devotion.book
                 .toLowerCase()
                 .replace(/\s+/g, "-");
@@ -127,16 +184,20 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
               return (
                 <TableRow
                   key={devotion.id}
+                  className="cursor-pointer hover:bg-primary"
                   onClick={() => router.push(devotionUrl)}
                 >
-                  <TableCell>{devotion.date?.toLocaleDateString()}</TableCell>
-                  <TableCell>{devotion.book}</TableCell>
-                  <TableCell className="font-bold">
-                    {devotion.chapter}
-                  </TableCell>
-                  <TableCell className="font-bold">
+                  <TableCell>{devotion.date
+                    ? devotion.date.toLocaleDateString("en-US", {
+                      month: "numeric",
+                      day: "numeric",
+                      year: "2-digit",
+                    })
+                    : ""}</TableCell>
+                  <TableCell>
+                    {devotion.book} {devotion.chapter}:
                     {devotion.fromVerse}
-                    {devotion.toVerse && `-${devotion.toVerse}`}
+                    {devotion.fromVerse !== devotion.toVerse && `-${devotion.toVerse}`}
                   </TableCell>
                   <TableCell>
                     {devotion.scripture.length > 25
@@ -145,12 +206,22 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                   </TableCell>
                   <TableCell>
                     <div
-                      className="flex justify-end"
-                      //e.stopPropagation to stop clicking the parent (because TableRow has onClick)
-                      onClick={(e) => e.stopPropagation()}
+                      className="flex "
+                    //e.stopPropagation to stop clicking the parent (because TableRow has onClick)
+                    //onClick={(e) => e.stopPropagation()}
                     >
-                      <UpdateDevotionButton devotion={devotion} />
-                      <DeleteDevotionButton devotion={devotion} />
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" className="h-8 w-8 p-0">
+                            <span className="sr-only">Open menu</span>
+                            <MoreHorizontal />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <UpdateDevotionButton devotion={devotion} className="w-full" >Edit</UpdateDevotionButton>
+                          <DeleteDevotionButton devotion={devotion} >Delete</DeleteDevotionButton>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
                   </TableCell>
                 </TableRow>

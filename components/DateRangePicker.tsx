@@ -31,30 +31,36 @@ export function DateRangePicker({ selectedRange, onChange, className }: DatePick
 
   return (
     <Field className={`${className} mx-auto `}>
-      
+
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id="date-picker-range"
-            className="bg-primary justify-center"
+            className="bg-primary w-full md:w-auto justify-between gap-2 px-3"
           >
-            {selectedRange?.from ? (
-              selectedRange.to ? (
-                <>
-                  {format(selectedRange.from, "yyyy-MM-dd")} - {format(selectedRange.to, "yyyy-MM-dd")}
-                </>
+            <span className="truncate text-left">
+              {selectedRange?.from ? (
+                selectedRange.to ? (
+                  <>
+                    {format(selectedRange.from, "yyyy-MM-dd")} -{" "}
+                    {format(selectedRange.to, "yyyy-MM-dd")}
+                  </>
+                ) : (
+                  format(selectedRange.from, "yyyy-MM-dd")
+                )
               ) : (
-                format(selectedRange.from, "yyyy-MM-dd")
-              )
-            ) : (
-              <span>Filter Date</span>
-            )}
-            <CalendarIcon/>
+                "Filter Date"
+              )}
+            </span>
+            <CalendarIcon className="shrink-0" />
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent className="w-auto p-2" align="start">
-          <div className="flex gap-2">
+        <PopoverContent
+          className="w-full max-w-[95vw] p-2 md:w-auto"
+          align="center"
+        >
+          <div className="flex flex-col md:flex-row gap-2">
             <Calendar
               mode="range"
               selected={selectedRange}

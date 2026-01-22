@@ -20,9 +20,10 @@ interface DeleteDevotionProps {
   devotion: {
     id: string;
   };
+  children?: React.ReactNode;
 }
 
-export default function DeleteDevotionButton({ devotion }: DeleteDevotionProps) {
+export default function DeleteDevotionButton({ devotion, children }: DeleteDevotionProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -43,7 +44,7 @@ export default function DeleteDevotionButton({ devotion }: DeleteDevotionProps) 
           asChild
         >
           <span>
-            <Trash2 className="w-4 h-4" />
+            {children ? children : <Trash2 className="w-4 h-4" />}
           </span>
         </Button>
       </AlertDialogTrigger>

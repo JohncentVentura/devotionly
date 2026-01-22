@@ -24,7 +24,7 @@ export default function UpdateDevotionButton({
   return (
     <Button
       size="lg"
-      className={`rounded-full text-base ${className}`}
+      className={` text-base ${className}`}
       onClick={() => router.push(`/devotions/${devotion?.id}/update`)}
     >
       {children ? children : <SquarePen className="w-4 h-4" />}
