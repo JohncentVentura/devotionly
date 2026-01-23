@@ -72,17 +72,6 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const searchLower = search.toLowerCase();
 
-  const handleSort = (key: SortKey) => {
-    if (sortKey === key) {
-      // toggle same column
-      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
-    } else {
-      // switch column → reset old, new starts asc
-      setSortKey(key);
-      setSortOrder("asc");
-    }
-  };
-
   const filteredDevotions = devotions?.filter((devotion) => {
     const devotionDate = new Date(devotion.date);
     let matchesDate = true;
@@ -126,16 +115,20 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
     return sortOrder === "asc" ? compareValue : -compareValue;
   });
 
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      // toggle same column
+      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      // switch column → reset old, new starts asc
+      setSortKey(key);
+      setSortOrder("asc");
+    }
+  };
+
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [page, setPage] = useState(1);
-
-  const TOTAL_ITEMS = sortedDevotions.length;
-  const totalPages = Math.ceil(TOTAL_ITEMS / rowsPerPage);
-
-  const startIndex = (page - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-
-  const paginatedDevotions = sortedDevotions.slice(startIndex, endIndex);
+  const [page] = useState(1);
+  const TOTAL_ITEMS = 100;
 
   return (
     <div className="w-full">
@@ -214,7 +207,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {paginatedDevotions?.map((devotion) => {
+            {sortedDevotions?.map((devotion) => {
               const slugifiedName = devotion.book
                 .toLowerCase()
                 .replace(/\s+/g, "-");
@@ -237,23 +230,23 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                     {devotion.fromVerse !== devotion.toVerse && `-${devotion.toVerse}`}
                   </TableCell>
                   <TableCell >
-                    {devotion.scripture.length > 20
-                      ? devotion.scripture.slice(0, 20) + "…"
+                    {devotion.scripture.length > 25
+                      ? devotion.scripture.slice(0, 25) + "…"
                       : devotion.scripture}
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {devotion.observation.length > 20
-                      ? devotion.observation.slice(0, 20) + "…"
+                    {devotion.observation.length > 25
+                      ? devotion.observation.slice(0, 25) + "…"
                       : devotion.observation}
                   </TableCell>
                   <TableCell className="hidden lg:table-cell">
-                    {devotion.application.length > 20
-                      ? devotion.application.slice(0, 20) + "…"
+                    {devotion.application.length > 25
+                      ? devotion.application.slice(0, 25) + "…"
                       : devotion.application}
                   </TableCell>
                   <TableCell className="hidden xl:table-cell">
-                    {devotion.prayer.length > 20
-                      ? devotion.prayer.slice(0, 20) + "…"
+                    {devotion.prayer.length > 25
+                      ? devotion.prayer.slice(0, 25) + "…"
                       : devotion.prayer}
                   </TableCell>
                   <TableCell>
@@ -312,10 +305,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         <div className="flex items-center gap-2">
           <Label className="whitespace-nowrap">Rows per page:</Label>
           <Select
-            onValueChange={(value) => {
-              setRowsPerPage(+value);
-              setPage(1); // reset to first page
-            }}
+            onValueChange={(rowsPerPage) => setRowsPerPage(+rowsPerPage)}
             value={rowsPerPage.toString()}
           >
             <SelectTrigger>
@@ -332,7 +322,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
         <div className="flex items-center gap-2">
           <span className="whitespace-nowrap text-muted-foreground text-sm">
-            Showing {startIndex + 1}-{Math.min(endIndex, TOTAL_ITEMS)} of {TOTAL_ITEMS}
+            Showing {(page - 1) * rowsPerPage + 1}-{page * rowsPerPage} of {TOTAL_ITEMS}
           </span>
 
           <Pagination>
@@ -343,19 +333,16 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                   disabled={page === 1}
                   size="icon"
                   variant="ghost"
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
                 >
                   <ChevronLeftIcon className="h-4 w-4" />
                 </Button>
-
               </PaginationItem>
               <PaginationItem>
                 <Button
                   aria-label="Go to next page"
-                  disabled={page === totalPages}
+                  disabled={page * rowsPerPage >= TOTAL_ITEMS}
                   size="icon"
                   variant="ghost"
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 >
                   <ChevronRightIcon className="h-4 w-4" />
                 </Button>

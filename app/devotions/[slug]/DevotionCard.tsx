@@ -35,7 +35,7 @@ const DevotionCard = ({ devotion }: DevotionCardProps) => {
   if (!devotion) return <>Devotion is deleted</>;
 
   return (
-    <div className="max-w-(--breakpoint-xl) mx-auto px-6 xl:px-0">
+    <div className="max-w-(--breakpoint-xl) mx-auto ">
       <Card className="shadow-none overflow-hidden rounded-md py-0">
         <CardHeader >
           <h1 className="mt-4 text-center text-2xl md:text-3xl font-semibold tracking-tight">
