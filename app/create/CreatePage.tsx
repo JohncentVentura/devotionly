@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import BookCombobox from "@/components/BookCombobox";
 import ChapterCombobox from "@/components/ChapterCombobox";
 import VerseCombobox from "@/components/VerseCombobox";
+import { Calendar } from "lucide-react";
 
 export default function CreatePage() {
   const router = useRouter();
@@ -140,9 +141,18 @@ export default function CreatePage() {
           </p>
         </div>
       )}
+      <div className="mt-12 mb-6 flex items-center justify-center gap-2 text-sm md:text-base text-muted-foreground">
+        Devotion for the day of{" "}
+        {new Date().toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+        <Calendar className="h-4 w-4" />
+      </div>
       <form onSubmit={handleSubmit}>
-
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <BookCombobox
             selected={formData.book}
             setSelected={(val) => handleChange("book", val || "")}
@@ -235,7 +245,7 @@ export default function CreatePage() {
             Cancel
           </Button>
         </div>
-      </form> 
+      </form>
     </section>
   );
 }

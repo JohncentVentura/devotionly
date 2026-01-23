@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import BookCombobox from "@/components/BookCombobox";
 import ChapterCombobox from "@/components/ChapterCombobox";
 import VerseCombobox from "@/components/VerseCombobox";
+import { Calendar } from "lucide-react";
 
 type Devotion = NonNullable<Awaited<ReturnType<typeof getDevotionById>>>;
 
@@ -108,15 +109,22 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
         Update Devotion
       </h1>
       <p className="mt-2 md:text-lg text-foreground/80">
-        <p className="mt-2 md:text-lg text-foreground/80">
-          Update and refine your personal Bible devotions using the SOAP method. 
-          Reflect on your previous entries—Scripture, Observation, Application, 
-          and Prayer—to gain new insights, deepen your understanding, and strengthen 
-          your daily walk with God. Adjust or expand your notes as you grow in faith and understanding.
-        </p>
-
+        Update and refine your personal Bible devotions using the SOAP method.
+        Reflect on your previous entries—Scripture, Observation, Application,
+        and Prayer—to gain new insights, deepen your understanding, and strengthen
+        your daily walk with God. Adjust or expand your notes as you grow in faith and understanding.
       </p>
-      <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="mt-12 mb-6 flex items-center justify-center gap-2 text-sm md:text-base text-muted-foreground">
+        Updating devotion of{" "}
+        {devotion.date.toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+        <Calendar className="h-4 w-4" />
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         <div>
           <Label className="mb-2" htmlFor="book">
             Book

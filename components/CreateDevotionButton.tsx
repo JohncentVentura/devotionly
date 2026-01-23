@@ -17,8 +17,7 @@ export default function CreateDevotionButton({
   return (
     <Button
       variant={variant || "default"}
-      size="lg"
-      className={`rounded-full text-base border-border dark:border-muted-foreground ${className}`}
+      className={`rounded-full text-sm lg:text-base border-border dark:border-muted-foreground ${className}`}
       onClick={() => router.push("/create")}
     >
       {children ? children : "Create Devotion"}

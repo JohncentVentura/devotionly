@@ -39,7 +39,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, ChevronUp, ChevronDown, ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
+import { MoreHorizontal, ChevronUp, ChevronDown, ChevronRightIcon, ChevronLeftIcon, Search, Pencil } from "lucide-react";
 
 import React from "react";
 
@@ -139,39 +139,65 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
   return (
     <div className="w-full">
-      <div className="px-2 grid grid-cols-3 md:grid-cols-6  gap-2 ">
-        <h1 className="col-span-3 md:col-span-2 text-center md:text-left text-xl md:text-3xl font-semibold ">
+      <div className="px-4 grid grid-cols-4 md:grid-cols-6  gap-2 ">
+        <div className="col-span-1 md:hidden"/>
+        <h1 className="col-span-2 md:col-span-2 text-center md:text-left text-xl md:text-3xl font-semibold ">
           Devotions Table
         </h1>
-        <div className="col-span-2 md:col-span-3" />
-        <CreateDevotionButton className="col-span-1 " />
-        <Input
-          type="search"
-          placeholder="Search book, chapter, scripture..."
-          className="col-span-3 md:col-span-3 rounded-2xl px-2 py-1 text-sm md:text-base border-border dark:border-muted-foreground"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <div className="col-span-1 md:col-span-3" />
+        <div className="col-span-4 md:col-span-1 text-center text-xs sm:text-sm md:text-base text-muted-foreground">
+          {new Date().toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </div>
+        <div className="col-span-1 md:hidden" />
+        <CreateDevotionButton className="col-span-1 flex md:hidden text-xs sm:text-sm items-center justify-center gap-2">
+          Write Devotion
+        </CreateDevotionButton>
+        <CreateDevotionButton className="col-span-1 flex md:hidden text-xs sm:text-sm items-center justify-center gap-2" variant="outline">
+          Resume Devotion
+        </CreateDevotionButton>
+        <div className="col-span-4 md:col-span-3 relative">
+          <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            type="search"
+            placeholder="Search book, chapter, scripture..."
+            className="pl-8 rounded-2xl px-2 py-1 text-sm md:text-base border-border dark:border-muted-foreground"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <div className="hidden md:block col-span-2" />
+        <CreateDevotionButton className="hidden md:flex col-span-1 items-center justify-center gap-2">
+          Write Devotion
+        </CreateDevotionButton>
         <DateRangePicker
-
+          className="col-span-4 sm:col-span-2 md:col-span-1"
           selectedRange={selectedDateRange}
           onChange={setSelectedDateRange}
         />
         <BookCombobox
-
+          className="col-span-2 sm:col-span-1"
           selected={selectedBook}
           setSelected={(val) => setSelectedBook(val || "")}
         >
           Filter Book
         </BookCombobox>
         <ChapterCombobox
-
+          className="col-span-2 sm:col-span-1"
           book={selectedBook}
           selected={selectedChapter}
           setSelected={(val) => setSelectedChapter(val)}
         >
           Filter Chapter
         </ChapterCombobox>
+        <div className="col-span-2" />
+        <CreateDevotionButton className="hidden md:flex col-span-1 text-xs sm:text-sm items-center justify-center gap-2" variant="outline">
+          Resume Devotion
+        </CreateDevotionButton>
       </div>
 
       <div className="mt-6 w-full border rounded-md overflow-hidden">
@@ -310,7 +336,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
       <div className="mt-4 px-4 flex w-full items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <Label className="whitespace-nowrap">Rows per page:</Label>
+          <Label className="whitespace-nowrap text-xs md:text-sm">Rows per page:</Label>
           <Select
             onValueChange={(value) => {
               setRowsPerPage(+value);
@@ -331,7 +357,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="whitespace-nowrap text-muted-foreground text-sm">
+          <span className="whitespace-nowrap text-muted-foreground text-xs md:text-sm">
             Showing {startIndex + 1}-{Math.min(endIndex, TOTAL_ITEMS)} of {TOTAL_ITEMS}
           </span>
 
