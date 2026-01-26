@@ -13,6 +13,7 @@ import BookCombobox from "@/components/BookCombobox";
 import ChapterCombobox from "@/components/ChapterCombobox";
 import VerseCombobox from "@/components/VerseCombobox";
 import { Calendar } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 export default function CreatePage() {
   const router = useRouter();
@@ -98,6 +99,25 @@ export default function CreatePage() {
         setScriptureLoading(false);
       });
   }, [formData.book, formData.chapter, formData.fromVerse, formData.toVerse]);
+
+  const searchParams = useSearchParams();
+
+  React.useEffect(() => {
+    const book = searchParams.get("book");
+    const chapter = searchParams.get("chapter");
+    const fromVerse = searchParams.get("fromVerse");
+    const toVerse = searchParams.get("toVerse");
+
+    if (book && chapter && fromVerse && toVerse) {
+      setFormData((prev) => ({
+        ...prev,
+        book,
+        chapter: Number(chapter),
+        fromVerse: Number(fromVerse),
+        toVerse: Number(toVerse),
+      }));
+    }
+  }, [searchParams]);
 
   return (
     <section>

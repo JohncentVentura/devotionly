@@ -47,6 +47,14 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
     );
   }
 
+  const reference = word.reference;
+  const [book, rest] = reference.split(" ");
+  const [chapterPart, versePart] = rest.split(":");
+  const chapter = Number(chapterPart);
+  const [fromVerse, toVerse] = versePart.includes("-")
+    ? versePart.split("-").map(Number)
+    : [Number(versePart), Number(versePart)];
+
   return (
     <div className="relative min-h-screen flex items-center justify-center">
       <div className="absolute top-0 left-0 w-full h-40 bg-linear-to-b from-background to-transparent pointer-events-none" />
@@ -81,7 +89,8 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
         <div className="mt-12 flex items-center gap-4">
           <Button size="lg" className="rounded-full text-base">
             {user ? (
-              <Link href="/create" className="flex items-center gap-2">
+              <Link href={`/create?book=${book}&chapter=${chapter}&fromVerse=${fromVerse}&toVerse=${toVerse}`}
+                className="flex items-center gap-2">
                 Make Devotion <NotebookPen className="size-5" />
               </Link>
             ) : (

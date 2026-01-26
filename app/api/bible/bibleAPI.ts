@@ -151,3 +151,42 @@ async function getDailyVerseReference(): Promise<string> {
 
   return `${book.book} ${chapter}:${startVerse}-${endVerse}`;
 }
+
+export async function getNextBibleReference(
+  book: string,
+  chapter: number,
+  verse: number
+) {
+  // 1️⃣ Get verse count in current chapter
+  const verseCount = await getVerseCount(book, chapter);
+
+  let nextBook = book;
+  let nextChapter = chapter;
+  let nextVerse = verse + 1;
+
+  // 2️⃣ If verse exceeds chapter → next chapter
+  if (nextVerse > verseCount) {
+    nextVerse = 1;
+    nextChapter += 1;
+
+    const chapterCount = getChapterCount(book);
+
+    // 3️⃣ If chapter exceeds book → next book
+    if (nextChapter > chapterCount) {
+      nextChapter = 1;
+
+      const bookIndex = bibleBooks.findIndex((b) => b.book === book);
+      const nextBookIndex =
+        bookIndex === bibleBooks.length - 1 ? 0 : bookIndex + 1;
+
+      nextBook = bibleBooks[nextBookIndex].book;
+    }
+  }
+
+  return {
+    book: nextBook,
+    chapter: nextChapter,
+    fromVerse: nextVerse,
+    toVerse: nextVerse,
+  };
+}

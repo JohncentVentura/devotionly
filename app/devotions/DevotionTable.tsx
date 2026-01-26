@@ -40,7 +40,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, ChevronUp, ChevronDown, ChevronRightIcon, ChevronLeftIcon, Search, Pencil } from "lucide-react";
-
+import { getNextBibleReference } from "@/app/api/bible/bibleAPI";
 import React from "react";
 
 import { Label } from "@/components/ui/label";
@@ -71,6 +71,30 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
   const [selectedBook, setSelectedBook] = useState<string>("");
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const searchLower = search.toLowerCase();
+
+  const handleResumeDevotion = async () => {
+    if (!devotions || devotions.length === 0) {
+      router.push("/create");
+      return;
+    }
+
+    // 1️⃣ Get latest devotion by date
+    const latestDevotion = [...devotions].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    )[0];
+
+    // 2️⃣ Calculate next verse
+    const next = await getNextBibleReference(
+      latestDevotion.book,
+      latestDevotion.chapter,
+      latestDevotion.toVerse
+    );
+
+    // 3️⃣ Redirect to CreatePage with params
+    router.push(
+      `/create?book=${next.book}&chapter=${next.chapter}&fromVerse=${next.fromVerse}&toVerse=${next.toVerse}`
+    );
+  };
 
   const handleSort = (key: SortKey) => {
     if (sortKey === key) {
@@ -140,7 +164,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
   return (
     <div className="w-full">
       <div className="px-4 grid grid-cols-4 md:grid-cols-6  gap-2 ">
-        <div className="col-span-1 md:hidden"/>
+        <div className="col-span-1 md:hidden" />
         <h1 className="col-span-2 md:col-span-2 text-center md:text-left text-xl md:text-3xl font-semibold ">
           Devotions Table
         </h1>
@@ -153,14 +177,18 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
             day: "numeric",
           })}
         </div>
-        <div className="col-span-1 md:hidden" />
-        <CreateDevotionButton className="col-span-1 flex md:hidden text-xs sm:text-sm items-center justify-center gap-2">
+
+        <CreateDevotionButton className="col-span-2 md:col-span-1 flex md:hidden text-sm items-center justify-center gap-2">
           Write Devotion
         </CreateDevotionButton>
-        <CreateDevotionButton className="col-span-1 flex md:hidden text-xs sm:text-sm items-center justify-center gap-2" variant="outline">
+        <CreateDevotionButton 
+          variant="outline"
+          className="col-span-2 md:col-span-1 flex md:hidden text-sm items-center justify-center gap-2"
+          onClick={handleResumeDevotion}>
           Resume Devotion
         </CreateDevotionButton>
-        <div className="col-span-4 md:col-span-3 relative">
+
+        <div className="mt-6 md:mt-0 col-span-4 md:col-span-3 relative">
           <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
@@ -195,7 +223,11 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           Filter Chapter
         </ChapterCombobox>
         <div className="col-span-2" />
-        <CreateDevotionButton className="hidden md:flex col-span-1 text-xs sm:text-sm items-center justify-center gap-2" variant="outline">
+        <CreateDevotionButton 
+          variant="outline"
+          className="hidden md:flex col-span-1 text-xs sm:text-sm items-center justify-center gap-2"    
+          onClick={handleResumeDevotion}
+        >
           Resume Devotion
         </CreateDevotionButton>
       </div>
