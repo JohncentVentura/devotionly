@@ -1,6 +1,8 @@
 export const externalPaths = {
+  facebook: "https://www.facebook.com/johncent.ventura.7",
   github: "https://github.com/JohncentVentura/devotionly",
-  gmail: "mailto:johncent.ventura@gmail.com",
+  gmail: "mailto:johncent.developer@gmail.com",
+  telegram: "https://t.me/JohncentVentura",
 };
 
 export const imagePaths = {

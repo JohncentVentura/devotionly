@@ -1,5 +1,5 @@
 import { Separator } from "@/components/ui/separator";
-import { GithubIcon } from "lucide-react";
+import { MailIcon, Send, Facebook, Github } from "lucide-react";
 import Link from "next/link";
 import Logo from "../Logo";
 import { externalPaths } from "@/lib/paths";
@@ -55,8 +55,14 @@ const Footer = () => {
             </span>
 
             <div className="flex items-center gap-5 text-muted-foreground">
+              <Link href={externalPaths.facebook} target="_blank">
+                <Facebook className="h-5 w-5" />
+              </Link>
+              <Link href={externalPaths.telegram} target="_blank">
+                <Send className="h-5 w-5" />
+              </Link>
               <Link href={externalPaths.github} target="_blank">
-                <GithubIcon className="h-5 w-5" />
+                <Github className="h-5 w-5" />
               </Link>
             </div>
           </div>
