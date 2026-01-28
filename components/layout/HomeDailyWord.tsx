@@ -48,9 +48,15 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
   }
 
   const reference = word.reference;
-  const [book, rest] = reference.split(" ");
-  const [chapterPart, versePart] = rest.split(":");
+
+  // Split last part (chapter:verse) safely
+  const lastSpaceIndex = reference.lastIndexOf(" ");
+  const book = reference.slice(0, lastSpaceIndex);
+  const chapterVerse = reference.slice(lastSpaceIndex + 1);
+
+  const [chapterPart, versePart] = chapterVerse.split(":");
   const chapter = Number(chapterPart);
+
   const [fromVerse, toVerse] = versePart.includes("-")
     ? versePart.split("-").map(Number)
     : [Number(versePart), Number(versePart)];

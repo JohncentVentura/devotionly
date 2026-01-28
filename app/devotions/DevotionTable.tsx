@@ -181,7 +181,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         <CreateDevotionButton className="col-span-2 md:col-span-1 flex md:hidden text-sm items-center justify-center gap-2">
           Write Devotion
         </CreateDevotionButton>
-        <CreateDevotionButton 
+        <CreateDevotionButton
           variant="outline"
           className="col-span-2 md:col-span-1 flex md:hidden text-sm items-center justify-center gap-2"
           onClick={handleResumeDevotion}>
@@ -223,17 +223,17 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           Filter Chapter
         </ChapterCombobox>
         <div className="col-span-2" />
-        <CreateDevotionButton 
+        <CreateDevotionButton
           variant="outline"
-          className="hidden md:flex col-span-1 text-xs sm:text-sm items-center justify-center gap-2"    
+          className="hidden md:flex col-span-1 text-xs sm:text-sm items-center justify-center gap-2"
           onClick={handleResumeDevotion}
         >
           Resume Devotion
         </CreateDevotionButton>
       </div>
 
-      <div className="mt-6 w-full border rounded-md overflow-hidden">
-        <Table>
+      <div className="mt-6 w-full border border-foreground dark:border-foreground/20 rounded-md overflow-hidden">
+        <Table className="[&_tr]:border-foreground [&_th]:border-foreground [&_td]:border-foreground dark:[&_tr]:border-foreground/20 dark:[&_th]:border-foreground/20 dark:[&_td]:border-foreground/20">
           <TableHeader>
             <TableRow>
               <TableHead

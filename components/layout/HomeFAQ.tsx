@@ -32,7 +32,7 @@ const faq = [
 
 const HomeFAQ = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-12">
+    <div className="relative min-h-screen flex items-center justify-center px-6 py-12 ">
       <div className="w-full max-w-2xl">
         <h2 className="text-4xl leading-[1.15]! font-semibold tracking-[-0.03em]">
           Frequently Asked Questions
@@ -71,6 +71,7 @@ const HomeFAQ = () => {
           ))}
         </Accordion>
       </div>
+      <div className="absolute bottom-0 left-0 w-full h-40 bg-linear-to-t from-background to-transparent pointer-events-none" />
     </div>
   );
 };
