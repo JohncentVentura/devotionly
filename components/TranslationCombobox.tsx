@@ -49,11 +49,15 @@ const translations: Translations[] = [
 ];
 
 type TranslationComboboxProps = {
+  variant?: "default" | "ghost" | "link" | "destructive" | "outline";
+  className?: string;
   selected: Translations | null;
   setSelected: (status: Translations | null) => void;
 };
 
 export function TranslationCombobox({
+  variant,
+  className,
   selected,
   setSelected,
 }: TranslationComboboxProps) {
@@ -68,14 +72,16 @@ export function TranslationCombobox({
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
-            variant="ghost"
-            className="w-56 justify-between border border-transparent hover:border-border hover:bg-transparent"
+            variant={variant || "ghost"}
+            className={`justify-between border border-transparent hover:border-border 
+              ${variant === "ghost" ? "hover:bg-transparent" : ""
+              } ${className}`}
           >
             {selected ? <>{selected.label}</> : <>Select Translation</>}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-56 p-0" align="start">
+        <PopoverContent className="p-0" align="start">
           <SelectedList
             setOpen={setOpen}
             selected={selected}
@@ -90,8 +96,10 @@ export function TranslationCombobox({
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button
-          variant="ghost"
-          className="w-56 justify-between border border-transparent hover:border-border hover:bg-transparent"
+          variant={variant || "ghost"}
+          className={`w-56 justify-between border border-transparent hover:border-border 
+            ${variant === "ghost" ? "hover:bg-transparent" : ""
+            } ${className}`}
         >
           {selected ? <>{selected.label}</> : <>Select Translation</>}
           <ChevronsUpDown className="opacity-50" />
