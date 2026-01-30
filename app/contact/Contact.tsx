@@ -18,7 +18,7 @@ export default function Contact() {
     <div className="flex min-h-screen items-center justify-center py-16">
       <div className="mx-auto w-full max-w-(--breakpoint-xl) px-6 xl:px-0">
         <b className="font-semibold text-muted-foreground text-sm uppercase">
-          Contact Us
+          Contact Me
         </b>
         <h2 className="mt-3 font-semibold text-3xl tracking-tight md:text-4xl">
           Connect with Devotionly!

@@ -190,3 +190,41 @@ export async function getNextBibleReference(
     toVerse: nextVerse,
   };
 }
+
+export function getNextChapter(book: string, chapter: number) {
+  const bookIndex = bibleBooks.findIndex((b) => b.book === book);
+  const chapterCount = getChapterCount(book);
+
+  let nextBook = book;
+  let nextChapter = chapter + 1;
+
+  // If last chapter → move to next book
+  if (nextChapter > chapterCount) {
+    nextChapter = 1;
+
+    const nextBookIndex =
+      bookIndex === bibleBooks.length - 1 ? 0 : bookIndex + 1;
+
+    nextBook = bibleBooks[nextBookIndex].book;
+  }
+
+  return { book: nextBook, chapter: nextChapter };
+}
+
+export function getPrevChapter(book: string, chapter: number) {
+  const bookIndex = bibleBooks.findIndex((b) => b.book === book);
+
+  let prevBook = book;
+  let prevChapter = chapter - 1;
+
+  // If first chapter → move to previous book
+  if (prevChapter < 1) {
+    const prevBookIndex =
+      bookIndex === 0 ? bibleBooks.length - 1 : bookIndex - 1;
+
+    prevBook = bibleBooks[prevBookIndex].book;
+    prevChapter = getChapterCount(prevBook);
+  }
+
+  return { book: prevBook, chapter: prevChapter };
+}

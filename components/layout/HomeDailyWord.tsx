@@ -76,6 +76,11 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
           <h4 className="text-base md:text-xl font-semibold tracking-tight">
             WORD OF THE DAY
           </h4>
+          
+          <TranslationCombobox
+          selected={translation}
+          setSelected={(selected) => setTranslation(selected)}
+        />
         </div>
         <h1 className="max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
           {word.reference}
@@ -88,10 +93,7 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
             &quot;{verse.text}&quot;
           </p>
         ))}
-        <TranslationCombobox
-          selected={translation}
-          setSelected={(selected) => setTranslation(selected)}
-        />
+        
         <div className="mt-12 flex items-center gap-4">
           <Button size="lg" className="rounded-full text-base">
             {user ? (
