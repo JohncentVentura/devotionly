@@ -76,13 +76,12 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
           <h4 className="text-base md:text-xl font-semibold tracking-tight">
             WORD OF THE DAY
           </h4>
-          
-          <TranslationCombobox
+        </div>
+        <TranslationCombobox
           selected={translation}
           setSelected={(selected) => setTranslation(selected)}
         />
-        </div>
-        <h1 className="max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
+        <h1 className="ml-2 mb-4 max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
           {word.reference}
         </h1>
         {word.verses.map((verse) => (
@@ -93,12 +92,13 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
             &quot;{verse.text}&quot;
           </p>
         ))}
-        
         <div className="mt-12 flex items-center gap-4">
           <Button size="lg" className="rounded-full text-base">
             {user ? (
-              <Link href={`/create?book=${book}&chapter=${chapter}&fromVerse=${fromVerse}&toVerse=${toVerse}`}
-                className="flex items-center gap-2">
+              <Link
+                href={`/create?book=${book}&chapter=${chapter}&fromVerse=${fromVerse}&toVerse=${toVerse}`}
+                className="flex items-center gap-2"
+              >
                 Make Devotion <NotebookPen className="size-5" />
               </Link>
             ) : (
@@ -117,8 +117,6 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
             </Link>
           </Button>
         </div>
-
-
       </div>
       <div className="absolute bottom-0 left-0 w-full h-40 bg-linear-to-t from-background to-transparent pointer-events-none" />
     </div>

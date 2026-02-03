@@ -13,6 +13,8 @@ import BookCombobox from "@/components/BookCombobox";
 import ChapterCombobox from "@/components/ChapterCombobox";
 import VerseCombobox from "@/components/VerseCombobox";
 import { Calendar } from "lucide-react";
+import type { BibleApiResponse } from "@/app/api/bible/bibleAPI";
+import ScriptureRenderer from "@/components/ScriptureRenderer";
 
 type Devotion = NonNullable<Awaited<ReturnType<typeof getDevotionById>>>;
 
@@ -40,6 +42,9 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
   });
 
   const [scriptureLoading, setScriptureLoading] = React.useState(false);
+
+  const [scriptureData, setScriptureData] =
+    React.useState<BibleApiResponse | null>(null);
 
   const handleChange = (field: string, value: string | number | Date) => {
     setFormData({ ...formData, [field]: value });
@@ -93,9 +98,11 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
 
     getVerse(reference)
       .then((data) => {
+        setScriptureData(data);
         handleChange("scripture", data.text.trim());
       })
       .catch(() => {
+        setScriptureData(null);
         handleChange("scripture", "Error fetching scripture.");
       })
       .finally(() => {
@@ -111,8 +118,9 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
       <p className="mt-2 md:text-lg text-foreground/80">
         Update and refine your personal Bible devotions using the SOAP method.
         Reflect on your previous entries—Scripture, Observation, Application,
-        and Prayer—to gain new insights, deepen your understanding, and strengthen
-        your daily walk with God. Adjust or expand your notes as you grow in faith and understanding.
+        and Prayer—to gain new insights, deepen your understanding, and
+        strengthen your daily walk with God. Adjust or expand your notes as you
+        grow in faith and understanding.
       </p>
       <div className="mt-12 mb-6 flex items-center justify-center gap-2 text-sm md:text-base text-muted-foreground">
         Updating devotion of{" "}
@@ -168,19 +176,22 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
         </div>
       </div>
       <div className="mt-4 grid grid-cols-1 gap-4">
+        
         <div>
-          <Label className="mt-2" htmlFor="scripture">
-            Scripture
-          </Label>
-          <Textarea
-            id="scripture"
-            placeholder="Waiting for a verse to show scripture here."
-            disabled
-            rows={5}
-            value={scriptureLoading ? "Loading scripture…" : formData.scripture}
-            onChange={(e) => handleChange("scripture", e.target.value)}
-          />
+          <Label className="mt-2">Scripture</Label>
+          <div className="mt-2">
+            {scriptureLoading && (
+              <p className="text-sm text-muted-foreground">
+                Loading scripture…
+              </p>
+            )}
+
+            {!scriptureLoading && scriptureData && (
+              <ScriptureRenderer data={scriptureData} />
+            )}
+          </div>
         </div>
+
         <div>
           <Label className="mt-2" htmlFor="observation">
             Observation
@@ -225,7 +236,11 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
             Clear
           </Button>
         </div>
-        <Button type="button" variant="destructive" onClick={() => router.back()}>
+        <Button
+          type="button"
+          variant="destructive"
+          onClick={() => router.back()}
+        >
           Cancel
         </Button>
       </div>

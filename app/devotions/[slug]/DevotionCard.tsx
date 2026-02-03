@@ -37,7 +37,7 @@ const DevotionCard = ({ devotion }: DevotionCardProps) => {
   return (
     <div className="max-w-(--breakpoint-xl) mx-auto ">
       <Card className="shadow-none overflow-hidden rounded-md py-0">
-        <CardHeader >
+        <CardHeader>
           <h1 className="mt-4 text-center text-2xl md:text-3xl font-semibold tracking-tight">
             Daily Devotional
           </h1>
@@ -65,43 +65,51 @@ const DevotionCard = ({ devotion }: DevotionCardProps) => {
             </Badge>
             <span className="font-medium text-sm text-muted-foreground">
               {devotion?.fromVerse}
-              {devotion.fromVerse !== devotion.toVerse && `-${devotion.toVerse}`}
+              {devotion.fromVerse !== devotion.toVerse &&
+                `-${devotion.toVerse}`}
             </span>
           </div>
           <h3 className="mt-8 text-[1.4rem] font-semibold tracking-tight">
             Scripture
           </h3>
-          <p className="mt-2 text-muted-foreground">
-            {devotion?.scripture}
-          </p>
+          <div className="mt-4 space-y-3 leading-relaxed text-muted-foreground">
+            {devotion?.scripture
+              ?.split(/(?<=[.!?])\s+/) // split by sentences
+              .map((text, index) => {
+                const verseNumber = devotion.fromVerse + index;
 
+                return (
+                  <p key={index} className={index === 0 ? "mt-4" : ""}>
+                    <span className="mr-1 font-semibold text-foreground">
+                      {verseNumber}
+                    </span>
+                    {text}
+                  </p>
+                );
+              })}
+          </div>
           <h3 className="mt-4 text-[1.4rem] font-semibold tracking-tight">
             Observation
           </h3>
-          <p className="mt-2 text-muted-foreground">
-            {devotion?.observation}
-          </p>
-
+          <p className="mt-2 text-muted-foreground">{devotion?.observation}</p>
           <h3 className="mt-4 text-[1.4rem] font-semibold tracking-tight">
             Application
           </h3>
-          <p className="mt-2 text-muted-foreground">
-            {devotion?.application}
-          </p>
-
+          <p className="mt-2 text-muted-foreground">{devotion?.application}</p>
           <h3 className="mt-4 text-[1.4rem] font-semibold tracking-tight">
             Prayer
           </h3>
-          <p className="mt-2 text-muted-foreground">
-            {devotion?.prayer}
-          </p>
-
+          <p className="mt-2 text-muted-foreground">{devotion?.prayer}</p>
           <div className="my-8 flex justify-between items-center">
             <div className="flex gap-4">
-              <UpdateDevotionButton devotion={devotion}  >
+              <UpdateDevotionButton devotion={devotion}>
                 Edit
               </UpdateDevotionButton>
-              <Button type="button" variant="outline" onClick={() => router.back()}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => router.back()}
+              >
                 Back
               </Button>
             </div>

@@ -232,6 +232,8 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         </CreateDevotionButton>
       </div>
 
+
+
       <div className="mt-6 w-full border border-foreground dark:border-foreground/20 rounded-md overflow-hidden">
         <Table className="[&_tr]:border-foreground [&_th]:border-foreground [&_td]:border-foreground dark:[&_tr]:border-foreground/20 dark:[&_th]:border-foreground/20 dark:[&_td]:border-foreground/20">
           <TableHeader>

@@ -4,7 +4,7 @@ import * as React from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { createDevotion } from "@/actions/devotion.action";
-import { getVerse } from "@/app/api/bible/bibleAPI";
+import { BibleApiResponse, getVerse } from "@/app/api/bible/bibleAPI";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,6 +14,7 @@ import ChapterCombobox from "@/components/ChapterCombobox";
 import VerseCombobox from "@/components/VerseCombobox";
 import { Calendar } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import ScriptureRenderer from "@/components/ScriptureRenderer";
 
 export default function CreatePage() {
   const router = useRouter();
@@ -38,7 +39,13 @@ export default function CreatePage() {
 
   const [showFull, setShowFull] = React.useState(false);
 
-  const handleChange = (field: string, value: string | number | Date | null) => {
+  const [scriptureData, setScriptureData] =
+    React.useState<BibleApiResponse | null>(null);
+
+  const handleChange = (
+    field: string,
+    value: string | number | Date | null,
+  ) => {
     setFormData({ ...formData, [field]: value });
   };
 
@@ -90,9 +97,11 @@ export default function CreatePage() {
 
     getVerse(reference)
       .then((data) => {
-        handleChange("scripture", data.text.trim());
+        setScriptureData(data);
+        handleChange("scripture", data.text.trim()); // still saved
       })
       .catch(() => {
+        setScriptureData(null);
         handleChange("scripture", "Error fetching scripture.");
       })
       .finally(() => {
@@ -145,19 +154,27 @@ export default function CreatePage() {
       {showFull && (
         <div className="mt-2 space-y-2">
           <p className="md:text-lg text-foreground/80">
-            <strong>S - Scripture:</strong> Read a passage (often a chapter) slowly, then choose one or two verses that stand out to you and write them down verbatim in your journal.
+            <strong>S - Scripture:</strong> Read a passage (often a chapter)
+            slowly, then choose one or two verses that stand out to you and
+            write them down verbatim in your journal.
           </p>
 
           <p className="md:text-lg text-foreground/80">
-            <strong>O - Observation:</strong> Ask questions about the text (who, what, where, when, why) and note key words, repetition, or commands. Paraphrase the verse in your own words to understand its meaning.
+            <strong>O - Observation:</strong> Ask questions about the text (who,
+            what, where, when, why) and note key words, repetition, or commands.
+            Paraphrase the verse in your own words to understand its meaning.
           </p>
 
           <p className="md:text-lg text-foreground/80">
-            <strong>A - Application:</strong> Reflect on how the verse applies to your life today. What changes do you need to make? What action can you take?
+            <strong>A - Application:</strong> Reflect on how the verse applies
+            to your life today. What changes do you need to make? What action
+            can you take?
           </p>
 
           <p className="md:text-lg text-foreground/80">
-            <strong>P - Prayer:</strong> Talk to God about what you have learned. Pray the scripture back to Him, confess any sins revealed, and ask for guidance to live it out.
+            <strong>P - Prayer:</strong> Talk to God about what you have
+            learned. Pray the scripture back to Him, confess any sins revealed,
+            and ask for guidance to live it out.
           </p>
         </div>
       )}
@@ -204,19 +221,22 @@ export default function CreatePage() {
           </VerseCombobox>
         </div>
         <div className="mt-4 grid grid-cols-1 gap-4">
+
           <div>
-            <Label className="mt-2" htmlFor="scripture">
-              Scripture
-            </Label>
-            <Textarea
-              id="scripture"
-              placeholder="Waiting for the verse to show scripture here."
-              disabled
-              rows={5}
-              value={scriptureLoading ? "Loading scripture…" : formData.scripture}
-              onChange={(e) => handleChange("scripture", e.target.value)}
-            />
+            <Label className="mt-2">Scripture</Label>
+            <div className="mt-2">
+              {scriptureLoading && (
+                <p className="text-sm text-muted-foreground">
+                  Loading scripture…
+                </p>
+              )}
+
+              {!scriptureLoading && scriptureData && (
+                <ScriptureRenderer data={scriptureData} />
+              )}
+            </div>
           </div>
+
           <div>
             <Label className="mt-2" htmlFor="observation">
               Observation
@@ -261,7 +281,11 @@ export default function CreatePage() {
               Clear
             </Button>
           </div>
-          <Button type="button" variant="destructive" onClick={() => router.back()}>
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={() => router.back()}
+          >
             Cancel
           </Button>
         </div>
