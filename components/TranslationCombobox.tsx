@@ -74,7 +74,8 @@ export function TranslationCombobox({
           <Button
             variant={variant || "ghost"}
             className={`justify-between border border-transparent hover:border-border 
-              ${variant === "ghost" ? "hover:bg-transparent" : ""
+              ${
+                variant === "ghost" ? "hover:bg-transparent" : ""
               } ${className}`}
           >
             {selected ? <>{selected.label}</> : <>Select Translation</>}
@@ -97,9 +98,19 @@ export function TranslationCombobox({
       <DrawerTrigger asChild>
         <Button
           variant={variant || "ghost"}
-          className={`w-56 justify-between border border-transparent hover:border-border 
-            ${variant === "ghost" ? "hover:bg-transparent" : ""
-            } ${className}`}
+          className={`
+      w-56 justify-between
+      transition-all duration-150
+      border
+      ${
+        open
+          ? "border-primary bg-primary/10 ring-2 ring-primary/30 scale-[0.98]"
+          : "border-transparent"
+      }
+      active:scale-[0.97]
+      ${variant === "ghost" ? "hover:bg-transparent" : ""}
+      ${className}
+    `}
         >
           {selected ? <>{selected.label}</> : <>Select Translation</>}
           <ChevronsUpDown className="opacity-50" />
@@ -147,7 +158,7 @@ function SelectedList({
                 onSelect={(value) => {
                   setSelected(
                     translations.find((priority) => priority.value === value) ||
-                    null,
+                      null,
                   );
                   setOpen(false);
                 }}

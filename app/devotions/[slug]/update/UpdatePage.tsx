@@ -112,17 +112,10 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1 className="text-center  text-xl md:text-3xl font-semibold ">
+      <h1 className="text-center text-xl md:text-3xl font-semibold ">
         Update Devotion
       </h1>
-      <p className="mt-2 md:text-lg text-foreground/80">
-        Update and refine your personal Bible devotions using the SOAP method.
-        Reflect on your previous entries—Scripture, Observation, Application,
-        and Prayer—to gain new insights, deepen your understanding, and
-        strengthen your daily walk with God. Adjust or expand your notes as you
-        grow in faith and understanding.
-      </p>
-      <div className="mt-12 mb-6 flex items-center justify-center gap-2 text-sm md:text-base text-muted-foreground">
+      <div className="mt-4 flex items-center justify-center gap-2 text-sm md:text-base text-muted-foreground">
         Updating devotion of{" "}
         {devotion.date.toLocaleDateString("en-US", {
           weekday: "long",
@@ -132,12 +125,19 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
         })}
         <Calendar className="h-4 w-4" />
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <p className="mt-4 md:text-lg text-foreground/80">
+        Refine your Bible devotions using the SOAP method. Reflect on Scripture,
+        Observation, Application, and Prayer to deepen your faith and grow in
+        understanding.
+      </p>
+
+      <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
         <div>
           <Label className="mb-2" htmlFor="book">
             Book
           </Label>
           <BookCombobox
+            className="w-full"
             selected={formData.book}
             setSelected={(val) => handleChange("book", val || "")}
           />
@@ -147,6 +147,7 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
             Chapter
           </Label>
           <ChapterCombobox
+            className="w-full"
             book={formData.book}
             selected={formData.chapter}
             setSelected={(val) => handleChange("chapter", val || 0)}
@@ -157,6 +158,7 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
             From Verse
           </Label>
           <VerseCombobox
+            className="w-full"
             book={formData.book}
             chapter={formData.chapter}
             selected={formData.fromVerse}
@@ -168,6 +170,7 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
             To Verse
           </Label>
           <VerseCombobox
+            className="w-full"
             book={formData.book}
             chapter={formData.chapter}
             selected={formData.toVerse}
@@ -176,7 +179,6 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
         </div>
       </div>
       <div className="mt-4 grid grid-cols-1 gap-4">
-        
         <div>
           <Label className="mt-2">Scripture</Label>
           <div className="mt-2">

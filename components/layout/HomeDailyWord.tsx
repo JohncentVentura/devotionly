@@ -77,17 +77,19 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
             WORD OF THE DAY
           </h4>
         </div>
+
+        <h1 className="max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
+          {word.reference}
+        </h1>
         <TranslationCombobox
+          className="my-2"
           selected={translation}
           setSelected={(selected) => setTranslation(selected)}
         />
-        <h1 className="ml-2 mb-4 max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
-          {word.reference}
-        </h1>
         {word.verses.map((verse) => (
           <p
             key={verse.verse}
-            className="my-2 max-w-[60ch] sm:text-lg text-foreground/80"
+            className="max-w-[60ch] sm:text-lg text-foreground/80"
           >
             &quot;{verse.text}&quot;
           </p>

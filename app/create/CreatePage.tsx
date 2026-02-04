@@ -133,7 +133,17 @@ export default function CreatePage() {
       <h1 className="text-center text-xl md:text-3xl font-semibold">
         Create Devotion
       </h1>
-      <p className="mt-2 md:text-lg text-foreground/80">
+      <div className="mt-4 flex items-center justify-center gap-2 text-sm md:text-base text-muted-foreground">
+        Devotion for the day of{" "}
+        {new Date().toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+        <Calendar className="h-4 w-4" />
+      </div>
+      <p className="mt-4 md:text-lg text-foreground/80">
         Create your personal Bible devotions using the SOAP method.{" "}
         {!showFull ? (
           <button
@@ -152,7 +162,7 @@ export default function CreatePage() {
         )}
       </p>
       {showFull && (
-        <div className="mt-2 space-y-2">
+        <div className="mt-4 space-y-2">
           <p className="md:text-lg text-foreground/80">
             <strong>S - Scripture:</strong> Read a passage (often a chapter)
             slowly, then choose one or two verses that stand out to you and
@@ -178,50 +188,64 @@ export default function CreatePage() {
           </p>
         </div>
       )}
-      <div className="mt-12 mb-6 flex items-center justify-center gap-2 text-sm md:text-base text-muted-foreground">
-        Devotion for the day of{" "}
-        {new Date().toLocaleDateString("en-US", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-        <Calendar className="h-4 w-4" />
-      </div>
-      <form onSubmit={handleSubmit}>
+      
+      <form className="mt-10" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <BookCombobox
-            selected={formData.book}
-            setSelected={(val) => handleChange("book", val || "")}
-          >
-            Select Book
-          </BookCombobox>
-          <ChapterCombobox
-            book={formData.book}
-            selected={formData.chapter}
-            setSelected={(val) => handleChange("chapter", val)}
-          >
-            Select Chapter
-          </ChapterCombobox>
-          <VerseCombobox
-            book={formData.book}
-            chapter={formData.chapter}
-            selected={formData.fromVerse}
-            setSelected={(val) => handleChange("fromVerse", val)}
-          >
-            From Verse
-          </VerseCombobox>
-          <VerseCombobox
-            book={formData.book}
-            chapter={formData.chapter}
-            selected={formData.toVerse}
-            setSelected={(val) => handleChange("toVerse", val)}
-          >
-            To Verse
-          </VerseCombobox>
+          <div className="col-span-1">
+            <Label className="mb-2" htmlFor="book">
+              Book
+            </Label>
+            <BookCombobox
+              className="w-full"
+              selected={formData.book}
+              setSelected={(val) => handleChange("book", val || "")}
+            >
+              Select Book
+            </BookCombobox>
+          </div>
+          <div className="col-span-1">
+            <Label className="mb-2" htmlFor="chapter">
+              Chapter
+            </Label>
+            <ChapterCombobox
+              className="w-full"
+              book={formData.book}
+              selected={formData.chapter}
+              setSelected={(val) => handleChange("chapter", val)}
+            >
+              Select Chapter
+            </ChapterCombobox>
+          </div>
+          <div className="col-span-1">
+            <Label className="mb-2" htmlFor="fromVerse">
+              From Verse
+            </Label>
+            <VerseCombobox
+              className="w-full"
+              book={formData.book}
+              chapter={formData.chapter}
+              selected={formData.fromVerse}
+              setSelected={(val) => handleChange("fromVerse", val)}
+            >
+              From Verse
+            </VerseCombobox>
+          </div>
+          <div className="col-span-1">
+            <Label className="mb-2" htmlFor="toVerse">
+              To Verse
+            </Label>
+            <VerseCombobox
+              className="w-full"
+              book={formData.book}
+              chapter={formData.chapter}
+              selected={formData.toVerse}
+              setSelected={(val) => handleChange("toVerse", val)}
+            >
+              To Verse
+            </VerseCombobox>
+          </div>
         </div>
         <div className="mt-4 grid grid-cols-1 gap-4">
-
           <div>
             <Label className="mt-2">Scripture</Label>
             <div className="mt-2">

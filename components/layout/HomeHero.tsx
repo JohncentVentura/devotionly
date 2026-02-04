@@ -42,7 +42,7 @@ export default async function HomeHero() {
           meaningful digital space, designed to help you reflect, stay
           consistent, and grow deeper in your daily walk with God.
         </p>
-        <div className=" mt-12 flex items-center justify-center gap-4">
+        <div className=" mt-12 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-4">
           <Button size="lg" className="rounded-full text-base">
             {user ? (
               <Link href="/create" className="flex items-center gap-2">

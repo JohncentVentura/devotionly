@@ -25,7 +25,7 @@ import ChapterCombobox from "@/components/ChapterCombobox";
 import CreateDevotionButton from "@/components/CreateDevotionButton";
 import DeleteDevotionButton from "@/components/DeleteDevotionButton";
 import UpdateDevotionButton from "@/components/UpdateDevotionButton";
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 import { DateRangePicker } from "@/components/DateRangePicker";
 import type { DateRange } from "react-day-picker";
 import { startOfDay, endOfDay, isWithinInterval, isSameDay } from "date-fns";
@@ -39,7 +39,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, ChevronUp, ChevronDown, ChevronRightIcon, ChevronLeftIcon, Search, Pencil } from "lucide-react";
+import {
+  MoreHorizontal,
+  ChevronUp,
+  ChevronDown,
+  ChevronRightIcon,
+  ChevronLeftIcon,
+  Search,
+  Pencil,
+} from "lucide-react";
 import { getNextBibleReference } from "@/app/api/bible/bibleAPI";
 import React from "react";
 
@@ -67,7 +75,9 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
   const router = useRouter();
   const [search, setSearch] = useState("");
-  const [selectedDateRange, setSelectedDateRange] = useState<DateRange | undefined>(undefined);
+  const [selectedDateRange, setSelectedDateRange] = useState<
+    DateRange | undefined
+  >(undefined);
   const [selectedBook, setSelectedBook] = useState<string>("");
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const searchLower = search.toLowerCase();
@@ -80,19 +90,19 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
     // 1️⃣ Get latest devotion by date
     const latestDevotion = [...devotions].sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
     )[0];
 
     // 2️⃣ Calculate next verse
     const next = await getNextBibleReference(
       latestDevotion.book,
       latestDevotion.chapter,
-      latestDevotion.toVerse
+      latestDevotion.toVerse,
     );
 
     // 3️⃣ Redirect to CreatePage with params
     router.push(
-      `/create?book=${next.book}&chapter=${next.chapter}&fromVerse=${next.fromVerse}&toVerse=${next.toVerse}`
+      `/create?book=${next.book}&chapter=${next.chapter}&fromVerse=${next.fromVerse}&toVerse=${next.toVerse}`,
     );
   };
 
@@ -123,11 +133,9 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
       matchesDate &&
       (selectedBook === "" || devotion.book === selectedBook) &&
       (selectedChapter === null || devotion.chapter === selectedChapter) &&
-      (
-        devotion.scripture.toLowerCase().includes(searchLower) ||
+      (devotion.scripture.toLowerCase().includes(searchLower) ||
         devotion.book.toLowerCase().includes(searchLower) ||
-        devotion.chapter.toString().includes(searchLower)
-      )
+        devotion.chapter.toString().includes(searchLower))
     );
   });
 
@@ -137,8 +145,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
     let compareValue = 0;
 
     if (sortKey === "date") {
-      compareValue =
-        new Date(a.date).getTime() - new Date(b.date).getTime();
+      compareValue = new Date(a.date).getTime() - new Date(b.date).getTime();
     }
 
     if (sortKey === "citation") {
@@ -184,7 +191,8 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         <CreateDevotionButton
           variant="outline"
           className="col-span-2 md:col-span-1 flex md:hidden text-sm items-center justify-center gap-2"
-          onClick={handleResumeDevotion}>
+          onClick={handleResumeDevotion}
+        >
           Resume Devotion
         </CreateDevotionButton>
 
@@ -232,8 +240,6 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         </CreateDevotionButton>
       </div>
 
-
-
       <div className="mt-6 w-full border border-foreground dark:border-foreground/20 rounded-md overflow-hidden">
         <Table className="[&_tr]:border-foreground [&_th]:border-foreground [&_td]:border-foreground dark:[&_tr]:border-foreground/20 dark:[&_th]:border-foreground/20 dark:[&_td]:border-foreground/20">
           <TableHeader>
@@ -245,7 +251,11 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                 <div className="flex items-center gap-1 justify-center md:justify-start">
                   <span>Date</span>
                   {sortKey === "date" ? (
-                    sortOrder === "asc" ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                    sortOrder === "asc" ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )
                   ) : (
                     <ChevronDown className="w-4 h-4" />
                   )}
@@ -259,7 +269,11 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                 <div className="flex items-center gap-1 justify-center md:justify-start">
                   <span>Citation</span>
                   {sortKey === "citation" ? (
-                    sortOrder === "asc" ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                    sortOrder === "asc" ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )
                   ) : (
                     <ChevronDown className="w-4 h-4" />
                   )}
@@ -267,8 +281,12 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
               </TableHead>
 
               <TableHead>Scripture</TableHead>
-              <TableHead className="hidden md:table-cell">Observation</TableHead>
-              <TableHead className="hidden lg:table-cell">Application</TableHead>
+              <TableHead className="hidden md:table-cell">
+                Observation
+              </TableHead>
+              <TableHead className="hidden lg:table-cell">
+                Application
+              </TableHead>
               <TableHead className="hidden xl:table-cell">Prayer</TableHead>
               <TableHead>{/*Menu*/}</TableHead>
             </TableRow>
@@ -283,22 +301,23 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
               return (
                 <TableRow key={devotion.id}>
-                  <TableCell>{devotion.date
-                    ? devotion.date.toLocaleDateString("en-US", {
-                      month: "numeric",
-                      day: "numeric",
-                      year: "2-digit",
-                    })
-                    : ""}
+                  <TableCell>
+                    {devotion.date
+                      ? devotion.date.toLocaleDateString("en-US", {
+                          month: "numeric",
+                          day: "numeric",
+                          year: "2-digit",
+                        })
+                      : ""}
                   </TableCell>
                   <TableCell>
-                    {devotion.book} {devotion.chapter}:
-                    {devotion.fromVerse}
-                    {devotion.fromVerse !== devotion.toVerse && `-${devotion.toVerse}`}
+                    {devotion.book} {devotion.chapter}:{devotion.fromVerse}
+                    {devotion.fromVerse !== devotion.toVerse &&
+                      `-${devotion.toVerse}`}
                   </TableCell>
-                  <TableCell >
-                    {devotion.scripture.length > 20
-                      ? devotion.scripture.slice(0, 20) + "…"
+                  <TableCell>
+                    {devotion.scripture.length > 16
+                      ? devotion.scripture.slice(0, 16) + "…"
                       : devotion.scripture}
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
@@ -325,19 +344,25 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                       >
                         View
                       </Button>
-                      <UpdateDevotionButton devotion={devotion} >
+                      <UpdateDevotionButton devotion={devotion}>
                         Edit
                       </UpdateDevotionButton>
-                      <DeleteDevotionButton devotion={devotion} >
+                      <DeleteDevotionButton devotion={devotion}>
                         Delete
                       </DeleteDevotionButton>
-                    </div> {/* Mobile: show dropdown */}
+                    </div>
+                    {/* Mobile: show dropdown */}
                     <div className="flex md:hidden">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
                             variant="outline"
-                            className="h-8 w-8 p-0 cursor-pointer"
+                            className="
+                              h-8 w-8 p-0
+                              active:bg-primary/20
+                              active:scale-90
+                              transition
+                            "
                           >
                             <span className="sr-only">Open menu</span>
                             <MoreHorizontal />
@@ -351,7 +376,10 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                           >
                             View
                           </Button>
-                          <UpdateDevotionButton devotion={devotion} className="w-full">
+                          <UpdateDevotionButton
+                            devotion={devotion}
+                            className="w-full"
+                          >
                             Edit
                           </UpdateDevotionButton>
                           <DeleteDevotionButton devotion={devotion}>
@@ -370,7 +398,9 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
       <div className="mt-4 px-4 flex w-full items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <Label className="whitespace-nowrap text-xs md:text-sm">Rows per page:</Label>
+          <Label className="whitespace-nowrap text-xs md:text-sm">
+            Rows per page:
+          </Label>
           <Select
             onValueChange={(value) => {
               setRowsPerPage(+value);
@@ -392,7 +422,8 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
         <div className="flex items-center gap-2">
           <span className="whitespace-nowrap text-muted-foreground text-xs md:text-sm">
-            Showing {startIndex + 1}-{Math.min(endIndex, TOTAL_ITEMS)} of {TOTAL_ITEMS}
+            Showing {startIndex + 1}-{Math.min(endIndex, TOTAL_ITEMS)} of{" "}
+            {TOTAL_ITEMS}
           </span>
 
           <Pagination>
@@ -407,7 +438,6 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                 >
                   <ChevronLeftIcon className="h-4 w-4" />
                 </Button>
-
               </PaginationItem>
               <PaginationItem>
                 <Button
