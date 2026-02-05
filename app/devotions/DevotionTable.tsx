@@ -49,10 +49,7 @@ import {
   Pencil,
 } from "lucide-react";
 import { getNextBibleReference } from "@/app/api/bible/bibleAPI";
-import React from "react";
-
 import { Label } from "@/components/ui/label";
-
 import {
   Select,
   SelectContent,
@@ -60,6 +57,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 
 type Devotions = Awaited<ReturnType<typeof getDevotions>>;
 
@@ -170,13 +168,11 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
   return (
     <div className="w-full">
-      <div className="px-4 grid grid-cols-4 md:grid-cols-6  gap-2 ">
-        <div className="col-span-1 md:hidden" />
-        <h1 className="col-span-2 md:col-span-2 text-center md:text-left text-xl md:text-3xl font-semibold ">
+      <div className="px-4 xl:px-0 grid grid-cols-6 md:grid-cols-14 gap-2 ">
+        <h1 className="col-span-6 md:col-span-3 text-center md:text-left text-xl md:text-3xl font-semibold ">
           Devotions Table
         </h1>
-        <div className="col-span-1 md:col-span-3" />
-        <div className="col-span-4 md:col-span-1 text-center text-xs sm:text-sm md:text-base text-muted-foreground">
+        <div className="col-span-6 md:col-span-3 text-center md:text-left text-xs sm:text-sm md:text-base text-muted-foreground">
           {new Date().toLocaleDateString("en-US", {
             weekday: "long",
             year: "numeric",
@@ -184,19 +180,22 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
             day: "numeric",
           })}
         </div>
-
-        <CreateDevotionButton className="col-span-2 md:col-span-1 flex md:hidden text-sm items-center justify-center gap-2">
-          Write Devotion
+        <div className="col-span-1 flex md:hidden" />
+        <div className="md:col-span-4 hidden md:flex" />
+        <CreateDevotionButton className="col-span-2 flex text-sm items-center justify-center gap-2">
+          New Devotion
         </CreateDevotionButton>
+
         <CreateDevotionButton
           variant="outline"
-          className="col-span-2 md:col-span-1 flex md:hidden text-sm items-center justify-center gap-2"
+          className="col-span-2 flex text-sm items-center justify-center gap-2"
           onClick={handleResumeDevotion}
         >
           Resume Devotion
         </CreateDevotionButton>
-
-        <div className="mt-6 md:mt-0 col-span-4 md:col-span-3 relative">
+        <div className="col-span-1 flex md:hidden" />
+        <Separator className="my-2 col-span-6 flex md:hidden h-8" />
+        <div className="col-span-6 md:col-span-7 relative">
           <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
@@ -206,38 +205,26 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <div className="hidden md:block col-span-2" />
-        <CreateDevotionButton className="hidden md:flex col-span-1 items-center justify-center gap-2">
-          Write Devotion
-        </CreateDevotionButton>
         <DateRangePicker
-          className="col-span-4 sm:col-span-2 md:col-span-1"
+          className="col-span-6 md:col-span-3"
           selectedRange={selectedDateRange}
           onChange={setSelectedDateRange}
         />
         <BookCombobox
-          className="col-span-2 sm:col-span-1"
+          className="col-span-4 md:col-span-2"
           selected={selectedBook}
           setSelected={(val) => setSelectedBook(val || "")}
         >
           Filter Book
         </BookCombobox>
         <ChapterCombobox
-          className="col-span-2 sm:col-span-1"
+          className="col-span-2"
           book={selectedBook}
           selected={selectedChapter}
           setSelected={(val) => setSelectedChapter(val)}
         >
           Filter Chapter
         </ChapterCombobox>
-        <div className="col-span-2" />
-        <CreateDevotionButton
-          variant="outline"
-          className="hidden md:flex col-span-1 text-xs sm:text-sm items-center justify-center gap-2"
-          onClick={handleResumeDevotion}
-        >
-          Resume Devotion
-        </CreateDevotionButton>
       </div>
 
       <div className="mt-6 w-full border border-foreground dark:border-foreground/20 rounded-md overflow-hidden">

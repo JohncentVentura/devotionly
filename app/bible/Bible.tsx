@@ -15,11 +15,21 @@ import {
   getVerse,
 } from "../api/bible/bibleAPI";
 import { Separator } from "@/components/ui/separator";
+import { useSearchParams } from "next/navigation";
 
 export default function Bible() {
-  const [search, setSearch] = useState("");
-  const [selectedBook, setSelectedBook] = useState<string>("Genesis");
-  const [selectedChapter, setSelectedChapter] = useState<number | null>(1);
+  const searchParams = useSearchParams();
+  const bookParam = searchParams.get("book");
+  const chapterParam = searchParams.get("chapter");
+  const fromVerseParam = searchParams.get("fromVerse");
+  const toVerseParam = searchParams.get("toVerse");
+
+  const [selectedBook, setSelectedBook] = useState<string>(
+    bookParam || "Genesis",
+  );
+  const [selectedChapter, setSelectedChapter] = useState<number | null>(
+    chapterParam ? Number(chapterParam) : 1,
+  );
   const [word, setWord] = useState<BibleApiResponse | null>(null);
   const [translation, setTranslation] = useState<{
     value: string;
@@ -73,10 +83,10 @@ export default function Bible() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="w-full max-w-(--breakpoint-lg) px-6 py-10">
-        <h2 className="text-pretty font-semibold text-4xl tracking-[-0.03em] sm:mx-auto sm:max-w-xl sm:text-center md:text-[2.75rem] md:leading-[1.2]">
+        <h2 className="text-pretty font-semibold text-2xl md:text-4xl tracking-[-0.03em] sm:mx-auto sm:max-w-xl sm:text-center md:text-[2.75rem] md:leading-[1.2]">
           The Living Word
         </h2>
-        <p className="mt-2 text-lg text-muted-foreground sm:text-center sm:text-xl">
+        <p className="mt-2 text-base md:text-lg text-muted-foreground sm:text-center sm:text-xl">
           Encounter the living Word of God. Let every verse speak to your heart,
           every chapter inspire your mind, and every passage illuminate your
           life.
@@ -126,7 +136,11 @@ export default function Bible() {
                   (prev && prev.text.trim().endsWith("."));
 
                 return (
-                  <p key={v.verse} className={newParagraph ? "mt-4" : ""}>
+                  <p
+                    id={`verse-${v.verse}`}
+                    key={v.verse}
+                    className={newParagraph ? "mt-4" : ""}
+                  >
                     <span className="mr-1 font-semibold text-foreground">
                       {v.verse}
                     </span>
@@ -135,8 +149,8 @@ export default function Bible() {
                 );
               })}
             </div>
-            <div className="mt-6 grid grid-cols-3 items-center">
-              <div className="flex justify-start">
+            <div className="mt-12 grid grid-cols-3 items-center">
+              <div className="flex items-center justify-start">
                 <Button onClick={handlePrev} className="gap-3 rounded-full">
                   <ArrowLeft /> Prev
                 </Button>
@@ -146,7 +160,7 @@ export default function Bible() {
                 {selectedBook} {selectedChapter}
               </div>
 
-              <div className="flex justify-end">
+              <div className="flex items-center justify-end">
                 <Button onClick={handleNext} className="gap-3 rounded-full">
                   Next <ArrowRight />
                 </Button>

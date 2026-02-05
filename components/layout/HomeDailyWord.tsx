@@ -71,25 +71,24 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
         fill
       />
       <div className="max-w-(--breakpoint-xl) w-full mx-auto px-6 py-16">
-        <div className="mb-6 flex items-center gap-2">
+        <div className="ml-2 mb-6 flex items-center gap-2">
           <Sun />
           <h4 className="text-base md:text-xl font-semibold tracking-tight">
             WORD OF THE DAY
           </h4>
         </div>
-
-        <h1 className="max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
-          {word.reference}
-        </h1>
         <TranslationCombobox
-          className="my-2"
           selected={translation}
           setSelected={(selected) => setTranslation(selected)}
         />
+        <h1 className="ml-2 mb-2 max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
+          {word.reference}
+        </h1>
+
         {word.verses.map((verse) => (
           <p
             key={verse.verse}
-            className="max-w-[60ch] sm:text-lg text-foreground/80"
+            className="ml-2 max-w-[60ch] sm:text-lg text-foreground/80"
           >
             &quot;{verse.text}&quot;
           </p>
@@ -114,7 +113,18 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
             size="lg"
             className="rounded-full text-base shadow-none"
           >
-            <Link href={"bible"} className="flex items-center gap-2">
+            <Link
+              href={{
+                pathname: "/bible",
+                query: {
+                  book,
+                  chapter,
+                  fromVerse,
+                  toVerse,
+                },
+              }}
+              className="flex items-center gap-2"
+            >
               <BookMarked className="h-5! w-5!" /> Read Book
             </Link>
           </Button>
