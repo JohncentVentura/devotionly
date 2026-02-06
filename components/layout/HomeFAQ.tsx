@@ -10,23 +10,34 @@ import { cn } from "@/lib/utils";
 const faq = [
   {
     question: "What are daily devotions?",
-    answer:
-      "Daily devotions are intentional moments set aside to read Scripture, pray, and reflect on God’s Word. “Your word is a lamp to my feet and a light to my path.” (Psalm 119:105)",
+    answer: {
+      text: "Daily devotions are intentional moments set aside to read Scripture, pray, and reflect on God’s Word.",
+      verse:
+        "“Your word is a lamp to my feet and a light to my path.” (Psalm 119:105)",
+    },
   },
   {
     question: "Why are devotions important?",
-    answer:
-      "Devotions help strengthen faith and deepen your relationship with God through consistent time with Him. “Draw near to God, and he will draw near to you.” (James 4:8)",
+    answer: {
+      text: "Devotions help strengthen faith and deepen your relationship with God through consistent time with Him.",
+      verse: "“Draw near to God, and he will draw near to you.” (James 4:8)",
+    },
   },
   {
     question: "When and where is the best time or place to devote?",
-    answer:
-      "The best time and place is where you can be still and focused, whether morning, evening, or anywhere quiet. “This Book of the Law shall not depart from your mouth, but you shall meditate on it day and night, so that you may be careful to do according to all that is written in it.” (Joshua 1:8)",
+    answer: {
+      text: "The best time and place is where you can be still and focused, whether morning, evening, or anywhere quiet.",
+      verse:
+        "“This Book of the Law shall not depart from your mouth, but you shall meditate on it day and night, so that you may be careful to do according to all that is written in it.” (Joshua 1:8)",
+    },
   },
   {
     question: "How does this apply to my life today?",
-    answer:
-      "God’s Word guides daily decisions, offers peace, and provides wisdom for everyday life. “Do not merely listen to the word… Do what it says.” (James 1:22)",
+    answer: {
+      text: "God’s Word guides daily decisions, offers peace, and provides wisdom for everyday life.",
+      verse:
+        "“Do not merely listen to the word… Do what it says.” (James 1:22)",
+    },
   },
 ];
 
@@ -57,15 +68,16 @@ const HomeFAQ = () => {
                 <AccordionPrimitive.Trigger
                   className={cn(
                     "flex flex-1 items-center justify-between pt-4 pb-3 font-semibold tracking-tight transition-all hover:underline [&[data-state=open]>svg]:rotate-45",
-                    "text-start text-lg"
+                    "text-start text-lg",
                   )}
                 >
                   {question}
                   <PlusIcon className="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200" />
                 </AccordionPrimitive.Trigger>
               </AccordionPrimitive.Header>
-              <AccordionContent className="text-base text-muted-foreground">
-                {answer}
+              <AccordionContent className="text-base space-y-2">
+                <p className="text-muted-foreground">{answer.text}</p>
+                <p className="text-primary font-medium">{answer.verse}</p>
               </AccordionContent>
             </AccordionItem>
           ))}

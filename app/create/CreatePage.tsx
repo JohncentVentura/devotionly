@@ -15,6 +15,7 @@ import VerseCombobox from "@/components/VerseCombobox";
 import { Calendar } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import ScriptureRenderer from "@/components/ScriptureRenderer";
+import { Separator } from "@/components/ui/separator";
 
 export default function CreatePage() {
   const router = useRouter();
@@ -188,15 +189,15 @@ export default function CreatePage() {
           </p>
         </div>
       )}
-      
-      <form className="mt-10" onSubmit={handleSubmit}>
+      <Separator className="my-4 md:my-8" />
+      <form className="" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="col-span-1">
-            <Label className="mb-2" htmlFor="book">
+            <Label htmlFor="book">
               Book
             </Label>
             <BookCombobox
-              className="w-full"
+              className="mt-2 w-full"
               selected={formData.book}
               setSelected={(val) => handleChange("book", val || "")}
             >
@@ -204,11 +205,11 @@ export default function CreatePage() {
             </BookCombobox>
           </div>
           <div className="col-span-1">
-            <Label className="mb-2" htmlFor="chapter">
+            <Label htmlFor="chapter">
               Chapter
             </Label>
             <ChapterCombobox
-              className="w-full"
+              className="mt-2 w-full"
               book={formData.book}
               selected={formData.chapter}
               setSelected={(val) => handleChange("chapter", val)}
@@ -217,11 +218,11 @@ export default function CreatePage() {
             </ChapterCombobox>
           </div>
           <div className="col-span-1">
-            <Label className="mb-2" htmlFor="fromVerse">
+            <Label htmlFor="fromVerse">
               From Verse
             </Label>
             <VerseCombobox
-              className="w-full"
+              className="mt-2 w-full"
               book={formData.book}
               chapter={formData.chapter}
               selected={formData.fromVerse}
@@ -231,11 +232,11 @@ export default function CreatePage() {
             </VerseCombobox>
           </div>
           <div className="col-span-1">
-            <Label className="mb-2" htmlFor="toVerse">
+            <Label htmlFor="toVerse">
               To Verse
             </Label>
             <VerseCombobox
-              className="w-full"
+              className="mt-2 w-full"
               book={formData.book}
               chapter={formData.chapter}
               selected={formData.toVerse}
@@ -245,9 +246,9 @@ export default function CreatePage() {
             </VerseCombobox>
           </div>
         </div>
-        <div className="mt-4 grid grid-cols-1 gap-4">
+        <div className="mt-8 grid grid-cols-1 gap-4">
           <div>
-            <Label className="mt-2">Scripture</Label>
+            <Label>Scripture</Label>
             <div className="mt-2">
               {scriptureLoading && (
                 <p className="text-sm text-muted-foreground">
@@ -262,11 +263,12 @@ export default function CreatePage() {
           </div>
 
           <div>
-            <Label className="mt-2" htmlFor="observation">
+            <Label htmlFor="observation">
               Observation
             </Label>
             <Textarea
               id="observation"
+              className="mt-2"
               placeholder="Type your observation here."
               rows={5}
               value={formData.observation}
@@ -274,11 +276,12 @@ export default function CreatePage() {
             />
           </div>
           <div>
-            <Label className="mt-2" htmlFor="application">
+            <Label htmlFor="application">
               Application
             </Label>
             <Textarea
               id="application"
+              className="mt-2"
               placeholder="Type your application here."
               rows={5}
               value={formData.application}
@@ -286,11 +289,12 @@ export default function CreatePage() {
             />
           </div>
           <div>
-            <Label className="mt-2" htmlFor="prayer">
+            <Label htmlFor="prayer">
               Prayer
             </Label>
             <Textarea
               id="prayer"
+              className="mt-2"
               placeholder="Type your prayer here."
               rows={5}
               value={formData.prayer}

@@ -9,12 +9,14 @@ import { Button } from "@/components/ui/button";
 type Devotion = Awaited<ReturnType<typeof getDevotionById>>;
 
 interface UpdateDevotionProps {
+  variant?: "default" | "link" | "destructive" | "outline" | "secondary" | "ghost";
   devotion: Devotion;
   className?: string;
   children?: React.ReactNode;
 }
 
 export default function UpdateDevotionButton({
+  variant,
   devotion,
   className,
   children,
@@ -23,7 +25,8 @@ export default function UpdateDevotionButton({
 
   return (
     <Button
-      className={`text-base ${className}`}
+      variant={variant || "default"}
+      className={`text-base cursor-pointer ${className}`}
       onClick={() => router.push(`/devotions/${devotion?.id}/update`)}
     >
       {children ? children : <SquarePen className="w-4 h-4" />}

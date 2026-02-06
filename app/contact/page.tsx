@@ -32,7 +32,7 @@ export default async function page(props: {
   if (!user) return <SignIn />;
 
   return (
-    <div className="relative pt-16 pb-8 mx-auto px-auto grid grid-cols-1 lg:grid-cols-10 gap-6 bg-muted/40">
+    <div className="relative pt-16 pb-8 mx-auto px-auto grid grid-cols-1 lg:grid-cols-10 gap-6 bg-muted">
       <div className="lg:col-span-full">
         <Contact/>
       </div>

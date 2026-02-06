@@ -15,6 +15,7 @@ import VerseCombobox from "@/components/VerseCombobox";
 import { Calendar } from "lucide-react";
 import type { BibleApiResponse } from "@/app/api/bible/bibleAPI";
 import ScriptureRenderer from "@/components/ScriptureRenderer";
+import { Separator } from "@/components/ui/separator";
 
 type Devotion = NonNullable<Awaited<ReturnType<typeof getDevotionById>>>;
 
@@ -130,35 +131,29 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
         Observation, Application, and Prayer to deepen your faith and grow in
         understanding.
       </p>
-
+      <Separator className="my-4 md:my-8" />
       <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
         <div>
-          <Label className="mb-2" htmlFor="book">
-            Book
-          </Label>
+          <Label htmlFor="book">Book</Label>
           <BookCombobox
-            className="w-full"
+            className="mt-2 w-full"
             selected={formData.book}
             setSelected={(val) => handleChange("book", val || "")}
           />
         </div>
         <div>
-          <Label className="mb-2" htmlFor="chapter">
-            Chapter
-          </Label>
+          <Label htmlFor="chapter">Chapter</Label>
           <ChapterCombobox
-            className="w-full"
+            className="mt-2 w-full"
             book={formData.book}
             selected={formData.chapter}
             setSelected={(val) => handleChange("chapter", val || 0)}
           />
         </div>
         <div>
-          <Label className="mb-2" htmlFor="fromVerse">
-            From Verse
-          </Label>
+          <Label htmlFor="fromVerse">From Verse</Label>
           <VerseCombobox
-            className="w-full"
+            className="mt-2 w-full"
             book={formData.book}
             chapter={formData.chapter}
             selected={formData.fromVerse}
@@ -166,11 +161,9 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
           />
         </div>
         <div>
-          <Label className="mb-2" htmlFor="toVerse">
-            To Verse
-          </Label>
+          <Label htmlFor="toVerse">To Verse</Label>
           <VerseCombobox
-            className="w-full"
+            className="mt-2 w-full"
             book={formData.book}
             chapter={formData.chapter}
             selected={formData.toVerse}
@@ -178,9 +171,9 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
           />
         </div>
       </div>
-      <div className="mt-4 grid grid-cols-1 gap-4">
+      <div className="mt-8 grid grid-cols-1 gap-4">
         <div>
-          <Label className="mt-2">Scripture</Label>
+          <Label>Scripture</Label>
           <div className="mt-2">
             {scriptureLoading && (
               <p className="text-sm text-muted-foreground">
@@ -195,11 +188,10 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
         </div>
 
         <div>
-          <Label className="mt-2" htmlFor="observation">
-            Observation
-          </Label>
+          <Label htmlFor="observation">Observation</Label>
           <Textarea
             id="observation"
+            className="mt-2"
             placeholder="Type your observation here."
             rows={5}
             value={formData.observation}
@@ -207,11 +199,10 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
           />
         </div>
         <div>
-          <Label className="mt-2" htmlFor="application">
-            Application
-          </Label>
+          <Label htmlFor="application">Application</Label>
           <Textarea
             id="application"
+            className="mt-2"
             placeholder="Type your application here."
             rows={5}
             value={formData.application}
@@ -219,11 +210,10 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
           />
         </div>
         <div>
-          <Label className="mt-2" htmlFor="prayer">
-            Prayer
-          </Label>
+          <Label htmlFor="prayer">Prayer</Label>
           <Textarea
             id="prayer"
+            className="mt-2"
             placeholder="Type your prayer here."
             rows={5}
             value={formData.prayer}

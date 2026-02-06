@@ -27,7 +27,7 @@ export const NavMenu = ({ onNavigate, ...props }: NavMenuProps) => (
           <NavigationMenuLink
             asChild
             className={navigationMenuTriggerStyle()}
-            onClick={onNavigate} // ⭐ CLOSE ON CLICK
+            onClick={onNavigate} //CLOSE ON CLICK
           >
             <Link href={href}>{label}</Link>
           </NavigationMenuLink>

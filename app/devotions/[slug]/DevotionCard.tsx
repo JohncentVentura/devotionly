@@ -16,6 +16,7 @@ import UpdateDevotionButton from "@/components/UpdateDevotionButton";
 import { useRouter } from "next/navigation";
 import DeleteDevotionButton from "@/components/DeleteDevotionButton";
 import { useEffect } from "react";
+import { Separator } from "@/components/ui/separator";
 
 type Devotion = Awaited<ReturnType<typeof getDevotionById>>;
 
@@ -36,7 +37,7 @@ const DevotionCard = ({ devotion }: DevotionCardProps) => {
 
   return (
     <div className="max-w-(--breakpoint-xl) mx-auto ">
-      <Card className="shadow-none overflow-hidden rounded-md py-0">
+      <Card className="shadow-none overflow-hidden rounded-md py-0 border-primary border-2">
         <CardHeader>
           <h1 className="mt-4 text-center text-2xl md:text-3xl font-semibold tracking-tight">
             Daily Devotional
@@ -47,7 +48,7 @@ const DevotionCard = ({ devotion }: DevotionCardProps) => {
           </h3>
         </CardHeader>
         <CardContent>
-          <div className="mb-4 flex justify-center items-center gap-3">
+          <div className="flex justify-center items-center flex-wrap gap-4">
             <Badge className="bg-primary/5 text-primary hover:bg-primary/5 shadow-none text-sm px-2 py-0.5">
               Book:
             </Badge>
@@ -69,10 +70,11 @@ const DevotionCard = ({ devotion }: DevotionCardProps) => {
                 `-${devotion.toVerse}`}
             </span>
           </div>
-          <h3 className="mt-8 text-[1.4rem] font-semibold tracking-tight">
+          <Separator className="my-6 md:my-8" />
+          <h3 className="text-[1.4rem] font-semibold tracking-tight">
             Scripture
           </h3>
-          <div className="mt-4 space-y-3 leading-relaxed text-muted-foreground">
+          <div className="mt-2 space-y-3 leading-relaxed text-muted-foreground">
             {devotion?.scripture
               ?.split(/(?<=[.!?])\s+/) // split by sentences
               .map((text, index) => {
@@ -88,19 +90,36 @@ const DevotionCard = ({ devotion }: DevotionCardProps) => {
                 );
               })}
           </div>
-          <h3 className="mt-4 text-[1.4rem] font-semibold tracking-tight">
-            Observation
-          </h3>
-          <p className="mt-2 text-muted-foreground">{devotion?.observation}</p>
-          <h3 className="mt-4 text-[1.4rem] font-semibold tracking-tight">
-            Application
-          </h3>
-          <p className="mt-2 text-muted-foreground">{devotion?.application}</p>
-          <h3 className="mt-4 text-[1.4rem] font-semibold tracking-tight">
-            Prayer
-          </h3>
-          <p className="mt-2 text-muted-foreground">{devotion?.prayer}</p>
-          <div className="my-8 flex justify-between items-center">
+          <div className="flex flex-col gap-4">
+            <div className="mt-4 flex flex-col">
+              <h3 className="text-[1.4rem] font-semibold tracking-tight">
+                Observation
+              </h3>
+              <p className="mt-2 text-muted-foreground wrap-break-word">
+                {devotion?.observation}
+              </p>
+            </div>
+
+            <div className="mt-4 flex flex-col">
+              <h3 className="text-[1.4rem] font-semibold tracking-tight">
+                Application
+              </h3>
+              <p className="mt-2 text-muted-foreground wrap-break-word">
+                {devotion?.application}
+              </p>
+            </div>
+
+            <div className="mt-4 flex flex-col">
+              <h3 className="text-[1.4rem] font-semibold tracking-tight">
+                Prayer
+              </h3>
+              <p className="mt-2 text-muted-foreground wrap-break-word">
+                {devotion?.prayer}
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 mb-8 flex justify-between items-center">
             <div className="flex gap-4">
               <UpdateDevotionButton devotion={devotion}>
                 Edit

@@ -21,23 +21,23 @@ export default async function HomeHero() {
       <div className="pb-32 text-center max-w-3xl">
         <Badge
           variant="outline"
-          className="rounded-full py-1 border-border"
+          className="rounded-full px-4 py-1 border-primary transition-colors"
           asChild
         >
           {user ? (
-            <Link href="/create">
+            <Link href="/create" className="text-white">
               &quot;Ready to reflect? Start your devotion!&quot;
             </Link>
           ) : (
-            <Link href={urls.signUp}>
-              &quot;Start your daily devotion with God&quot;
+            <Link href={urls.signUp}  className="text-white">
+              &quot;Sign up to start your daily devotion!&quot;
             </Link>
           )}
         </Badge>
-        <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter">
+        <h1 className="mt-6 text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter">
           Welcome to Devo✟ionly
         </h1>
-        <p className="mt-6 md:text-lg text-foreground/80">
+        <p className="mt-6 md:text-lg text-white/80">
           Write, organize, and track your personal Bible devotions in one
           meaningful digital space, designed to help you reflect, stay
           consistent, and grow deeper in your daily walk with God.

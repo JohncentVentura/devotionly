@@ -71,20 +71,21 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
         fill
       />
       <div className="max-w-(--breakpoint-xl) w-full mx-auto px-6 py-16">
-        <div className="ml-2 mb-6 flex items-center gap-2">
+        <div className="ml-2 flex items-center gap-2">
           <Sun />
           <h4 className="text-base md:text-xl font-semibold tracking-tight">
             WORD OF THE DAY
           </h4>
         </div>
+        
+        <h1 className="ml-2 mt-8 max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
+          {word.reference}
+        </h1>
         <TranslationCombobox
+          className="my-2"
           selected={translation}
           setSelected={(selected) => setTranslation(selected)}
         />
-        <h1 className="ml-2 mb-2 max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
-          {word.reference}
-        </h1>
-
         {word.verses.map((verse) => (
           <p
             key={verse.verse}
@@ -93,7 +94,7 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
             &quot;{verse.text}&quot;
           </p>
         ))}
-        <div className="mt-12 flex items-center gap-4">
+        <div className="mt-14 flex items-center gap-4">
           <Button size="lg" className="rounded-full text-base">
             {user ? (
               <Link

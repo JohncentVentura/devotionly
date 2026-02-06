@@ -30,13 +30,12 @@ export function DateRangePicker({ selectedRange, onChange, className }: DatePick
   };
 
   return (
-    <Field className={`${className} mx-auto `}>
-
+    <Field className={`mx-auto ${className}`}>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id="date-picker-range"
-            className=" bg-primary w-full md:w-auto justify-center items-center gap-2 px-3"
+            className="cursor-pointer  bg-primary w-full md:w-auto justify-center items-center gap-2 px-3"
           >
             <span className="truncate">
               {selectedRange?.from ? (

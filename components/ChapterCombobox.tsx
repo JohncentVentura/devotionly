@@ -68,9 +68,9 @@ export default function ChapterCombobox({
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button className={className}>
+          <Button className={`cursor-pointer ${className}`}>
             {selected ? selected : children}
-            <ChevronsUpDown className="opacity-50" />
+            <ChevronsUpDown />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0" align="start">
