@@ -20,16 +20,24 @@ export default async function HomeHero() {
       />
       <div className="pb-32 text-center max-w-3xl">
         <Badge
-          variant="outline"
-          className="rounded-full px-4 py-1 border-primary transition-colors"
+          className="rounded-full px-4 py-1 border-primary bg-transparent
+          hover:bg-primary dark:hover:bg-primary
+          active:bg-primary dark:active:bg-primary
+          transition-colors duration-500"
           asChild
         >
           {user ? (
-            <Link href="/create" className="text-white">
+            <Link
+              href="/create"
+              className="text-white hover:text-black active:text-black"
+            >
               &quot;Ready to reflect? Start your devotion!&quot;
             </Link>
           ) : (
-            <Link href={urls.signUp}  className="text-white">
+            <Link
+              href={urls.signUp}
+              className="text-white hover:text-black active:text-black"
+            >
               &quot;Sign up to start your daily devotion!&quot;
             </Link>
           )}
@@ -43,7 +51,13 @@ export default async function HomeHero() {
           consistent, and grow deeper in your daily walk with God.
         </p>
         <div className=" mt-12 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-4">
-          <Button size="lg" className="rounded-full text-base">
+          <Button
+            size="lg"
+            className="rounded-full text-base
+            hover:bg-secondary dark:hover:bg-secondary
+            active:bg-secondary dark:active:bg-secondary
+            transition-colors duration-500"
+          >
             {user ? (
               <Link href="/create" className="flex items-center gap-2">
                 Write Devotion <Pencil className="size-5" />
@@ -57,7 +71,10 @@ export default async function HomeHero() {
           <Button
             variant="outline"
             size="lg"
-            className="rounded-full text-base shadow-none"
+            className="rounded-full text-base shadow-none bg-muted/60
+            hover:bg-muted dark:hover:bg-muted
+            active:bg-muted dark:active:bg-muted
+            transition-colors duration-500"
           >
             <Link href="/bible" className="flex items-center gap-2">
               <BookOpenText className="size-5" /> Read Bible

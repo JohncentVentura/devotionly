@@ -88,7 +88,7 @@ export default function ChapterCombobox({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button className={className}>
+        <Button className={`cursor-pointer ${className}`}>
           {selected ? selected : children}
           <ChevronsUpDown className="opacity-50" />
         </Button>

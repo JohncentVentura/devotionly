@@ -369,9 +369,10 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                             border-primary
                             bg-transparent
                             text-foreground
-                            hover:bg-primary
                             hover:text-muted
-                            transition-colors"
+                            hover:bg-primary dark:hover:bg-primary
+                            active:bg-primary dark:active:bg-primary
+                            transition-colors duration-500"
                           >
                             <span className="sr-only">Open menu</span>
                             <MoreHorizontal />

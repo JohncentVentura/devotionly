@@ -28,7 +28,7 @@ export default function Contact() {
           I&apos;d love to hear from you. Devotionly is a personal project built with care, 
           and every message helps it grow.
         </p>
-        <div className="mt-16 flex flex-col gap-16 md:gap-10 lg:flex-row">
+        <div className="mt-8 flex flex-col gap-16 md:gap-10 lg:flex-row">
           <div className="grid w-full max-w-3xl grid-cols-1 gap-1 border bg-muted p-1 *:border *:bg-background *:p-6 sm:grid-cols-2 lg:col-span-2">
             <div>
               <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-foreground/3 bg-foreground/5 text-foreground dark:bg-foreground/10">
@@ -39,7 +39,7 @@ export default function Contact() {
                 Email the developer directly for support, ideas, or concerns.
               </p>
               <Link
-                className="font-medium text-primary"
+                className="font-medium text-primary "
                 href={externalPaths.gmail}
                 target="_blank"
               >

@@ -77,7 +77,7 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
             WORD OF THE DAY
           </h4>
         </div>
-        
+
         <h1 className="ml-2 mt-8 max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
           {word.reference}
         </h1>
@@ -95,7 +95,13 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
           </p>
         ))}
         <div className="mt-14 flex items-center gap-4">
-          <Button size="lg" className="rounded-full text-base">
+          <Button
+            size="lg"
+            className="rounded-full text-base
+          hover:bg-secondary dark:hover:bg-secondary
+          active:bg-secondary dark:active:bg-secondary
+          transition-colors duration-500"
+          >
             {user ? (
               <Link
                 href={`/create?book=${book}&chapter=${chapter}&fromVerse=${fromVerse}&toVerse=${toVerse}`}
@@ -112,7 +118,10 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
           <Button
             variant="outline"
             size="lg"
-            className="rounded-full text-base shadow-none"
+            className="rounded-full text-base shadow-none bg-muted/60
+            hover:bg-muted dark:hover:bg-muted
+            active:bg-muted dark:active:bg-muted
+            transition-colors duration-500"
           >
             <Link
               href={{
