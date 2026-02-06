@@ -38,9 +38,9 @@ export default function ScriptureRenderer({ data }: Props) {
       ref={containerRef}
       className={`
         w-full
-        min-h-[9rem]      /* match textarea rows=5 */
+        min-h-36      /* match textarea rows=5 */
         max-h-[80vh]      /* optional max height */
-        resize-y           /* allow vertical resize */
+        resize-y           /* allow vertical */
         rounded-md
         border
         bg-background
