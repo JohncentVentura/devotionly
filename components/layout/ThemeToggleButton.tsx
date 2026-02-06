@@ -20,14 +20,20 @@ const ThemeToggleButton = () => {
 
   // Prevent SSR flicker and hydration mismatch
   if (!mounted) {
-    return <Button variant="outline" size="icon" className="rounded-full cursor-pointer hover:bg-secondary dark:hover:bg-secondary"/>;
+    return (
+      <Button
+        variant="outline"
+        size="icon"
+        className="rounded-full cursor-pointer hover:bg-secondary dark:hover:bg-secondary focus:bg-secondary dark:focus:bg-secondary"
+      />
+    );
   }
 
   return (
     <Button
       variant="outline"
       size="icon"
-      className="rounded-full cursor-pointer hover:bg-secondary dark:hover:bg-secondary"
+      className="rounded-full cursor-pointer hover:bg-secondary dark:hover:bg-secondary focus:bg-secondary dark:focus:bg-secondary "
       onClick={toggleTheme}
     >
       {resolvedTheme === "dark" ? <SunIcon /> : <MoonIcon />}

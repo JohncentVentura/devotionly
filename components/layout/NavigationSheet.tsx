@@ -23,7 +23,12 @@ export const NavigationSheet = () => {
       </VisuallyHidden>
 
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="rounded-full cursor-pointer active:bg-secondary dark:active:bg-secondary">
+        <Button
+          variant="outline"
+          size="icon"
+          className="rounded-full cursor-pointer 
+          hover:bg-secondary dark:hover:bg-secondary focus:bg-secondary dark:focus:bg-secondary"
+        >
           <Menu />
         </Button>
       </SheetTrigger>
@@ -32,10 +37,7 @@ export const NavigationSheet = () => {
         <Logo />
 
         <div onClick={() => setOpen(false)}>
-          <NavMenu
-            orientation="vertical"
-            className="mt-6 [&>div]:h-full"
-          />
+          <NavMenu orientation="vertical" className="mt-6 [&>div]:h-full" />
         </div>
       </SheetContent>
     </Sheet>
