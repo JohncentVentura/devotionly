@@ -23,7 +23,7 @@ export const NavigationSheet = () => {
       </VisuallyHidden>
 
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="rounded-full cursor-pointer hover:bg-secondary dark:hover:bg-secondary">
+        <Button variant="outline" size="icon" className="rounded-full cursor-pointer active:bg-secondary dark:active:bg-secondary">
           <Menu />
         </Button>
       </SheetTrigger>
