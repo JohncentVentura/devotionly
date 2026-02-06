@@ -30,7 +30,7 @@ export const NavigationSheet = () => {
           rounded-full cursor-pointer
           hover:bg-primary dark:hover:bg-primary
           active:bg-primary dark:active:bg-primary
-          transition-colors duration-0 sm:duration-150"
+          transition-colors duration-150"
         >
           <Menu />
         </Button>

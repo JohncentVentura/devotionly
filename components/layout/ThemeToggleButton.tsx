@@ -27,7 +27,7 @@ const ThemeToggleButton = () => {
         className="rounded-full cursor-pointer 
         hover:bg-primary dark:hover:bg-primary
         active:bg-primary dark:active:bg-primary
-        transition-colors duration-0 sm:duration-150"
+        transition-colors duration-150"
       />
     );
   }
@@ -39,7 +39,7 @@ const ThemeToggleButton = () => {
       className="rounded-full cursor-pointer 
       hover:bg-primary dark:hover:bg-primary
       active:bg-primary dark:active:bg-primary
-      transition-colors duration-0 sm:duration-150"
+      transition-colors duration-150"
       onClick={toggleTheme}
     >
       {resolvedTheme === "dark" ? <SunIcon /> : <MoonIcon />}
