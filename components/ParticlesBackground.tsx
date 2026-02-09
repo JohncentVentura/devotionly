@@ -4,6 +4,13 @@ import { useEffect, useRef } from "react";
 import Script from "next/script";
 import { usePathname } from "next/navigation"; // Next.js 13+ hook
 
+declare global {
+  interface Window {
+    particlesJS: (id: string, config: unknown) => void;
+    pJSDom: Array<{ pJS: { fn: { vendors: { destroypJS: () => void }; particlesRefresh: () => void }; particles: { color: { value: string } } } }>;
+  }
+}
+
 export default function ParticlesBackground() {
   const initialized = useRef(false);
   const pathname = usePathname(); // Track page changes
@@ -51,7 +58,7 @@ export default function ParticlesBackground() {
     };
 
     // Wait until script is loaded
-    if (window.particlesJS) {
+    if (typeof window.particlesJS === "function") {
       initParticles();
     } else {
       window.addEventListener("particlesjs-loaded", initParticles);
