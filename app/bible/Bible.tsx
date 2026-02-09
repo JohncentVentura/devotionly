@@ -83,10 +83,10 @@ export default function Bible() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="w-full max-w-(--breakpoint-lg) px-6 py-10">
-        <h2 className="text-pretty font-semibold text-xl md:text-3xl tracking-[-0.03em] sm:mx-auto sm:max-w-xl sm:text-center md:text-[2.75rem] md:leading-[1.2]">
+        <h2 className="text-pretty font-semibold text-xl md:text-3xl tracking-[-0.03em] sm:mx-auto sm:max-w-xl text-center md:text-[2.75rem] md:leading-[1.2]">
           The Living Word
         </h2>
-        <p className="mt-2 text-sm sm:text-xl md:text-lg text-muted-foreground sm:text-center ">
+        <p className="mt-2 text-sm sm:text-xl md:text-lg text-muted-foreground text-center ">
           Encounter the living Word of God. Let every verse speak to your heart,
           every chapter inspire your mind, and every passage illuminate your
           life.
