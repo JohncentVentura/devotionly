@@ -11,7 +11,7 @@ export default async function Home() {
   const plainUser = user ? user.toClientJson() : null;
 
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main className="relative overflow-hidden">
       <ParticlesBackground />
       <HomeHero />
       <HomeFeatures />

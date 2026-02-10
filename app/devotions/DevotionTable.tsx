@@ -175,7 +175,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
   return (
     <div className="w-full">
-      <div className="px-4 xl:px-0 grid grid-cols-6 md:grid-cols-14 items-center gap-2">
+      <div className="px-4 md:px-8 xl:px-24 grid grid-cols-6 md:grid-cols-14 items-center gap-2">
         <h1 className="col-span-6 md:col-span-3 text-center md:text-left text-xl md:text-3xl font-semibold">
           Devotions Table
         </h1>
@@ -195,7 +195,9 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         </CreateDevotionButton>
         <CreateDevotionButton
           variant="outline"
-          className="col-span-2 flex items-center justify-center text-xs lg:text-sm gap-2"
+          className="col-span-2 flex items-center justify-center text-xs lg:text-sm gap-2 
+          hover:bg-foreground hover:text-background hover:dark:bg-foreground hover:dark:text-background
+          active:bg-foreground active:text-background active:dark:bg-foreground active:dark:text-background"
           onClick={handleResumeDevotion}
         >
           Resume Devotion
@@ -243,8 +245,14 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         </ChapterCombobox>
       </div>
 
-      <div className="mt-6 w-full border border-foreground dark:border-foreground/20 rounded-md overflow-hidden">
-        <Table className="[&_tr]:border-foreground [&_th]:border-foreground [&_td]:border-foreground dark:[&_tr]:border-foreground/20 dark:[&_th]:border-foreground/20 dark:[&_td]:border-foreground/20">
+      <div className="mt-6 px-0 md:px-8 xl:px-24 w-full">
+        <Table className="
+        [&_tr]:border-foreground 
+        [&_th]:border-foreground 
+        [&_td]:border-foreground 
+        dark:[&_tr]:border-foreground/20 
+        dark:[&_th]:border-foreground/20 
+        dark:[&_td]:border-foreground/20">
           <TableHeader>
             <TableRow>
               <TableHead
@@ -411,7 +419,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         </Table>
       </div>
 
-      <div className="mt-4 px-4 flex w-full items-center justify-between gap-2">
+      <div className="mt-6 px-4 md:px-8 xl:px-24 flex w-full items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <Label className="whitespace-nowrap text-xs md:text-sm">
             Rows per page:

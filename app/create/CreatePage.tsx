@@ -193,9 +193,7 @@ export default function CreatePage() {
       <form className="" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="col-span-1">
-            <Label htmlFor="book">
-              Book
-            </Label>
+            <Label htmlFor="book">Book</Label>
             <BookCombobox
               className="mt-2 w-full"
               selected={formData.book}
@@ -205,9 +203,7 @@ export default function CreatePage() {
             </BookCombobox>
           </div>
           <div className="col-span-1">
-            <Label htmlFor="chapter">
-              Chapter
-            </Label>
+            <Label htmlFor="chapter">Chapter</Label>
             <ChapterCombobox
               className="mt-2 w-full"
               book={formData.book}
@@ -218,9 +214,7 @@ export default function CreatePage() {
             </ChapterCombobox>
           </div>
           <div className="col-span-1">
-            <Label htmlFor="fromVerse">
-              From Verse
-            </Label>
+            <Label htmlFor="fromVerse">From Verse</Label>
             <VerseCombobox
               className="mt-2 w-full"
               book={formData.book}
@@ -232,9 +226,7 @@ export default function CreatePage() {
             </VerseCombobox>
           </div>
           <div className="col-span-1">
-            <Label htmlFor="toVerse">
-              To Verse
-            </Label>
+            <Label htmlFor="toVerse">To Verse</Label>
             <VerseCombobox
               className="mt-2 w-full"
               book={formData.book}
@@ -263,9 +255,7 @@ export default function CreatePage() {
           </div>
 
           <div>
-            <Label htmlFor="observation">
-              Observation
-            </Label>
+            <Label htmlFor="observation">Observation</Label>
             <Textarea
               id="observation"
               className="mt-2"
@@ -276,9 +266,7 @@ export default function CreatePage() {
             />
           </div>
           <div>
-            <Label htmlFor="application">
-              Application
-            </Label>
+            <Label htmlFor="application">Application</Label>
             <Textarea
               id="application"
               className="mt-2"
@@ -289,9 +277,7 @@ export default function CreatePage() {
             />
           </div>
           <div>
-            <Label htmlFor="prayer">
-              Prayer
-            </Label>
+            <Label htmlFor="prayer">Prayer</Label>
             <Textarea
               id="prayer"
               className="mt-2"
@@ -303,19 +289,27 @@ export default function CreatePage() {
           </div>
         </div>
         <div className="mt-8 gap-4 flex justify-between">
+          <Button type="submit" className="cursor-pointer">
+            Create
+          </Button>
           <div className="flex gap-4">
-            <Button type="submit">Create</Button>
-            <Button type="button" variant="outline" onClick={handleClear}>
+            <Button
+              type="button"
+              variant="outline"
+              className="cursor-pointer"
+              onClick={handleClear}
+            >
               Clear
             </Button>
+            <Button
+              type="button"
+              className="cursor-pointer"
+              variant="destructive"
+              onClick={() => router.back()}
+            >
+              Cancel
+            </Button>
           </div>
-          <Button
-            type="button"
-            variant="destructive"
-            onClick={() => router.back()}
-          >
-            Cancel
-          </Button>
         </div>
       </form>
     </section>

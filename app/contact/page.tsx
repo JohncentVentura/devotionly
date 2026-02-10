@@ -1,8 +1,10 @@
 import { getDevotionById } from "@/actions/devotion.action";
 import { stackServerApp } from "@/stack/server";
-import { SignIn } from "@stackframe/stack";
+import { SignUp } from "@stackframe/stack";
 import Contact from "./Contact";
 import ParticlesBackground from "@/components/ParticlesBackground";
+import PageSection from "@/components/PageSection";
+import { TopGradient } from "@/components/PageGradient";
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
@@ -30,15 +32,19 @@ export default async function page(props: {
   //const [id] = slug.split("--");
   //const devotion = await getDevotionById(id);
 
-  if (!user) return <SignIn />;
-
   return (
-    <div className="relative pt-16 pb-8 mx-auto px-auto grid grid-cols-1 lg:grid-cols-10 gap-6 bg-muted">
-      <ParticlesBackground />
-      <div className="lg:col-span-full">
-        <Contact />
-      </div>
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-linear-to-t from-background to-transparent pointer-events-none" />
-    </div>
+    <PageSection>
+      {user ? (
+        <>
+          <ParticlesBackground />
+          <Contact />
+        </>
+      ) : (
+        <div className="relative flex justify-center items-center">
+          <ParticlesBackground />
+          <SignUp />
+        </div>
+      )}
+    </PageSection>
   );
 }

@@ -222,19 +222,27 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
         </div>
       </div>
       <div className="mt-8 gap-4 flex justify-between">
+        <Button type="submit" className="cursor-pointer">
+          Update
+        </Button>
         <div className="flex gap-4">
-          <Button type="submit">Update</Button>
-          <Button type="button" variant="outline" onClick={handleClear}>
+          <Button
+            type="button"
+            className="cursor-pointer"
+            variant="outline"
+            onClick={handleClear}
+          >
             Clear
           </Button>
+          <Button
+            type="button"
+            className="cursor-pointer"
+            variant="destructive"
+            onClick={() => router.back()}
+          >
+            Cancel
+          </Button>
         </div>
-        <Button
-          type="button"
-          variant="destructive"
-          onClick={() => router.back()}
-        >
-          Cancel
-        </Button>
       </div>
     </form>
   );

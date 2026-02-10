@@ -15,7 +15,7 @@ import { externalPaths } from "@/lib/paths";
 
 export default function Contact() {
   return (
-    <div className="flex min-h-screen items-center justify-center py-16">
+    <div className="flex items-center justify-center ">
       <div className="mx-auto w-full max-w-(--breakpoint-xl) px-6 xl:px-0">
         <b className="font-semibold text-muted-foreground text-sm uppercase">
           Contact Me
@@ -92,8 +92,8 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="w-full max-w-lg border border-border bg-muted p-1">
-            <Card className="relative h-full isolate rounded-none bg-card shadow-none lg:ms-auto">
+          <div className="w-full max-w-lg border border-border  p-1">
+            <Card className="relative h-full isolate rounded-none bg-transparent shadow-none lg:ms-auto">
               <CardHeader>
                 <CardTitle>Contact Me</CardTitle>
                 <CardDescription>

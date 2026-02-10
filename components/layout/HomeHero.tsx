@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { imagePaths } from "@/lib/paths";
 import { stackServerApp } from "@/stack/server";
+import {BottomGradient, TopGradient} from "../PageGradient";
 
 export default async function HomeHero() {
   const user = await stackServerApp.getUser();
@@ -82,7 +83,7 @@ export default async function HomeHero() {
           </Button>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-linear-to-t from-background to-transparent pointer-events-none" />
+      <BottomGradient/>
     </div>
   );
 }

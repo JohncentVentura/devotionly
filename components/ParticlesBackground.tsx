@@ -91,7 +91,7 @@ export default function ParticlesBackground() {
         strategy="afterInteractive"
         onLoad={() => window.dispatchEvent(new Event("particlesjs-loaded"))}
       />
-      <div id="particles-js" className="absolute inset-0 " />
+      <div id="particles-js" className="absolute inset-0 pointer-events-none" />
     </>
   );
 }

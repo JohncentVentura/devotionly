@@ -82,7 +82,7 @@ export default function Bible() {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-(--breakpoint-lg) px-6 py-10">
+      <div className="w-full max-w-(--breakpoint-lg) px-6">
         <h2 className="text-pretty font-semibold text-xl md:text-3xl tracking-[-0.03em] sm:mx-auto sm:max-w-xl text-center md:text-[2.75rem] md:leading-[1.2]">
           The Living Word
         </h2>

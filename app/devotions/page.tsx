@@ -3,6 +3,9 @@ import DevotionTable from "@/app/devotions/DevotionTable";
 import prisma from "@/lib/prisma";
 import { stackServerApp } from "@/stack/server";
 import { SignUp } from "@stackframe/stack";
+import PageSection from "@/components/PageSection";
+import ParticlesBackground from "@/components/ParticlesBackground";
+import { TopGradient } from "@/components/PageGradient";
 
 export default async function Devotions() {
   const user = await stackServerApp.getUser();
@@ -11,15 +14,15 @@ export default async function Devotions() {
   //const localDevotions = await prisma.devotions.findMany();
 
   return (
-    <section className="relative py-28 xl:px-22 bg-muted">
+    <PageSection>
       {user ? (
         <DevotionTable devotions={devotions} />
       ) : (
-        <div className="flex justify-center items-center">
+        <div className="relative flex justify-center items-center">
+          <ParticlesBackground />
           <SignUp />
         </div>
       )}
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-linear-to-t from-background to-transparent pointer-events-none" />
-    </section>
+    </PageSection>
   );
 }

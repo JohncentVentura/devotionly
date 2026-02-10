@@ -120,21 +120,22 @@ const DevotionCard = ({ devotion }: DevotionCardProps) => {
           </div>
 
           <div className="mt-12 mb-8 flex justify-between items-center">
+            <UpdateDevotionButton devotion={devotion}>
+              Edit
+            </UpdateDevotionButton>
             <div className="flex gap-4">
-              <UpdateDevotionButton devotion={devotion}>
-                Edit
-              </UpdateDevotionButton>
               <Button
                 type="button"
+                className="cursor-pointer"
                 variant="outline"
                 onClick={() => router.back()}
               >
                 Back
               </Button>
+              <DeleteDevotionButton devotion={devotion}>
+                Delete
+              </DeleteDevotionButton>
             </div>
-            <DeleteDevotionButton devotion={devotion}>
-              Delete
-            </DeleteDevotionButton>
           </div>
         </CardContent>
       </Card>

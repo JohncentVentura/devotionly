@@ -11,6 +11,7 @@ import { imagePaths } from "@/lib/paths";
 import { stackServerApp } from "@/stack/server";
 import { TranslationCombobox } from "../TranslationCombobox";
 import { BibleApiResponse } from "@/app/api/bible/bibleAPI";
+import {BottomGradient, TopGradient} from "../PageGradient";
 
 interface HomeDailyWordProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -63,7 +64,7 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
-      <div className="absolute top-0 left-0 w-full h-40 bg-linear-to-b from-background to-transparent pointer-events-none" />
+      <TopGradient />
       <Image
         src={imagePaths.homeDailyWord}
         alt="Hero"
@@ -140,7 +141,7 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
           </Button>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-linear-to-t from-background to-transparent pointer-events-none" />
+      <BottomGradient />
     </div>
   );
 }
