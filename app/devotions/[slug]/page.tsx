@@ -33,17 +33,8 @@ export default async function page(props: {
 
   return (
     <PageSection>
-      {user ? (
-        <>
-          <ParticlesBackground />
-          <DevotionCard devotion={devotion} />
-        </>
-      ) : (
-        <div className="flex justify-center items-center">
-          <ParticlesBackground />
-          <SignUp />
-        </div>
-      )}
+      <ParticlesBackground />
+      <DevotionCard devotion={devotion} />
     </PageSection>
   );
 }

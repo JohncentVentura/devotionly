@@ -8,7 +8,7 @@ type PageSectionProps = {
 
 export default function PageSection({ className, children }: PageSectionProps) {
   return (
-    <section className={`relative pt-32 pb-16 w-full bg ${className}`}>
+    <section className={`relative pt-28 pb-16 w-full bg ${className}`}>
       <TopGradient/>
       {children}
       

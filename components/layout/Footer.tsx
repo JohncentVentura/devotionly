@@ -24,8 +24,7 @@ const Footer = () => {
   return (
     <footer className="relative flex flex-col w-full">
       <TopGradient />
-
-      <div className="bg-muted/50 px-24">
+      <div className="bg-muted/50 px-0 md:px-8 xl:px-24">
         <div className="py-12 flex flex-col justify-start items-center">
           <Logo />
           <ul className="mt-6 flex items-center gap-4 flex-wrap">

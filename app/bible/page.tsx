@@ -37,7 +37,7 @@ export default async function page(props: {
       {user ? (
         <Bible />
       ) : (
-        <div className="relative flex justify-center items-center">
+        <div className="relative px-4 flex justify-center items-center">
           <ParticlesBackground />
           <SignUp />
         </div>

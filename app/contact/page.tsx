@@ -40,7 +40,7 @@ export default async function page(props: {
           <Contact />
         </>
       ) : (
-        <div className="relative flex justify-center items-center">
+        <div className="relative px-4 flex justify-center items-center">
           <ParticlesBackground />
           <SignUp />
         </div>

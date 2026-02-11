@@ -18,7 +18,7 @@ export default async function Devotions() {
       {user ? (
         <DevotionTable devotions={devotions} />
       ) : (
-        <div className="relative flex justify-center items-center">
+        <div className="relative px-4 flex justify-center items-center">
           <ParticlesBackground />
           <SignUp />
         </div>
