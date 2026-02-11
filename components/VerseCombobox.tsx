@@ -124,13 +124,11 @@ function SelectedList({
   setOpen,
   selected,
   setSelected,
-  chapter,
   verses,
 }: {
   setOpen: (open: boolean) => void;
   selected: number | null;
   setSelected: (value: number | null) => void;
-  chapter: number | null;
   verses: { value: number; label: string }[];
 }) {
   //cmdk always focuses the first CommandItem on mount, so we need to reset the value
