@@ -34,6 +34,7 @@ type ChapterComboboxProps = {
   setSelected: (status: number | null) => void;
   className?: string;
   children?: React.ReactNode;
+  noneSelectedText: string;
 };
 
 export default function ChapterCombobox({
@@ -42,6 +43,7 @@ export default function ChapterCombobox({
   setSelected,
   className,
   children,
+  noneSelectedText,
 }: ChapterComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -78,7 +80,9 @@ export default function ChapterCombobox({
             setOpen={setOpen}
             selected={selected}
             setSelected={setSelected}
+            book={book}
             chapters={chapters}
+            noneSelectedText={noneSelectedText}
           />
         </PopoverContent>
       </Popover>
@@ -99,7 +103,9 @@ export default function ChapterCombobox({
             setOpen={setOpen}
             selected={selected}
             setSelected={setSelected}
+            book={book}
             chapters={chapters}
+            noneSelectedText={noneSelectedText}
           />
         </div>
       </DrawerContent>
@@ -111,12 +117,16 @@ function SelectedList({
   setOpen,
   selected,
   setSelected,
+  book,
   chapters,
+  noneSelectedText,
 }: {
   setOpen: (open: boolean) => void;
   selected: number | null;
   setSelected: (status: number | null) => void;
+  book: string | null;
   chapters: { value: number; label: string }[];
+  noneSelectedText: string;
 }) {
   //cmdk always focuses the first CommandItem on mount, so we need to reset the value
   const [value, setValue] = React.useState<string>("");
@@ -127,28 +137,30 @@ function SelectedList({
     <Command value={value} onValueChange={setValue}>
       <CommandInput placeholder="Search Chapter..." />
       <CommandList>
-        <CommandEmpty>No chapter found.</CommandEmpty>
+        <CommandEmpty>Select a book first</CommandEmpty>
         <CommandGroup>
-          <CommandItem
-            value=""
-            onSelect={() => {
-              setSelected(null);
-              setOpen(false);
-            }}
-            className={`
+          {book && noneSelectedText && (
+            <CommandItem
+              value=""
+              onSelect={() => {
+                setSelected(null);
+                setOpen(false);
+              }}
+              className={`
               cursor-pointer
               data-[selected=true]:bg-primary
               hover:bg-primary
               ${isNoneSelected ? "bg-secondary font-medium" : ""}
               `}
-          >
-            All
-          </CommandItem>
+            >
+              {noneSelectedText}
+            </CommandItem>
+          )}
         </CommandGroup>
         <CommandGroup>
           {chapters.map((chapter) => {
             const isSelected = selected === chapter.value;
-            
+
             return (
               <CommandItem
                 key={chapter.value}
@@ -165,7 +177,7 @@ function SelectedList({
               >
                 {chapter.label}
               </CommandItem>
-            )
+            );
           })}
         </CommandGroup>
       </CommandList>

@@ -139,6 +139,7 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
             className="mt-2 w-full"
             selected={formData.book}
             setSelected={(val) => handleChange("book", val || "")}
+            noneSelectedText=""
           />
         </div>
         <div>
@@ -148,6 +149,7 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
             book={formData.book}
             selected={formData.chapter}
             setSelected={(val) => handleChange("chapter", val || 0)}
+            noneSelectedText=""
           />
         </div>
         <div>

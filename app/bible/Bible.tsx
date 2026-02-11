@@ -97,6 +97,7 @@ export default function Bible() {
             className="col-span-2"
             selected={selectedBook}
             setSelected={(val) => setSelectedBook(val || selectedBook)}
+            noneSelectedText=""
           >
             Select Book
           </BookCombobox>
@@ -105,6 +106,7 @@ export default function Bible() {
             book={selectedBook}
             selected={selectedChapter}
             setSelected={(val) => setSelectedChapter(val || selectedChapter)}
+            noneSelectedText=""
           >
             Select Chapter
           </ChapterCombobox>
@@ -151,7 +153,10 @@ export default function Bible() {
             </div>
             <div className="mt-12 grid grid-cols-3 items-center">
               <div className="flex items-center justify-start">
-                <Button onClick={handlePrev} className="gap-3 rounded-full cursor-pointer">
+                <Button
+                  onClick={handlePrev}
+                  className="gap-3 rounded-full cursor-pointer"
+                >
                   <ArrowLeft /> Prev
                 </Button>
               </div>
@@ -161,7 +166,10 @@ export default function Bible() {
               </div>
 
               <div className="flex items-center justify-end">
-                <Button onClick={handleNext} className="gap-3 rounded-full cursor-pointer">
+                <Button
+                  onClick={handleNext}
+                  className="gap-3 rounded-full cursor-pointer"
+                >
                   Next <ArrowRight />
                 </Button>
               </div>

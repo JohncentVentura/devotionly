@@ -174,8 +174,8 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
   }, [page]);
 
   return (
-    <div className="w-full">
-      <div className="px-4 md:px-8 xl:px-24 grid grid-cols-6 md:grid-cols-14 items-center gap-2">
+    <div className="px-4 md:px-8 xl:px-24 w-full">
+      <div className="grid grid-cols-6 md:grid-cols-14 items-center gap-2">
         <h1 className="col-span-6 md:col-span-3 text-center md:text-left text-xl md:text-3xl font-semibold">
           Devotions Table
         </h1>
@@ -232,6 +232,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           className="col-span-4 md:col-span-2 text-base md:text-xs lg:text-base"
           selected={selectedBook}
           setSelected={(val) => setSelectedBook(val || "")}
+          noneSelectedText="All"
         >
           Filter Book
         </BookCombobox>
@@ -240,23 +241,27 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           book={selectedBook}
           selected={selectedChapter}
           setSelected={(val) => setSelectedChapter(val)}
+          noneSelectedText="All"
         >
           Filter Chapter
         </ChapterCombobox>
       </div>
 
-      <div className="mt-6 px-0 md:px-8 xl:px-24 w-full">
-        <Table className="
-        [&_tr]:border-foreground 
-        [&_th]:border-foreground 
-        [&_td]:border-foreground 
-        dark:[&_tr]:border-foreground/20 
-        dark:[&_th]:border-foreground/20 
-        dark:[&_td]:border-foreground/20">
+      <div className="mt-6 w-full">
+        <Table
+          className="
+          w-full md:table-fixed
+          [&_tr]:border-foreground 
+          [&_th]:border-foreground 
+          [&_td]:border-foreground 
+          dark:[&_tr]:border-foreground/20 
+          dark:[&_th]:border-foreground/20 
+          dark:[&_td]:border-foreground/20"
+        >
           <TableHeader>
             <TableRow>
               <TableHead
-                className="cursor-pointer select-none"
+                className="sm:w-20 xl:w-24 cursor-pointer select-none"
                 onClick={() => handleSort("date")}
               >
                 <div className="flex items-center gap-1 justify-start">
@@ -327,28 +332,28 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                       `-${devotion.toVerse}`}
                   </TableCell>
                   <TableCell>
-                    {devotion.scripture.length > 16
-                      ? devotion.scripture.slice(0, 16) + "…"
+                    {devotion.scripture.length > 12
+                      ? devotion.scripture.slice(0, 12) + "…"
                       : devotion.scripture}
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {devotion.observation.length > 16
-                      ? devotion.observation.slice(0, 16) + "…"
+                    {devotion.observation.length > 12
+                      ? devotion.observation.slice(0, 12) + "…"
                       : devotion.observation}
                   </TableCell>
                   <TableCell className="hidden lg:table-cell">
-                    {devotion.application.length > 16
-                      ? devotion.application.slice(0, 16) + "…"
+                    {devotion.application.length > 12
+                      ? devotion.application.slice(0, 12) + "…"
                       : devotion.application}
                   </TableCell>
                   <TableCell className="hidden xl:table-cell">
-                    {devotion.prayer.length > 16
-                      ? devotion.prayer.slice(0, 16) + "…"
+                    {devotion.prayer.length > 12
+                      ? devotion.prayer.slice(0, 12) + "…"
                       : devotion.prayer}
                   </TableCell>
                   <TableCell>
                     {/* Desktop (md+): show buttons */}
-                    <div className="hidden md:flex justify-end gap-4">
+                    <div className="hidden md:flex justify-end gap-2">
                       <Button
                         className="cursor-pointer"
                         onClick={() => router.push(devotionUrl)}
@@ -419,7 +424,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
         </Table>
       </div>
 
-      <div className="mt-6 px-4 md:px-8 xl:px-24 flex w-full items-center justify-between gap-2">
+      <div className="mt-6 flex w-full items-center justify-between gap-2 ">
         <div className="flex items-center gap-2">
           <Label className="whitespace-nowrap text-xs md:text-sm">
             Rows per page:
@@ -431,7 +436,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
             }}
             value={rowsPerPage.toString()}
           >
-            <SelectTrigger>
+            <SelectTrigger className="cursor-pointer">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -453,6 +458,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
             <PaginationContent>
               <PaginationItem>
                 <Button
+                  className="cursor-pointer"
                   aria-label="Go to previous page"
                   disabled={page === 1}
                   size="icon"
@@ -463,6 +469,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
               </PaginationItem>
               <PaginationItem>
                 <Button
+                  className="cursor-pointer"
                   aria-label="Go to next page"
                   disabled={page === totalPages}
                   size="icon"

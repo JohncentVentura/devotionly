@@ -198,6 +198,7 @@ export default function CreatePage() {
               className="mt-2 w-full"
               selected={formData.book}
               setSelected={(val) => handleChange("book", val || "")}
+              noneSelectedText = ""
             >
               Select Book
             </BookCombobox>
@@ -209,6 +210,7 @@ export default function CreatePage() {
               book={formData.book}
               selected={formData.chapter}
               setSelected={(val) => handleChange("chapter", val)}
+              noneSelectedText = ""
             >
               Select Chapter
             </ChapterCombobox>

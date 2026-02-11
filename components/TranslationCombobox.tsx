@@ -73,14 +73,16 @@ export function TranslationCombobox({
         <PopoverTrigger asChild>
           <Button
             variant={variant || "ghost"}
-            className={`justify-between border border-transparent
-              hover:border-border
+            className={`justify-between border-2 border-transparent cursor-pointer
+              hover:border-primary
               hover:bg-transparent
-              active:border-border
+              hover:dark:bg-transparent
+              active:border-primary
+              active:bg-transparent
               ${className}`}
           >
             {selected ? <>{selected.label}</> : <>Select Translation</>}
-            <ChevronsUpDown className="opacity-50" />
+            <ChevronsUpDown/>
           </Button>
         </PopoverTrigger>
         <PopoverContent className="p-0" align="start">
@@ -98,14 +100,16 @@ export function TranslationCombobox({
       <DrawerTrigger asChild>
         <Button
           variant={variant || "ghost"}
-          className={`justify-between border border-transparent
-              hover:border-border
+          className={`justify-between border-2 border-transparent cursor-pointer
+              hover:border-primary
               hover:bg-transparent
-              active:border-border
+              hover:dark:bg-transparent
+              active:border-primary
+              active:bg-transparent
               ${className}`}
         >
           {selected ? selected.label : "Select Translation"}
-          <ChevronsUpDown className="opacity-50" />
+          <ChevronsUpDown/>
         </Button>
       </DrawerTrigger>
       <DrawerContent>

@@ -124,11 +124,13 @@ function SelectedList({
   setOpen,
   selected,
   setSelected,
+  chapter,
   verses,
 }: {
   setOpen: (open: boolean) => void;
   selected: number | null;
   setSelected: (value: number | null) => void;
+  chapter: number | null;
   verses: { value: number; label: string }[];
 }) {
   //cmdk always focuses the first CommandItem on mount, so we need to reset the value
@@ -137,9 +139,9 @@ function SelectedList({
 
   return (
     <Command value={value} onValueChange={setValue}>
-      <CommandInput placeholder="Search Book..." />
       <CommandList>
-        <CommandEmpty>No verses found.</CommandEmpty>
+        <CommandInput placeholder="Search Book..." />
+        <CommandEmpty className="p-4">No verses found.</CommandEmpty>
         <CommandGroup>
           {verses.map((verse) => (
             <CommandItem
@@ -150,7 +152,7 @@ function SelectedList({
                 setOpen(false);
               }}
             >
-              {verse.label}
+              Verse {verse.label}
             </CommandItem>
           ))}
         </CommandGroup>

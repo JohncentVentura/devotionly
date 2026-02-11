@@ -104,6 +104,7 @@ type BookComboboxProps = {
   setSelected: (value: string | null) => void;
   className?: string;
   children?: React.ReactNode;
+  noneSelectedText: string ;
 };
 
 export default function BookCombobox({
@@ -111,6 +112,7 @@ export default function BookCombobox({
   setSelected,
   className,
   children,
+  noneSelectedText,
 }: BookComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -124,7 +126,7 @@ export default function BookCombobox({
         <PopoverTrigger asChild>
           <Button className={`cursor-pointer ${className}`}>
             {selected ? selected : children}
-            <ChevronsUpDown  />
+            <ChevronsUpDown />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0" align="start">
@@ -132,6 +134,7 @@ export default function BookCombobox({
             setOpen={setOpen}
             selected={selected || ""}
             setSelected={setSelected}
+            noneSelectedText={noneSelectedText}
           />
         </PopoverContent>
       </Popover>
@@ -152,6 +155,7 @@ export default function BookCombobox({
             setOpen={setOpen}
             selected={selected || ""}
             setSelected={setSelected}
+            noneSelectedText={noneSelectedText}
           />
         </div>
       </DrawerContent>
@@ -163,10 +167,12 @@ function SelectedList({
   setOpen,
   selected,
   setSelected,
+  noneSelectedText,
 }: {
   setOpen: (open: boolean) => void;
   selected: string;
   setSelected: (value: string) => void;
+  noneSelectedText: string;
 }) {
   //cmdk always focuses the first CommandItem on mount, so we need to reset the value
   const [value, setValue] = React.useState<string>("");
@@ -179,21 +185,23 @@ function SelectedList({
       <CommandList>
         <CommandEmpty>No book found.</CommandEmpty>
         <CommandGroup>
-          <CommandItem
-            value=""
-            onSelect={() => {
-              setSelected("");
-              setOpen(false);
-            }}
-            className={`
+          {noneSelectedText && (
+            <CommandItem
+              value=""
+              onSelect={() => {
+                setSelected("");
+                setOpen(false);
+              }}
+              className={`
               cursor-pointer
               data-[selected=true]:bg-primary
               hover:bg-primary
               ${isNoneSelected ? "bg-secondary font-medium" : ""}
             `}
-          >
-            All
-          </CommandItem>
+            >
+              {noneSelectedText}
+            </CommandItem>
+          )}
         </CommandGroup>
         <div className="grid grid-cols-2 gap-4">
           <CommandGroup heading="Old Testament">

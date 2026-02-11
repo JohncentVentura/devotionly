@@ -12,6 +12,7 @@ import { stackServerApp } from "@/stack/server";
 import { TranslationCombobox } from "../TranslationCombobox";
 import { BibleApiResponse } from "@/app/api/bible/bibleAPI";
 import {BottomGradient, TopGradient} from "../PageGradient";
+import { Separator } from "../ui/separator";
 
 interface HomeDailyWordProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -73,7 +74,7 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
       />
       <div className="max-w-(--breakpoint-xl) w-full mx-auto px-6 py-16">
         <div className="ml-2 flex items-center gap-2">
-          <Sun />
+          <Sun/>
           <h4 className="text-base md:text-xl font-semibold tracking-tight">
             WORD OF THE DAY
           </h4>
