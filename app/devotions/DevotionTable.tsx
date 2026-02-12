@@ -250,7 +250,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
       <div className="mt-6 w-full">
         <Table
           className="
-          w-full md:table-fixed
+          w-full table-fixed
           [&_tr]:border-foreground 
           [&_th]:border-foreground 
           [&_td]:border-foreground 
@@ -261,7 +261,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           <TableHeader>
             <TableRow>
               <TableHead
-                className="sm:w-20 xl:w-24 cursor-pointer select-none"
+                className="w-[20%] md:w-[10%] cursor-pointer select-none"
                 onClick={() => handleSort("date")}
               >
                 <div className="flex items-center gap-1 justify-start">
@@ -279,7 +279,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
               </TableHead>
 
               <TableHead
-                className="cursor-pointer select-none"
+                className="w-[30%] sm:w-auto cursor-pointer select-none"
                 onClick={() => handleSort("citation")}
               >
                 <div className="flex items-center gap-1 justify-start">
@@ -296,7 +296,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                 </div>
               </TableHead>
 
-              <TableHead>Scripture</TableHead>
+              <TableHead className="w-[20%] sm:w-auto">Scripture</TableHead>
               <TableHead className="hidden md:table-cell">
                 Observation
               </TableHead>
@@ -304,7 +304,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                 Application
               </TableHead>
               <TableHead className="hidden xl:table-cell">Prayer</TableHead>
-              <TableHead>{/*Menu*/}</TableHead>
+              <TableHead className="w-[20%] sm:w-auto text-right">{/*Menu*/}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -371,7 +371,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                       </DeleteDevotionButton>
                     </div>
                     {/* Mobile: show dropdown */}
-                    <div className="flex md:hidden">
+                    <div className="flex justify-end md:hidden">
                       <DropdownMenu modal={false}>
                         <DropdownMenuTrigger asChild>
                           <Button
