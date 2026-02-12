@@ -47,6 +47,9 @@ import {
   ChevronLeftIcon,
   Search,
   Pencil,
+  Eye,
+  SquarePen,
+  Trash2,
 } from "lucide-react";
 import { getNextBibleReference } from "@/app/api/bible/bibleAPI";
 import { Label } from "@/components/ui/label";
@@ -261,7 +264,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           <TableHeader>
             <TableRow>
               <TableHead
-                className="w-[20%] md:w-[10%] cursor-pointer select-none"
+                className="w-[20%] sm:w-[15%] md:w-[10%] cursor-pointer select-none"
                 onClick={() => handleSort("date")}
               >
                 <div className="flex items-center gap-1 justify-start">
@@ -279,7 +282,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
               </TableHead>
 
               <TableHead
-                className="w-[30%] sm:w-auto cursor-pointer select-none"
+                className="cursor-pointer select-none"
                 onClick={() => handleSort("citation")}
               >
                 <div className="flex items-center gap-1 justify-start">
@@ -296,7 +299,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                 </div>
               </TableHead>
 
-              <TableHead className="w-[20%] sm:w-auto">Scripture</TableHead>
+              <TableHead className="hidden sm:table-cell">Scripture</TableHead>
               <TableHead className="hidden md:table-cell">
                 Observation
               </TableHead>
@@ -304,7 +307,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                 Application
               </TableHead>
               <TableHead className="hidden xl:table-cell">Prayer</TableHead>
-              <TableHead className="w-[20%] sm:w-auto text-right">{/*Menu*/}</TableHead>
+              <TableHead className="">{/*Menu*/}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -331,7 +334,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                     {devotion.fromVerse !== devotion.toVerse &&
                       `-${devotion.toVerse}`}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="hidden sm:table-cell">
                     {devotion.scripture.length > 12
                       ? devotion.scripture.slice(0, 12) + "…"
                       : devotion.scripture}
@@ -352,7 +355,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                       : devotion.prayer}
                   </TableCell>
                   <TableCell>
-                    {/* Desktop (md+): show buttons */}
+                    {/* Desktop (md+): show buttons with text */}
                     <div className="hidden md:flex justify-end gap-2">
                       <Button
                         className="cursor-pointer"
@@ -370,51 +373,23 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                         Delete
                       </DeleteDevotionButton>
                     </div>
-                    {/* Mobile: show dropdown */}
-                    <div className="flex justify-end md:hidden">
-                      <DropdownMenu modal={false}>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            className="
-                            h-8 w-8 p-0
-                            cursor-pointer
-                            border
-                            border-primary
-                            bg-transparent
-                            text-foreground
-                            hover:text-muted
-                            hover:bg-primary dark:hover:bg-primary
-                            active:bg-primary dark:active:bg-primary
-                            transition-colors duration-500"
-                          >
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal />
-                          </Button>
-                        </DropdownMenuTrigger>
-
-                        <DropdownMenuContent
-                          align="end"
-                          sideOffset={4}
-                          className="flex flex-col gap-2 p-2"
-                        >
-                          <Button
-                            className="w-full"
-                            onClick={() => router.push(devotionUrl)}
-                          >
-                            View
-                          </Button>
-                          <UpdateDevotionButton
-                            variant="secondary"
-                            className="w-full"
-                            devotion={devotion}
-                          >
-                            Edit
-                          </UpdateDevotionButton>
-                          <DeleteDevotionButton devotion={devotion}>
-                            Delete
-                          </DeleteDevotionButton>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                    {/* Mobile: show buttons with icons */}
+                    <div className="flex justify-between md:hidden">
+                      <Button
+                        className="cursor-pointer"
+                        onClick={() => router.push(devotionUrl)}
+                      >
+                        <Eye/>
+                      </Button>
+                      <UpdateDevotionButton
+                        variant="secondary"
+                        devotion={devotion}
+                      >
+                        <SquarePen/>
+                      </UpdateDevotionButton>
+                      <DeleteDevotionButton devotion={devotion}>
+                        <Trash2/>
+                      </DeleteDevotionButton>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -485,3 +460,51 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
     </div>
   );
 }
+
+/*
+
+<DropdownMenu modal={false}>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            className="
+                            h-8 w-8 p-0
+                            cursor-pointer
+                            border
+                            border-primary
+                            bg-transparent
+                            text-foreground
+                            hover:text-muted
+                            hover:bg-primary dark:hover:bg-primary
+                            active:bg-primary dark:active:bg-primary
+                            transition-colors duration-500"
+                          >
+                            <span className="sr-only">Open menu</span>
+                            <MoreHorizontal />
+                          </Button>
+                        </DropdownMenuTrigger>
+
+                        <DropdownMenuContent
+                          align="end"
+                          sideOffset={4}
+                          className="flex flex-col gap-2 p-2"
+                        >
+                          <Button
+                            className="w-full"
+                            onClick={() => router.push(devotionUrl)}
+                          >
+                            View
+                          </Button>
+                          <UpdateDevotionButton
+                            variant="secondary"
+                            className="w-full"
+                            devotion={devotion}
+                          >
+                            Edit
+                          </UpdateDevotionButton>
+                          <DeleteDevotionButton devotion={devotion}>
+                            Delete
+                          </DeleteDevotionButton>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+
+*/
