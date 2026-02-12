@@ -264,7 +264,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           <TableHeader>
             <TableRow>
               <TableHead
-                className="w-[20%] md:w-[10%] cursor-pointer select-none"
+                className="w-[20%] md:w-[10%] font-bold cursor-pointer select-none"
                 onClick={() => handleSort("date")}
               >
                 <div className="flex items-center gap-1 justify-start">
@@ -282,7 +282,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
               </TableHead>
 
               <TableHead
-                className="w-[30%] sm:w-auto cursor-pointer select-none"
+                className="w-[30%] sm:w-auto font-bold cursor-pointer select-none"
                 onClick={() => handleSort("citation")}
               >
                 <div className="flex items-center gap-1 justify-start">
@@ -299,14 +299,14 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                 </div>
               </TableHead>
 
-              <TableHead className="w-[20%] sm:w-auto">Scripture</TableHead>
-              <TableHead className="hidden md:table-cell">
+              <TableHead className="w-[20%] sm:w-auto font-bold">Scripture</TableHead>
+              <TableHead className="hidden md:table-cell font-bold">
                 Observation
               </TableHead>
-              <TableHead className="hidden lg:table-cell">
+              <TableHead className="hidden lg:table-cell font-bold">
                 Application
               </TableHead>
-              <TableHead className="hidden xl:table-cell">Prayer</TableHead>
+              <TableHead className="hidden xl:table-cell font-bold">Prayer</TableHead>
               <TableHead className="w-[20%] sm:w-auto text-right">{/*Menu*/}</TableHead>
             </TableRow>
           </TableHeader>
@@ -320,7 +320,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
 
               return (
                 <TableRow key={devotion.id}>
-                  <TableCell className="text-xs sm:text-sm">
+                  <TableCell className="text-xs sm:text-sm font-semibold">
                     {devotion.date
                       ? devotion.date.toLocaleDateString("en-US", {
                           month: "numeric",
@@ -379,7 +379,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                         <DropdownMenuTrigger asChild>
                           <Button
                             className="
-                            h-6 w-6 p-0
+                            h-8 w-8 p-0
                             cursor-pointer
                             border
                             border-primary
