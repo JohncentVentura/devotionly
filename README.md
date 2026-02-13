@@ -56,3 +56,8 @@ Prisma
 
 Uploadthing
 - https://docs.uploadthing.com/getting-started/appdir
+
+Resend
+- https://resend.com/emails
+- npm install resend
+ 
