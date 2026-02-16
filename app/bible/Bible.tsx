@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, Search } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookHeart, Search } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -83,13 +83,17 @@ export default function Bible() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="w-full max-w-(--breakpoint-lg) px-6">
-        <h2 className="text-pretty font-semibold text-xl md:text-3xl tracking-[-0.03em] sm:mx-auto sm:max-w-xl text-center md:text-[2.75rem] md:leading-[1.2]">
-          The Living Word
-        </h2>
-        <p className="mt-2 text-sm sm:text-xl md:text-lg text-muted-foreground text-center ">
-          Encounter the living Word of God. Let every verse speak to your heart,
-          every chapter inspire your mind, and every passage illuminate your
-          life.
+        <div className="flex justify-center items-center gap-2">
+          <h2 className="text-pretty font-semibold text-3xl sm:text-4xl tracking-[-0.03em]">
+            Digital Bible
+          </h2>
+          <BookHeart className="h-8 w-8 sm:h-10 sm:w-10 text-primary" />
+        </div>
+
+        <p className="mt-6 text-base sm:text-lg text-muted-foreground text-center ">
+          Encounter the living Word of God anytime, anywhere. Let Scripture
+          guide you on-screen, yet remember to treasure the quiet depth found in
+          reading from a traditional (physical) Bible.
         </p>
         <div className="mt-6 grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-12  gap-2">
           <div className="hidden lg:block col-span-3" />
@@ -119,15 +123,32 @@ export default function Bible() {
           <div className="hidden lg:block col-span-3" />
         </div>
         <Separator className="mt-6" />
-        <div className="mx-auto w-full space-y-20 mt-4 md:mt-8">
+        <div className="mx-auto w-full space-y-20 mt-6 md:mt-10">
           <div className="shrink-0 basis-1/2">
-            <h4 className="font-semibold text-3xl tracking-[-0.02em]">
-              {selectedBook}
-            </h4>
-            <h6 className="mt-4 font-bold text-sm uppercase">
-              Chapter {selectedChapter && ` ${selectedChapter}`}
-            </h6>
-            <div className="mt-6 space-y-3 leading-relaxed text-muted-foreground">
+            <div className="w-full flex justify-between items-center">
+              <Button
+                onClick={handlePrev}
+                className="gap-3 rounded-full cursor-pointer"
+              >
+                <ArrowLeft /> Prev
+              </Button>
+              <div>
+                <h4 className="font-semibold text-xl md:text-3xl text-center">
+                  {selectedBook}
+                </h4>
+                <h6 className="mt-2 text-sm md:text-lg text-center">
+                  Chapter {selectedChapter && ` ${selectedChapter}`}
+                </h6>
+              </div>
+              <Button
+                onClick={handleNext}
+                className="gap-3 rounded-full cursor-pointer"
+              >
+                Next <ArrowRight />
+              </Button>
+            </div>
+
+            <div className="mt-8 md:mt-14 space-y-3 leading-relaxed text-muted-foreground">
               {word?.verses.map((v, index) => {
                 const prev = word.verses[index - 1];
 

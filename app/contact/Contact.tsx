@@ -37,7 +37,7 @@ export default function Contact() {
       toast.error("Please fill in all fields");
       return;
     }
-    
+
     setLoading(true)
     try {
       const formData = new FormData();
@@ -72,7 +72,7 @@ export default function Contact() {
           and every message helps it grow.
         </p>
         <div className="mt-8 flex flex-col gap-16 md:gap-10 lg:flex-row">
-          <div className="grid w-full max-w-3xl grid-cols-1 gap-1 border bg-muted p-1 *:border *:bg-background *:p-6 sm:grid-cols-2 lg:col-span-2">
+          <div className="grid w-full grid-cols-1 gap-1 border bg-muted p-1 *:border *:bg-background *:p-6 sm:grid-cols-2 lg:col-span-2">
             <div>
               <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-foreground/3 bg-foreground/5 text-foreground dark:bg-foreground/10">
                 <MailIcon />
@@ -134,7 +134,7 @@ export default function Contact() {
               </Link>
             </div>
           </div>
-          <div className="w-full max-w-lg border bg-muted p-1">
+          <div className="w-full border bg-muted p-1">
             <Card className="h-full rounded-none bg-background shadow-none lg:ms-auto">
               <CardHeader>
                 <CardTitle>Contact Me</CardTitle>

@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import { BibleApiResponse } from "@/app/api/bible/bibleAPI";
+import { cn } from "@/lib/utils";
+
 
 interface Props {
   data: BibleApiResponse | null;
@@ -35,24 +37,25 @@ export default function ScriptureRenderer({ data }: Props) {
 
   return (
     <div
-      ref={containerRef}
-      className={`
-        w-full
-        min-h-36      /* match textarea rows=5 */
-        max-h-[80vh]      /* optional max height */
-        resize-y           /* allow vertical */
-        rounded-md
-        border
-        bg-background
-        px-3
-        py-2
-        text-sm
-        leading-relaxed
-        text-muted-foreground
-        whitespace-pre-wrap
-        overflow-y-${scrollEnabled ? "auto" : "hidden"}
-      `}
-    >
+  ref={containerRef}
+  className={cn(
+    "w-full",
+    "min-h-30",          // same visual height as rows={5}
+    "max-h-[80vh]",
+    "resize-y",
+    "rounded-md",
+    "border border-input",
+    "bg-background",
+    "px-4 pb-4",
+    "text-sm leading-relaxed",
+    "text-muted-foreground",
+    "whitespace-pre-wrap",
+    "focus-visible:outline-none",
+    "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+    scrollEnabled ? "overflow-y-auto" : "overflow-y-hidden"
+  )}
+>
+
       <div className="space-y-3">
         {data.verses.map((v, index) => {
           const prev = data.verses[index - 1];

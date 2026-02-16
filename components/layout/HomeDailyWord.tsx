@@ -100,9 +100,9 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
           <Button
             size="lg"
             className="rounded-full text-base
-          hover:bg-secondary dark:hover:bg-secondary
-          active:bg-secondary dark:active:bg-secondary
-          transition-colors duration-500"
+            hover:bg-secondary dark:hover:bg-secondary
+            active:bg-secondary dark:active:bg-secondary
+            transition-colors duration-500"
           >
             {user ? (
               <Link
