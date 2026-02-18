@@ -89,8 +89,7 @@ export default function Bible() {
           </h2>
           <BookHeart className="h-8 w-8 sm:h-10 sm:w-10 text-primary" />
         </div>
-
-        <p className="mt-6 text-base sm:text-lg text-muted-foreground text-center ">
+        <p className="mt-4 text-base sm:text-lg text-muted-foreground text-center ">
           Encounter the living Word of God anytime, anywhere. Let Scripture
           guide you on-screen, yet remember to treasure the quiet depth found in
           reading from a traditional (physical) Bible.
@@ -130,7 +129,7 @@ export default function Bible() {
                 onClick={handlePrev}
                 className="gap-3 rounded-full cursor-pointer"
               >
-                <ArrowLeft /> Prev
+                <ArrowLeft /> <span className="hidden md:block">Prev</span>
               </Button>
               <div>
                 <h4 className="font-semibold text-xl md:text-3xl text-center">
@@ -144,7 +143,7 @@ export default function Bible() {
                 onClick={handleNext}
                 className="gap-3 rounded-full cursor-pointer"
               >
-                Next <ArrowRight />
+                <span className="hidden md:block">Next</span> <ArrowRight />
               </Button>
             </div>
 
@@ -178,7 +177,7 @@ export default function Bible() {
                   onClick={handlePrev}
                   className="gap-3 rounded-full cursor-pointer"
                 >
-                  <ArrowLeft /> Prev
+                  <ArrowLeft /> <span className="hidden md:block">Prev</span>
                 </Button>
               </div>
 
@@ -191,7 +190,7 @@ export default function Bible() {
                   onClick={handleNext}
                   className="gap-3 rounded-full cursor-pointer"
                 >
-                  Next <ArrowRight />
+                  <span className="hidden md:block">Next</span> <ArrowRight />
                 </Button>
               </div>
             </div>

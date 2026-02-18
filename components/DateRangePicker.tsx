@@ -35,9 +35,9 @@ export function DateRangePicker({ selectedRange, onChange, className }: DatePick
         <PopoverTrigger asChild>
           <Button
             id="date-picker-range"
-            className="cursor-pointer  bg-primary w-full md:w-auto justify-center items-center gap-2 px-3"
+            className="cursor-pointer bg-primary w-full md:w-auto justify-center items-center gap-2 px-3"
           >
-            <span className="truncate">
+            <span className="truncate text-sm lg:text-base">
               {selectedRange?.from ? (
                 selectedRange.to ? (
                   <>

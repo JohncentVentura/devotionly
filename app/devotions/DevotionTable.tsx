@@ -46,10 +46,8 @@ import {
   ChevronRightIcon,
   ChevronLeftIcon,
   Search,
-  Pencil,
-
-
-
+  BookPlus,
+  BookMarked,
 } from "lucide-react";
 import { getNextBibleReference } from "@/app/api/bible/bibleAPI";
 import { Label } from "@/components/ui/label";
@@ -177,46 +175,42 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
   }, [page]);
 
   return (
-    <div className="px-4 md:px-8 xl:px-24 w-full">
-      <div className="grid grid-cols-6 md:grid-cols-14 items-center gap-2">
-        <h1 className="col-span-6 md:col-span-3 text-center md:text-left text-xl md:text-3xl font-semibold">
-          Devotions Table
-        </h1>
-
-        {/* Mobile date */}
-        <div className="col-span-6 block md:hidden text-center text-xs text-muted-foreground">
-          {new Date().toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+    <div className="px-4 md:px-8 xl:px-28 w-full">
+      <div className="grid grid-cols-6 md:grid-cols-18 items-center gap-2">
+        <div className="col-span-4 md:col-span-9 flex flex-col lg:flex-row justify-start items-start lg:items-center gap-2 lg:gap-6">
+          <h1 className="text-3xl md:text-4xl font-bold">
+            Devotions Table
+          </h1>
+          {/* Desktop date */}
+          <div className="text-sm text-muted-foreground">
+            {new Date().toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </div>
         </div>
-        <div className="col-span-1 flex md:hidden" />
-        <CreateDevotionButton className="col-span-2 flex items-center justify-center text-xs lg:text-sm gap-2">
-          New Devotion
+        <div className="hidden md:block md:col-span-1 lg:col-span-3" />
+        <CreateDevotionButton className="col-span-1 md:col-span-4 lg:col-span-3
+         flex items-center justify-center text-xs xl:text-sm gap-2">
+          <span className="hidden md:block">New Devotion</span>
+          <BookPlus className="h-8 w-8" />
         </CreateDevotionButton>
         <CreateDevotionButton
           variant="outline"
-          className="col-span-2 flex items-center justify-center text-xs lg:text-sm gap-2 
+          className="col-span-1 md:col-span-4 lg:col-span-3
+           flex items-center justify-center text-xs xl:text-sm gap-2 
           hover:bg-foreground hover:text-background hover:dark:bg-foreground hover:dark:text-background
           active:bg-foreground active:text-background active:dark:bg-foreground active:dark:text-background"
           onClick={handleResumeDevotion}
         >
-          Resume Devotion
+          <span className="hidden md:block">Resume Devotion</span>
+          <BookMarked className="h-8 w-8" />
         </CreateDevotionButton>
-        <div className="md:col-span-4 hidden md:flex" />
-        {/* Desktop date */}
-        <div className="col-span-3 hidden md:block text-right text-sm lg:text-base text-muted-foreground">
-          {new Date().toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </div>
-        <Separator className="my-2 col-span-6 md:col-span-14 flex h-8" />
-        <div className="col-span-6 md:col-span-7 relative">
+
+        <Separator className="my-2 col-span-6 md:col-span-18 flex h-8" />
+        <div className="col-span-6 md:col-span-8 relative">
           <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
@@ -227,12 +221,12 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           />
         </div>
         <DateRangePicker
-          className="col-span-6 md:col-span-3 text-base md:text-xs lg:text-base"
+          className="col-span-6 md:col-span-4"
           selectedRange={selectedDateRange}
           onChange={setSelectedDateRange}
         />
         <BookCombobox
-          className="col-span-4 md:col-span-2 text-base md:text-xs lg:text-base"
+          className="col-span-4 md:col-span-3 text-xs lg:text-base"
           selected={selectedBook}
           setSelected={(val) => setSelectedBook(val || "")}
           noneSelectedText="All"
@@ -240,7 +234,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           Filter Book
         </BookCombobox>
         <ChapterCombobox
-          className="col-span-2 text-xs md:text-xs lg:text-base"
+          className="col-span-2 md:col-span-3 text-xs lg:text-base"
           book={selectedBook}
           selected={selectedChapter}
           setSelected={(val) => setSelectedChapter(val)}
@@ -261,7 +255,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
           dark:[&_th]:border-foreground/20 
           dark:[&_td]:border-foreground/20"
         >
-          <TableHeader>
+          <TableHeader className="border-t border-foreground">
             <TableRow>
               <TableHead
                 className="w-[20%] md:w-[10%] font-bold cursor-pointer select-none"
@@ -299,15 +293,21 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
                 </div>
               </TableHead>
 
-              <TableHead className="w-[20%] sm:w-auto font-bold">Scripture</TableHead>
+              <TableHead className="w-[20%] sm:w-auto font-bold">
+                Scripture
+              </TableHead>
               <TableHead className="hidden md:table-cell font-bold">
                 Observation
               </TableHead>
               <TableHead className="hidden lg:table-cell font-bold">
                 Application
               </TableHead>
-              <TableHead className="hidden xl:table-cell font-bold">Prayer</TableHead>
-              <TableHead className="w-[20%] sm:w-auto text-right">{/*Menu*/}</TableHead>
+              <TableHead className="hidden xl:table-cell font-bold">
+                Prayer
+              </TableHead>
+              <TableHead className="w-[20%] sm:w-auto text-right">
+                {/*Menu*/}
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
