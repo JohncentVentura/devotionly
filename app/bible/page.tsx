@@ -31,17 +31,13 @@ export default async function page(props: {
   //const { slug } = await props.params;
   //const [id] = slug.split("--");
   //const devotion = await getDevotionById(id);
+  const urls = stackServerApp.urls;
+  const plainUser = user ? user.toClientJson() : null;
 
   return (
     <PageSection>
-      {user ? (
-        <Bible />
-      ) : (
-        <div className="relative px-4 flex justify-center items-center">
-          <ParticlesBackground />
-          <SignUp />
-        </div>
-      )}
+      <ParticlesBackground />
+      <Bible user={plainUser} urls={urls} />
     </PageSection>
   );
 }

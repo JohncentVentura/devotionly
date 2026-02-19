@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ArrowUpRight, BookMarked, NotebookPen, Sun } from "lucide-react";
+import { ArrowUpRight, NotebookPen, NotebookText, Sun } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getDailyVerse } from "@/app/api/bible/bibleAPI";
@@ -11,7 +11,7 @@ import { imagePaths } from "@/lib/paths";
 import { stackServerApp } from "@/stack/server";
 import { TranslationCombobox } from "../TranslationCombobox";
 import { BibleApiResponse } from "@/app/api/bible/bibleAPI";
-import {BottomGradient, TopGradient} from "../PageGradient";
+import { BottomGradient, TopGradient } from "../PageGradient";
 import { Separator } from "../ui/separator";
 
 interface HomeDailyWordProps {
@@ -72,75 +72,78 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
         className="absolute -z-10  object-cover"
         fill
       />
-      <div className="max-w-(--breakpoint-xl) w-full mx-auto px-6 py-16">
-        <div className="ml-2 flex items-center gap-2">
-          <Sun/>
-          <h4 className="text-base md:text-xl font-semibold tracking-tight">
-            WORD OF THE DAY
-          </h4>
-        </div>
+      <div className=" mx-auto grid w-full max-w-(--breakpoint-xl) gap-12 lg:gap-6 px-6 py-24 lg:grid-cols-2">
+        <div>
+          <div className="ml-2 flex items-center gap-2">
+            <Sun />
+            <h4 className="text-base md:text-xl font-semibold tracking-tight">
+              WORD OF THE DAY
+            </h4>
+          </div>
 
-        <h1 className="ml-2 mt-8 max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
-          {word.reference}
-        </h1>
-        <TranslationCombobox
-          className="my-2"
-          selected={translation}
-          setSelected={(selected) => setTranslation(selected)}
-        />
-        {word.verses.map((verse) => (
-          <p
-            key={verse.verse}
-            className="ml-2 max-w-[60ch] sm:text-lg text-foreground/80"
-          >
-            &quot;{verse.text}&quot;
-          </p>
-        ))}
-        <div className="mt-14 flex items-center gap-4">
-          <Button
-            size="lg"
-            className="rounded-full text-base
+          <h1 className="ml-2 mt-6 max-w-[17ch] text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-semibold leading-[1.2] tracking-[-0.035em] flex items-center">
+            {word.reference}
+          </h1>
+          <TranslationCombobox
+            className="my-2"
+            selected={translation}
+            setSelected={(selected) => setTranslation(selected)}
+          />
+          {word.verses.map((verse) => (
+            <p
+              key={verse.verse}
+              className="ml-2 max-w-[60ch] sm:text-lg text-foreground/80"
+            >
+              &quot;{verse.text}&quot;
+            </p>
+          ))}
+          <div className="mt-6 flex items-center gap-4">
+            <Button
+              size="lg"
+              className="rounded-full text-base
             hover:bg-secondary dark:hover:bg-secondary
             active:bg-secondary dark:active:bg-secondary
             transition-colors duration-500"
-          >
-            {user ? (
-              <Link
-                href={`/create?book=${book}&chapter=${chapter}&fromVerse=${fromVerse}&toVerse=${toVerse}`}
-                className="flex items-center gap-2"
-              >
-                Make Devotion <NotebookPen className="size-5" />
-              </Link>
-            ) : (
-              <Link href={urls.signUp} className="flex items-center gap-2">
-                Get Started <ArrowUpRight className="size-5" />
-              </Link>
-            )}
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="rounded-full text-base shadow-none bg-muted/60
+            >
+              {user ? (
+                <Link
+                  href={`/create?book=${book}&chapter=${chapter}&fromVerse=${fromVerse}&toVerse=${toVerse}`}
+                  className="flex items-center gap-2"
+                >
+                  Make Devotion <NotebookPen className="size-5" />
+                </Link>
+              ) : (
+                <Link href={urls.signUp} className="flex items-center gap-2">
+                  Get Started <ArrowUpRight className="size-5" />
+                </Link>
+              )}
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="rounded-full text-base shadow-none bg-muted/60
             hover:bg-muted dark:hover:bg-muted
             active:bg-muted dark:active:bg-muted
             transition-colors duration-500"
-          >
-            <Link
-              href={{
-                pathname: "/bible",
-                query: {
-                  book,
-                  chapter,
-                  fromVerse,
-                  toVerse,
-                },
-              }}
-              className="flex items-center gap-2"
             >
-              <BookMarked className="h-5! w-5!" /> Read Book
-            </Link>
-          </Button>
+              <Link
+                href={{
+                  pathname: "/bible",
+                  query: {
+                    book,
+                    chapter,
+                    fromVerse,
+                    toVerse,
+                  },
+                }}
+                className="flex items-center gap-2"
+              >
+                <NotebookText className="size-5" /> Read Book
+              </Link>
+            </Button>
+          </div>
         </div>
+        <div className="aspect-video w-full rounded-xl bg-accent" />
       </div>
       <BottomGradient />
     </div>
