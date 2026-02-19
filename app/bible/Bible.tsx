@@ -110,7 +110,7 @@ export default function Bible({ user, urls }: BibleProps) {
   }, [selectedBook, selectedChapter]);
 
   return (
-    <div className="relative flex flex-col items-center justify-center px-6">
+    <div className="flex flex-col items-center justify-center px-6">
       <div className="mx-auto grid w-full max-w-(--breakpoint-xl) gap-6 lg:gap-12 pt-6 px-0 lg:px-6 lg:grid-cols-2">
         <div>
           <Badge
@@ -138,7 +138,7 @@ export default function Bible({ user, urls }: BibleProps) {
               </Link>
             )}
           </Badge>
-          <h1 className="mt-6  text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter">
+          <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter">
             Digital Bible
           </h1>
           <p className="mt-6 md:text-lg">
@@ -174,7 +174,7 @@ export default function Bible({ user, urls }: BibleProps) {
         </div>
         <div className="aspect-video w-full rounded-xl bg-accent" />
         
-        <div ref={scrollRef} className="grid lg:hidden grid-cols-6 gap-2" >
+        <div ref={scrollRef} className="grid lg:hidden grid-cols-3 gap-2" >
             <BookCombobox
               className="col-span-2"
               selected={selectedBook}

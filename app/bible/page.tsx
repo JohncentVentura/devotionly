@@ -36,7 +36,6 @@ export default async function page(props: {
 
   return (
     <PageSection>
-      <ParticlesBackground />
       <Bible user={plainUser} urls={urls} />
     </PageSection>
   );

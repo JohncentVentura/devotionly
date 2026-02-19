@@ -256,7 +256,7 @@ export default function CreatePage() {
             </div>
           </div>
 
-          <div>
+          <div className="mt-4">
             <Label htmlFor="observation">Observation</Label>
             <Textarea
               id="observation"
@@ -267,7 +267,7 @@ export default function CreatePage() {
               onChange={(e) => handleChange("observation", e.target.value)}
             />
           </div>
-          <div>
+          <div className="mt-4">
             <Label htmlFor="application">Application</Label>
             <Textarea
               id="application"
@@ -278,7 +278,7 @@ export default function CreatePage() {
               onChange={(e) => handleChange("application", e.target.value)}
             />
           </div>
-          <div>
+          <div className="mt-4">
             <Label htmlFor="prayer">Prayer</Label>
             <Textarea
               id="prayer"
