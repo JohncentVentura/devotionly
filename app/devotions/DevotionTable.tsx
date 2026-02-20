@@ -178,7 +178,7 @@ export default function DevotionTable({ devotions }: DevotionsTableProps) {
     <div className="px-4 md:px-8 xl:px-28 w-full">
       <div className="grid grid-cols-6 md:grid-cols-18 items-center gap-2">
         <div className="col-span-4 md:col-span-9 flex flex-col lg:flex-row justify-start items-start lg:items-center gap-2 lg:gap-6">
-          <h1 className="text-3xl md:text-4xl font-bold">Devotions Table</h1>
+          <h1 className="text-3xl md:text-4xl font-semibold">Devotions Table</h1>
           <div className="text-sm text-muted-foreground">
             {new Date().toLocaleDateString("en-US", {
               weekday: "long",

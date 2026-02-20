@@ -13,6 +13,7 @@ import { TranslationCombobox } from "../TranslationCombobox";
 import { BibleApiResponse } from "@/app/api/bible/bibleAPI";
 import { BottomGradient, TopGradient } from "../PageGradient";
 import { Separator } from "../ui/separator";
+import BookImage from "../BookImage";
 
 interface HomeDailyWordProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -72,7 +73,7 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
         className="absolute -z-10  object-cover"
         fill
       />
-      <div className=" mx-auto grid w-full max-w-(--breakpoint-xl) gap-12 lg:gap-6 px-6 py-24 lg:grid-cols-2">
+      <div className=" mx-auto grid w-full max-w-(--breakpoint-xl) gap-12 lg:gap-6 px-6 sm:px-10 py-24 lg:grid-cols-2">
         <div>
           <div className="ml-2 flex items-center gap-2">
             <Sun />
@@ -143,7 +144,9 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
             </Button>
           </div>
         </div>
-        <div className="aspect-video w-full rounded-xl bg-accent" />
+        <div className="flex justify-start items-start">
+          <BookImage book={book} className="sm:w-[60%]" />
+        </div>
       </div>
       <BottomGradient />
     </div>

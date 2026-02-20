@@ -27,7 +27,7 @@ export const NavigationSheet = () => {
           variant="outline"
           size="icon"
           className="
-          rounded-full cursor-pointer
+          rounded-full cursor-pointer  bg-white/50 dark:bg-black/50 hover:text-background
           hover:bg-primary dark:hover:bg-primary
           active:bg-primary dark:active:bg-primary
           transition-colors duration-300"

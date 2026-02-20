@@ -19,6 +19,9 @@ import { Separator } from "@/components/ui/separator";
 import { useSearchParams } from "next/navigation";
 import { useRef } from "react";
 import { Badge } from "@/components/ui/badge";
+import { imagePaths } from "@/lib/paths";
+import Image from "next/image";
+import BookImage from "@/components/BookImage";
 
 interface BibleProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -111,8 +114,8 @@ export default function Bible({ user, urls }: BibleProps) {
 
   return (
     <div className="flex flex-col items-center justify-center px-6">
-      <div className="mx-auto grid w-full max-w-(--breakpoint-xl) gap-6 lg:gap-12 pt-6 px-0 lg:px-6 lg:grid-cols-2">
-        <div>
+      <div className="mx-auto grid w-full max-w-(--breakpoint-xl) gap-6 lg:gap-12 pt-0 lg:pt-4 px-0 lg:px-6 lg:grid-cols-2">
+        <div className="flex flex-col items-center lg:items-start">
           <Badge
             className="rounded-full px-4 py-1 border-primary bg-transparent
                 hover:bg-primary dark:hover:bg-primary
@@ -138,15 +141,18 @@ export default function Bible({ user, urls }: BibleProps) {
               </Link>
             )}
           </Badge>
-          <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter">
+          <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter">
             Digital Bible
           </h1>
-          <p className="mt-6 md:text-lg">
+          <p className="mt-4 md:text-lg text-justify ">
             Encounter the living Word of God anytime, anywhere. Let Scripture
             guide you on-screen, yet remember to treasure the quiet depth found
             in reading from a traditional (physical) Bible.
           </p>
-          <div ref={scrollRef} className="hidden mt-6 lg:grid grid-cols-6 gap-2" >
+          <div
+            ref={scrollRef}
+            className="hidden mt-6 lg:grid grid-cols-6 gap-2"
+          >
             <BookCombobox
               className="col-span-2"
               selected={selectedBook}
@@ -172,33 +178,38 @@ export default function Bible({ user, urls }: BibleProps) {
             />
           </div>
         </div>
-        <div className="aspect-video w-full rounded-xl bg-accent" />
-        
-        <div ref={scrollRef} className="grid lg:hidden grid-cols-3 gap-2" >
-            <BookCombobox
-              className="col-span-2"
-              selected={selectedBook}
-              setSelected={(val) => setSelectedBook(val || selectedBook)}
-              noneSelectedText=""
-            >
-              Select Book
-            </BookCombobox>
-            <ChapterCombobox
-              className="col-span-1"
-              book={selectedBook}
-              selected={selectedChapter}
-              setSelected={(val) => setSelectedChapter(val || selectedChapter)}
-              noneSelectedText=""
-            >
-              Select Chapter
-            </ChapterCombobox>
-            <TranslationCombobox
-              className="col-span-3 w-full justify-center"
-              variant="default"
-              selected={translation}
-              setSelected={(selected) => setTranslation(selected)}
-            />
-          </div>
+        <div className="mt-2 flex justify-center items-start">
+          <BookImage book={selectedBook} className="h-full sm:h-[30vh] lg:h-auto"/>
+        </div>
+        <div ref={scrollRef} className="grid lg:hidden grid-cols-5 sm:grid-cols-7 gap-2">
+          <div className="hidden sm:block col-span-1"/>
+          <BookCombobox
+            className="col-span-3"
+            selected={selectedBook}
+            setSelected={(val) => setSelectedBook(val || selectedBook)}
+            noneSelectedText=""
+          >
+            Select Book
+          </BookCombobox>
+          <ChapterCombobox
+            className="col-span-2"
+            book={selectedBook}
+            selected={selectedChapter}
+            setSelected={(val) => setSelectedChapter(val || selectedChapter)}
+            noneSelectedText=""
+          >
+            Select Chapter
+          </ChapterCombobox>
+          <div className="hidden sm:block col-span-1"/>
+          <div className="hidden sm:block col-span-1"/>
+          <TranslationCombobox
+            className="col-span-5 w-full justify-center"
+            variant="default"
+            selected={translation}
+            setSelected={(selected) => setTranslation(selected)}
+          />
+          <div className="hidden sm:block col-span-1"/>
+        </div>
       </div>
 
       <Separator className="mt-6 lg:mt-12 mb-6 w-full max-w-(--breakpoint-xl)" />

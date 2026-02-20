@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <StackProvider app={stackClientApp}>
           <StackTheme>
@@ -44,7 +44,7 @@ export default function RootLayout({
             >
               <Toaster />
               <Navbar />
-              {children}
+              <main className="flex-1">{children}</main>
               <Footer />
             </ThemeProvider>
           </StackTheme>

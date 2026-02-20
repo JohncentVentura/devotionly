@@ -24,7 +24,7 @@ const NavbarClient = ({ user, urls }: NavbarClientProps) => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setShowNavbar(
-        !(currentScrollY > lastScrollY.current && currentScrollY > 50)
+        !(currentScrollY > lastScrollY.current && currentScrollY > 50),
       );
       lastScrollY.current = currentScrollY;
     };
@@ -34,10 +34,10 @@ const NavbarClient = ({ user, urls }: NavbarClientProps) => {
 
   return (
     <nav
-      className={`z-10 fixed top-6 inset-x-4 h-16 bg-background border max-w-(--breakpoint-xl) mx-auto rounded-full
-    ${
-      showNavbar ? "translate-y-0" : "-translate-y-24"
-    } border-primary border-[3px] transition-transform duration-300`}
+      className={`z-50 fixed top-6 inset-x-4 h-16 bg-background/50 backdrop-blur-sm 
+      max-w-(--breakpoint-xl) mx-auto rounded-full border-primary border-[3px] 
+      ${showNavbar ? "translate-y-0" : "-translate-y-24"}
+      transition-transform duration-300`}
     >
       <div className="h-full flex items-center justify-between mx-auto px-4">
         <Logo />
@@ -49,13 +49,13 @@ const NavbarClient = ({ user, urls }: NavbarClientProps) => {
           <ThemeToggleButton />
 
           {user ? (
-            <UserButton />
+            <UserButton/>
           ) : (
             <Button className="rounded-full" asChild>
               <Link href={urls?.signIn || "/"}>Sign in</Link>
             </Button>
           )}
-          
+
           {/* Mobile Menu */}
           <div className="md:hidden">
             <NavigationSheet />
