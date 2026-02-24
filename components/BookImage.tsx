@@ -29,7 +29,7 @@ export default function BookImage({ book, className }: BookImageProps) {
         <Image
           src={imageSrc}
           alt={imageSrc}
-          className="object-cover"
+          className="object-fill sm:object-cover lg:object-fill"
           fill
         />
       </Link>

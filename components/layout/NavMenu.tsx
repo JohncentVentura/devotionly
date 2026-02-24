@@ -26,11 +26,14 @@ export const NavMenu = ({ onNavigate, ...props }: NavMenuProps) => (
         <NavigationMenuItem key={href}>
           <NavigationMenuLink
             asChild
-            className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium 
-            hover:bg-muted active:bg-muted focus:bg-primary focus:text-background
-            disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-muted
-            data-[state=open]:focus:bg-primary data-[state=open]:bg-muted focus-visible:ring-ring/50 outline-none 
-            transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1"
+            className="group inline-flex items-center justify-center h-9 w-max px-4 py-2 rounded-md
+              text-sm font-medium border-2 border-transparent bg-transparent outline-none
+              hover:bg-transparent active:bg-transparent data-[state=open]:bg-transparent
+              hover:border-primary active:border-primary data-[state=open]:border-primary
+              focus:bg-primary focus:text-background
+              focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1
+              disabled:pointer-events-none disabled:opacity-50
+              transition-[color,box-shadow,border-color,background-color]"
             onClick={onNavigate} //CLOSE ON CLICK
           >
             <Link href={href}>{label}</Link>

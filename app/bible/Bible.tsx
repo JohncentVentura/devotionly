@@ -129,7 +129,7 @@ export default function Bible({ user, urls }: BibleProps) {
                 className="text-foreground hover:text-background active:text-background
                     dark:text-foreground dark:hover:text-background dark:active:text-background"
               >
-                &quot;Feeling Blessed? Make this your devotion!&quot;
+                &quot;Feeling Blessed? Make this chapter your devotion!&quot;
               </Link>
             ) : (
               <Link
@@ -141,10 +141,10 @@ export default function Bible({ user, urls }: BibleProps) {
               </Link>
             )}
           </Badge>
-          <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter">
+          <h1 className="mt-4 text-4xl sm:text-5xl xl:text-7xl md:leading-[1.2] font-semibold tracking-tighter">
             Digital Bible
           </h1>
-          <p className="mt-4 md:text-lg text-justify ">
+          <p className="mt-3 md:mt-4 xl:text-lg text-justify ">
             Encounter the living Word of God anytime, anywhere. Let Scripture
             guide you on-screen, yet remember to treasure the quiet depth found
             in reading from a traditional (physical) Bible.
