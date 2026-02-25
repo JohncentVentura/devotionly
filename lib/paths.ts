@@ -8,7 +8,7 @@ export const externalPaths = {
 
 export const imagePaths = {
   homeDailyWord:
-    "https://images.unsplash.com/photo-1590070168023-5395dfaa6b24?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1653748973561-d7a3ecf871c4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   homeFeature1:
     "https://images.unsplash.com/photo-1508780709619-79562169bc64?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   homeFeature2:
@@ -186,110 +186,110 @@ export const bookImagePaths = [
   },
   {
     book: "Matthew",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/source-jpeg/01_FB_JJ_New_Testament_1024.jpg?1655205229",
   },
   {
     book: "Mark",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/overview-thumbnails/05_FB_JJ_New_Testament_Thumbnail.jpg?1655207464",
   },
   {
     book: "Luke",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/source-jpeg/03_FB_JJ_New_Testament_1024.jpg?1655205229",
   },
   {
     book: "John",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/source-jpeg/08_FB_JJ_New_Testament_1024.jpg?1655205229",
   },
   {
     book: "Acts",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BI_City_Maps/source-jpeg/02_FB_BI_City_Maps_1024.jpg?1751898394",
   },
   {
     book: "Romans",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Rome/source-jpeg/02_FB_BM_Maps_Paul_Rome_1024.jpg?1746534733",
   },
   {
     book: "1 Corinthians",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Journey_2/source-jpeg/08_FB_BM_Maps_Paul_Journey_2_1024.jpg?1736333125",
   },
   {
     book: "2 Corinthians",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Journey_2/source-jpeg/08_FB_BM_Maps_Paul_Journey_2_1024.jpg?1736333125",
   },
   {
     book: "Galatians",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Journey_1/source-jpeg/05_FB_BM_Maps_Paul_Journey_1_1024.jpg?1730898629",
   },
   {
     book: "Ephesians",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Journey_2/source-jpeg/09_FB_BM_Maps_Paul_Journey_2_1024.jpg?1736333126",
   },
   {
     book: "Philippians",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Journey_2/source-jpeg/06_FB_BM_Maps_Paul_Journey_2_1024.jpg?1736333125",
   },
   {
     book: "Colossians",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Journey_3/source-jpeg/03_FB_BM_Maps_Paul_Journey_3_1024.jpg?1738926417",
   },
   {
     book: "1 Thessalonians",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Journey_2/source-jpeg/06_FB_BM_Maps_Paul_Journey_2_1024.jpg?1736333125",
   },
   {
     book: "2 Thessalonians",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Journey_2/source-jpeg/06_FB_BM_Maps_Paul_Journey_2_1024.jpg?1736333125",
   },
   {
     book: "1 Timothy",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Journey_2/source-jpeg/09_FB_BM_Maps_Paul_Journey_2_1024.jpg?1736333126",
   },
   {
     book: "2 Timothy",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Rome/source-jpeg/06_FB_BM_Maps_Paul_Rome_1024.jpg?1746534734",
   },
   {
     book: "Titus",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Rome/source-jpeg/05_FB_BM_Maps_Paul_Rome_1024.jpg?1746534733",
   },
   {
     book: "Philemon",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_BM_Maps_Paul_Journey_3/source-jpeg/03_FB_BM_Maps_Paul_Journey_3_1024.jpg?1738926417",
   },
   {
     book: "Hebrews",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_Old_Testament/source-jpeg/03_FB_JJ_Old_Testament_1024.jpg?1646658009",
   },
   {
     book: "James",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/source-jpeg/07_FB_JJ_New_Testament_1024.jpg?1655205229",
   },
   {
     book: "1 Peter",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/source-jpeg/02_FB_JJ_New_Testament_1024.jpg?1655205229",
   },
   {
     book: "2 Peter",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/source-jpeg/02_FB_JJ_New_Testament_1024.jpg?1655205229",
   },
   {
     book: "1 John",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/source-jpeg/09_FB_JJ_New_Testament_1024.jpg?1655205229",
   },
   {
     book: "2 John",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/source-jpeg/09_FB_JJ_New_Testament_1024.jpg?1655205229",
   },
   {
     book: "3 John",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/source-jpeg/09_FB_JJ_New_Testament_1024.jpg?1655205229",
   },
   {
     book: "Jude",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/overview-thumbnails/10_FB_JJ_New_Testament_Thumbnail.jpg?1655207464",
   },
   {
     book: "Revelation",
-    path: "",
+    path: "https://media.freebibleimages.org/stories/FB_JJ_New_Testament/source-jpeg/11_FB_JJ_New_Testament_1024.jpg?1655205229",
   },
 ];

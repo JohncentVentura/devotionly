@@ -70,7 +70,7 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
       <Image
         src={imagePaths.homeDailyWord}
         alt="Hero"
-        className="absolute -z-10 object-cover"
+        className="absolute -z-10 object-fill scale-x-[-1]"
         fill
       />
       <div className=" mx-auto grid w-full max-w-(--breakpoint-xl) gap-12 lg:gap-6 px-6 sm:px-10 py-24 lg:grid-cols-2">

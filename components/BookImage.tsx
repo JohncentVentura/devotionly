@@ -16,7 +16,7 @@ export default function BookImage({ book, className }: BookImageProps) {
   return (
     <div className={`relative aspect-video w-[96%] lg:w-[96%] ${className}`}>
       {/* Shadow layer */}
-      <div className="absolute inset-0 translate-x-3 -translate-y-3 rounded-xl bg-primary z-0" />
+      <div className="absolute inset-0 translate-x-3 -translate-y-3 rounded-xl bg-secondary z-0" />
 
       {/* Image layer */}
       <Link
