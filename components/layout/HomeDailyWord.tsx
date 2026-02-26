@@ -144,8 +144,8 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
             </Button>
           </div>
         </div>
-        <div className="flex justify-start items-start">
-          <BookImage book={book} className="sm:w-[60%]" />
+        <div className="flex justify-start items-center">
+          <BookImage book={book} className=" h-full sm:h-[30vh] lg:h-auto" />
         </div>
       </div>
       <BottomGradient />

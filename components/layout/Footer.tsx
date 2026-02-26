@@ -54,15 +54,26 @@ const Footer = () => {
                 johncent.developer@gmail.com
               </Link>
             </span>
-            <span className="text-xs text-muted-foreground hover:text-primary transition-colors duration-300">
+            <div className="text-xs text-muted-foreground ">
+              Illustrations provided by{" "}
               <Link
+              className="hover:text-primary active:text-primary transition-colors duration-300"
                 href={externalPaths.freeBibleImages}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Illustrations provided by freebibleimages.org
+                 freebibleimages.org
               </Link>
-            </span>
+              {" "}& {" "}
+              <Link
+              className="hover:text-primary active:text-primary transition-colors duration-300"
+                href={externalPaths.unsplash}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                 unsplash.com
+              </Link>
+            </div>
           </div>
 
           <div className="flex justify-center items-center gap-6 text-muted-foreground">

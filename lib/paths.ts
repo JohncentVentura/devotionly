@@ -4,6 +4,7 @@ export const externalPaths = {
   github: "https://github.com/JohncentVentura/devotionly",
   gmail: "mailto:johncent.developer@gmail.com",
   telegram: "https://t.me/JohncentVentura",
+  unsplash:"https://unsplash.com",
 };
 
 export const imagePaths = {
