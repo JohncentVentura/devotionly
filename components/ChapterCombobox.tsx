@@ -70,7 +70,10 @@ export default function ChapterCombobox({
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button className={`cursor-pointer ${className}`}>
+          <Button
+            className={`hover:brightness-110 dark:hover:brightness-110 active:brightness-110 dark:active:brightness-110 
+            transition duration-500 cursor-pointer ${className}`}
+          >
             {selected ? selected : children}
             <ChevronsUpDown />
           </Button>
@@ -92,7 +95,10 @@ export default function ChapterCombobox({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button className={`cursor-pointer ${className}`}>
+        <Button
+          className={`hover:brightness-110 dark:hover:brightness-110 active:brightness-110 dark:active:brightness-110
+         transition duration-500 cursor-pointer ${className}`}
+        >
           {selected ? selected : children}
           <ChevronsUpDown className="opacity-50" />
         </Button>

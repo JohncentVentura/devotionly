@@ -27,7 +27,9 @@ export default function Contact() {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -38,7 +40,7 @@ export default function Contact() {
       return;
     }
 
-    setLoading(true)
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append("firstName", form.firstName);
@@ -67,9 +69,9 @@ export default function Contact() {
           Connect with Devotionly!
         </h2>
         <p className="mt-3 text-base text-muted-foreground sm:text-lg">
-          Whether you have feedback, ideas, or prayerful reflections to share, 
-          I&apos;d love to hear from you. Devotionly is a personal project built with care, 
-          and every message helps it grow.
+          Whether you have feedback, ideas, or prayerful reflections to share,
+          I&apos;d love to hear from you. Devotionly is a personal project built
+          with care, and every message helps it grow.
         </p>
         <div className="mt-8 flex flex-col gap-16 md:gap-10 lg:flex-row">
           <div className="grid w-full grid-cols-1 gap-1 border bg-muted p-1 *:border *:bg-background *:p-6 sm:grid-cols-2 lg:col-span-2">
@@ -82,7 +84,7 @@ export default function Contact() {
                 Email the developer directly for support, ideas, or concerns.
               </p>
               <Link
-                className="font-medium text-primary "
+                className="font-medium text-primary hover:underline active:underline"
                 href={externalPaths.gmail}
                 target="_blank"
               >
@@ -97,7 +99,11 @@ export default function Contact() {
               <p className="my-2.5 text-muted-foreground">
                 Connect with the creator of Devotionly through his profile.
               </p>
-              <Link className="font-medium text-primary" href={externalPaths.facebook} target="_blank">
+              <Link
+                className="font-medium text-primary hover:underline active:underline"
+                href={externalPaths.facebook}
+                target="_blank"
+              >
                 Johncent Ventura
               </Link>
             </div>
@@ -110,7 +116,7 @@ export default function Contact() {
                 Send a quick message to the developer through Telegram.
               </p>
               <Link
-                className="font-medium text-primary"
+                className="font-medium text-primary hover:underline active:underline"
                 href={externalPaths.telegram}
                 target="_blank"
               >
@@ -123,10 +129,11 @@ export default function Contact() {
               </div>
               <h3 className="mt-6 font-semibold text-xl">Github</h3>
               <p className="my-2.5 text-muted-foreground">
-                Explore how Devotionly is built and the source code of the project.
+                Explore how Devotionly is built and the source code of the
+                project.
               </p>
               <Link
-                className="font-medium text-primary"
+                className="font-medium text-primary hover:underline active:underline"
                 href={externalPaths.github}
                 target="_blank"
               >
@@ -196,7 +203,13 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <Button className={`mt-6 w-full ${loading ? "cursor-not-allowed" : "cursor-pointer"}`} size="lg" disabled={loading}>
+                  <Button
+                    className={`mt-6 w-full 
+                    hover:brightness-110 dark:hover:brightness-110 active:brightness-110 dark:active:brightness-110 transition duration-500
+                    ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}
+                    size="lg"
+                    disabled={loading}
+                  >
                     {loading ? "Sending..." : "Submit"}
                   </Button>
                 </form>

@@ -113,10 +113,10 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1 className="text-center text-xl md:text-3xl font-semibold ">
+      <h1 className="text-center text-3xl md:text-4xl font-semibold ">
         Update Devotion
       </h1>
-      <div className="mt-4 flex items-center justify-center gap-2 text-sm md:text-base text-muted-foreground">
+      <div className="mt-2 flex items-center justify-center gap-2 text-sm md:text-base text-muted-foreground">
         Updating devotion of{" "}
         {devotion.date.toLocaleDateString("en-US", {
           weekday: "long",
@@ -126,13 +126,13 @@ export default function UpdatePage({ devotion }: EditDialogProps) {
         })}
         <Calendar className="h-4 w-4" />
       </div>
-      <p className="mt-4 md:text-lg text-foreground/80">
+      <p className="mt-6 md:text-lg text-foreground/80 text-center">
         Refine your Bible devotions using the SOAP method. Reflect on Scripture,
         Observation, Application, and Prayer to deepen your faith and grow in
         understanding.
       </p>
       <Separator className="my-4 md:my-8" />
-      <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-6">
         <div>
           <Label htmlFor="book">Book</Label>
           <BookCombobox

@@ -104,7 +104,7 @@ type BookComboboxProps = {
   setSelected: (value: string | null) => void;
   className?: string;
   children?: React.ReactNode;
-  noneSelectedText: string ;
+  noneSelectedText: string;
 };
 
 export default function BookCombobox({
@@ -124,7 +124,10 @@ export default function BookCombobox({
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button className={`cursor-pointer ${className}`}>
+          <Button
+            className={`hover:brightness-110 dark:hover:brightness-110 active:brightness-110 dark:active:brightness-110 
+            transition duration-500 cursor-pointer ${className}`}
+          >
             {selected ? selected : children}
             <ChevronsUpDown />
           </Button>
@@ -144,7 +147,10 @@ export default function BookCombobox({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button className={`cursor-pointer ${className}`}>
+        <Button
+          className={`hover:brightness-110 dark:hover:brightness-110 active:brightness-110 dark:active:brightness-110 
+        transition duration-500 cursor-pointer ${className}`}
+        >
           {selected ? selected : children}
           <ChevronsUpDown className="opacity-50" />
         </Button>

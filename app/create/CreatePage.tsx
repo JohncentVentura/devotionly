@@ -16,6 +16,8 @@ import { Calendar } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import ScriptureRenderer from "@/components/ScriptureRenderer";
 import { Separator } from "@/components/ui/separator";
+import { PencilLine } from "lucide-react";
+import BookImage from "@/components/BookImage";
 
 export default function CreatePage() {
   const router = useRouter();
@@ -131,10 +133,10 @@ export default function CreatePage() {
 
   return (
     <section>
-      <h1 className="text-center text-xl md:text-3xl font-semibold">
+      <h1 className="text-center text-3xl md:text-4xl font-semibold">
         Create Devotion
       </h1>
-      <div className="mt-4 flex items-center justify-center gap-2 text-sm md:text-base text-muted-foreground">
+      <div className="mt-2 flex items-center justify-center gap-2 text-sm md:text-base text-muted-foreground">
         Devotion for the day of{" "}
         {new Date().toLocaleDateString("en-US", {
           weekday: "long",
@@ -144,18 +146,18 @@ export default function CreatePage() {
         })}
         <Calendar className="h-4 w-4" />
       </div>
-      <p className="mt-4 md:text-lg text-foreground/80">
+      <p className="mt-6 md:text-lg text-foreground/80 text-center">
         Create your personal Bible devotions using the SOAP method.{" "}
         {!showFull ? (
           <button
-            className="text-primary font-medium underline ml-1 cursor-pointer"
+            className="text-primary font-medium hover:underline active:underline ml-1 cursor-pointer"
             onClick={() => setShowFull(true)}
           >
             Read more...
           </button>
         ) : (
           <button
-            className="text-primary font-medium underline ml-1 cursor-pointer"
+            className="text-primary font-medium hover:underline active:underline ml-1 cursor-pointer"
             onClick={() => setShowFull(false)}
           >
             Read less
@@ -189,8 +191,8 @@ export default function CreatePage() {
           </p>
         </div>
       )}
-      <Separator className="my-4 md:my-8" />
-      <form className="" onSubmit={handleSubmit}>
+      <Separator className="my-4 md:my-8" />      
+      <form className="mt-4" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="col-span-1">
             <Label htmlFor="book">Book</Label>
@@ -198,7 +200,7 @@ export default function CreatePage() {
               className="mt-2 w-full"
               selected={formData.book}
               setSelected={(val) => handleChange("book", val || "")}
-              noneSelectedText = ""
+              noneSelectedText=""
             >
               Select Book
             </BookCombobox>
@@ -210,7 +212,7 @@ export default function CreatePage() {
               book={formData.book}
               selected={formData.chapter}
               setSelected={(val) => handleChange("chapter", val)}
-              noneSelectedText = ""
+              noneSelectedText=""
             >
               Select Chapter
             </ChapterCombobox>

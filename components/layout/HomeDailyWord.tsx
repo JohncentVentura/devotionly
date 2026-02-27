@@ -102,9 +102,9 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
             <Button
               size="lg"
               className="rounded-full text-base
-            hover:bg-secondary dark:hover:bg-secondary
-            active:bg-secondary dark:active:bg-secondary
-            transition-colors duration-500"
+            hover:brightness-110 dark:hover:brightness-110
+            active:brightness-110 dark:active:brightness-110
+            transition duration-500"
             >
               {user ? (
                 <Link
@@ -122,11 +122,13 @@ export default function HomeDailyWord({ user, urls }: HomeDailyWordProps) {
             <Button
               variant="outline"
               size="lg"
-              className="rounded-full text-base shadow-none bg-muted/60
-            hover:bg-muted dark:hover:bg-muted
-            active:bg-muted dark:active:bg-muted
+              className="rounded-full text-base shadow-none bg-muted/70
+            hover:bg-foreground dark:hover:bg-foreground
+            active:bg-foreground dark:active:bg-foreground
+            hover:text-background dark:hover:text-background
+            active:text-background dark:active:text-background
             transition-colors duration-500"
-            >
+          >
               <Link
                 href={{
                   pathname: "/bible",

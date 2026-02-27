@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import DeleteDevotionButton from "@/components/DeleteDevotionButton";
 import { useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
+import BookImage from "@/components/BookImage";
 
 type Devotion = Awaited<ReturnType<typeof getDevotionById>>;
 
@@ -38,39 +39,57 @@ const DevotionCard = ({ devotion }: DevotionCardProps) => {
   return (
     <div className="max-w-(--breakpoint-xl) mx-auto ">
       <Card className="shadow-none overflow-hidden rounded-md py-0 border-primary border-2">
-        <CardHeader>
-          <h1 className="mt-4 text-center text-2xl md:text-3xl font-semibold tracking-tight">
-            Daily Devotional
-          </h1>
-          <h3 className="mt-1 flex items-center justify-center gap-1 text-sm md:text-base font-medium text-muted-foreground">
-            <Calendar className="h-4 w-4" />
-            {devotion?.date?.toLocaleDateString()}
-          </h3>
-        </CardHeader>
-        <CardContent>
-          <div className="flex justify-center items-center flex-wrap gap-4">
-            <Badge className="bg-primary/5 text-primary hover:bg-primary/5 shadow-none text-sm px-2 py-0.5">
-              Book:
-            </Badge>
-            <span className="font-medium text-sm text-muted-foreground">
-              {devotion?.book}
-            </span>
-            <Badge className="bg-primary/5 text-primary hover:bg-primary/5 shadow-none text-sm px-2 py-0.5">
-              Chapter:
-            </Badge>
-            <span className="font-medium text-sm text-muted-foreground">
-              {devotion?.chapter}
-            </span>
-            <Badge className="bg-primary/5 text-primary hover:bg-primary/5 shadow-none text-sm px-2 py-0.5">
-              Verses:
-            </Badge>
-            <span className="font-medium text-sm text-muted-foreground">
-              {devotion?.fromVerse}
-              {devotion.fromVerse !== devotion.toVerse &&
-                `-${devotion.toVerse}`}
-            </span>
+        <div className="relative w-full mt-6 lg:mt-10 px-12 flex flex-col lg:flex-row justify-between gap-4">
+          <div className="flex flex-col justify-start items-center lg:items-start">
+            <h1 className="text-center text-3xl lg:text-5xl font-semibold tracking-tight">
+              Daily Devotional
+            </h1>
+            <h3 className="mt-3 flex items-center justify-center gap-1 text-sm lg:text-lg text-muted-foreground">
+              <Calendar className="h-4 w-4" />
+              {devotion?.date?.toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </h3>
+            <div className="mt-6 flex lg:flex-col justify-center items-start flex-wrap gap-4">
+              <div>
+                <Badge className="bg-primary/5 text-primary hover:bg-primary/5 shadow-none text-sm md:text-base px-2 py-0.5">
+                  Book:
+                </Badge>
+                <span className="font-medium text-sm lg:text-base text-muted-foreground">
+                  {devotion?.book}
+                </span>
+              </div>
+              <div>
+                <Badge className="bg-primary/5 text-primary hover:bg-primary/5 shadow-none text-sm lg:text-base px-2 py-0.5">
+                  Chapter:
+                </Badge>
+                <span className="font-medium text-sm lg:text-base text-muted-foreground">
+                  {devotion?.chapter}
+                </span>
+              </div>
+              <div>
+                <Badge className="bg-primary/5 text-primary hover:bg-primary/5 shadow-none text-sm lg:text-base px-2 py-0.5">
+                  Verses:
+                </Badge>
+                <span className="font-medium text-sm lg:text-base text-muted-foreground">
+                  {devotion?.fromVerse}
+                  {devotion.fromVerse !== devotion.toVerse &&
+                    `-${devotion.toVerse}`}
+                </span>
+              </div>
+            </div>
           </div>
-          <Separator className="my-6 md:my-8" />
+          <BookImage
+            book={devotion.book}
+            className="mt-4 lg:mt-0 w-full lg:w-[60%] h-full sm:h-[25vh] lg:h-[40vh]"
+          />
+        </div>
+
+        <CardContent>
+          <Separator className="mb-4" />
           <h3 className="text-[1.4rem] font-semibold tracking-tight">
             Scripture
           </h3>

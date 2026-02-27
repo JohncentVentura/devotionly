@@ -218,7 +218,8 @@ export default function Bible({ user, urls }: BibleProps) {
           <div className="w-full flex justify-between items-center">
             <Button
               onClick={handlePrev}
-              className="gap-3 rounded-full cursor-pointer"
+              className="gap-3 rounded-full cursor-pointer
+              hover:brightness-110 dark:hover:brightness-110 active:brightness-110 dark:active:brightness-110 transition duration-500"
             >
               <ArrowLeft /> <span className="hidden md:block">Prev</span>
             </Button>
@@ -232,7 +233,8 @@ export default function Bible({ user, urls }: BibleProps) {
             </div>
             <Button
               onClick={handleNext}
-              className="gap-3 rounded-full cursor-pointer"
+              className="gap-3 rounded-full cursor-pointer
+              hover:brightness-110 dark:hover:brightness-110 active:brightness-110 dark:active:brightness-110 transition duration-500"
             >
               <span className="hidden md:block">Next</span> <ArrowRight />
             </Button>
@@ -266,7 +268,8 @@ export default function Bible({ user, urls }: BibleProps) {
             <div className="flex items-center justify-start">
               <Button
                 onClick={handlePrev}
-                className="gap-3 rounded-full cursor-pointer"
+                className="gap-3 rounded-full cursor-pointer
+                hover:brightness-110 dark:hover:brightness-110 active:brightness-110 dark:active:brightness-110 transition duration-500"
               >
                 <ArrowLeft /> <span className="hidden md:block">Prev</span>
               </Button>
@@ -279,7 +282,7 @@ export default function Bible({ user, urls }: BibleProps) {
             <div className="flex items-center justify-end">
               <Button
                 onClick={handleNext}
-                className="gap-3 rounded-full cursor-pointer"
+                className="gap-3 rounded-full cursor-pointer hover:brightness-110 dark:hover:brightness-110 active:brightness-110 dark:active:brightness-110 transition duration-500"
               >
                 <span className="hidden md:block">Next</span> <ArrowRight />
               </Button>

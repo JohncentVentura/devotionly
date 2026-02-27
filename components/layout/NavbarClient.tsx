@@ -49,7 +49,7 @@ const NavbarClient = ({ user, urls }: NavbarClientProps) => {
           <ThemeToggleButton />
 
           {user ? (
-            <UserButton/>
+            <UserButton />
           ) : (
             <Button className="rounded-full" asChild>
               <Link href={urls?.signIn || "/"}>Sign in</Link>
